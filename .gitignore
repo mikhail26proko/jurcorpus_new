@@ -1,0 +1,12 @@
+.env
+*.log
+*.lock
+.gitignore
+/pgdumps/
+/uploads/
+/backend/var/
+/backend/.gitignore
+/backend/vendor/
+/frontend/.next/
+/frontend/.gitignore
+/frontend/node_modules/
