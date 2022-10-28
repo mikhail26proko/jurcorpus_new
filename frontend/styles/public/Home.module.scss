@@ -1,0 +1,28 @@
+@import "../variables.scss";
+
+.MainPageContainer:before {
+    content: "";
+    width: calc(100% - $leftBarwidth - 50px);
+    height: calc(100vh - $topBarheight - 50px);
+    position: absolute;
+    // background: $redColor;
+    background:
+      url('../../public/images/home_jurcorpus.svg'),
+      url('../../public/images/home_full_text.png'),
+      url('../../public/images/home_logo.png'),
+      url('../../public/images/home_busines.png');
+    background-position:
+      20% 45%,
+      center 90%,
+      7% 43%,
+      150% center;
+    background-size:
+      60%,
+      60%,
+      15%,
+      70%;
+    background-repeat: no-repeat;
+    @media (max-width:992px) {
+      width:100%;
+    }
+  }

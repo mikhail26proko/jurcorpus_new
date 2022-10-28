@@ -1,0 +1,10 @@
+@import '../variables.scss';
+
+.TeamContainer{
+    width: 100%;
+    height: calc(100vh - $topBarheight - 50px);
+    margin: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

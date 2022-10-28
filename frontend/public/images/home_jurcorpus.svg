@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="780"
+   height="150"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="home_jurcorpus.svg"
+   style="enable-background:new">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient4800"
+       osb:paint="gradient">
+      <stop
+         style="stop-color:#900000;stop-opacity:1;"
+         offset="0"
+         id="stop4796" />
+      <stop
+         style="stop-color:#900000;stop-opacity:0;"
+         offset="1"
+         id="stop4798" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath23">
+      <rect
+         id="rect25"
+         width="15.72759"
+         height="29.873724"
+         x="23.676428"
+         y="87.776573"
+         style="stroke-width:0.26458332" />
+    </clipPath>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Fade to Black or White"
+       id="filter114">
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"
+         id="feColorMatrix112" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter180">
+      <feBlend
+         inkscape:collect="always"
+         mode="color"
+         in2="BackgroundImage"
+         id="feBlend182" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       height="1"
+       width="1"
+       y="0"
+       x="0"
+       inkscape:label="Color Blindness"
+       id="filter6600">
+      <feColorMatrix
+         values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0 "
+         type="matrix"
+         result="fbSourceGraphic"
+         id="feColorMatrix6598" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix6602" />
+      <feColorMatrix
+         id="feColorMatrix6604"
+         values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0 "
+         type="matrix"
+         result="colormatrix1"
+         in="fbSourceGraphic" />
+    </filter>
+    <font
+       horiz-adv-x="1024"
+       id="font1568"
+       inkscape:label="шрифт 1"
+       horiz-origin-x="0"
+       horiz-origin-y="0"
+       vert-origin-x="45"
+       vert-origin-y="90"
+       vert-adv-y="90">
+      <font-face
+         units-per-em="1024"
+         id="font-face1570"
+         font-family="SVGFont 1" />
+      <missing-glyph
+         d="M0,0h1000v1024h-1000z"
+         id="missing-glyph1572" />
+    </font>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="621.02015"
+     inkscape:cy="161.94679"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1019"
+     inkscape:window-x="1920"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline;opacity:0.2;filter:url(#filter180)" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <g
+       style="display:inline;enable-background:new"
+       id="g39"
+       transform="matrix(4.5240951,0,0,4.5240951,-267.04939,-170.68572)"
+       inkscape:transform-center-x="-224.01143"
+       inkscape:transform-center-y="-100.0051">
+      <text
+         id="text29"
+         y="56.987755"
+         x="-79.935913"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.27692223px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.38076922"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.27692223px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.38076922"
+           y="56.987755"
+           x="-79.935913"
+           id="tspan27"
+           sodipodi:role="line">Юридическая компания </tspan></text>
+      <text
+         id="text33"
+         y="96.636101"
+         x="-83.005249"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:45.69230652px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.38076922"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:45.69230652px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.38076922"
+           y="96.636101"
+           x="-83.005249"
+           id="tspan31"
+           sodipodi:role="line">&quot;ЮРКОРПУС&quot;</tspan></text>
+    </g>
+  </g>
+</svg>

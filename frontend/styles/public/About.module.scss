@@ -1,0 +1,25 @@
+@import '../variables.scss';
+
+.AboutContainer{
+    width: 100%;
+    height: calc(100vh - $topBarheight - 50px);
+    margin: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .Board{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: -($stampDotsRadius / 2);
+        border: $stampDotsRadius dotted white;
+        -webkit-filter: drop-shadow($shadow);
+    }
+
+    .white{
+        background: white;
+        margin: -($stampDotsRadius / 2);
+        padding: $stampDotsRadius;
+    }
+}

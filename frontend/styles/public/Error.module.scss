@@ -1,0 +1,30 @@
+@import '../variables.scss';
+
+.ErrorContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+
+    .errorCode{
+        display:inline-block;
+        margin:0;
+        margin-right:20px;
+        font-size:24px;
+        font-weight:500;
+        vertical-align:top;
+        line-height:49px
+    }
+    .verticalLine{
+        margin-right:20px;
+    }
+
+    .errorMessage{
+        font-size:14px;
+        font-weight:normal;
+        line-height:49px;
+        margin:0;
+        padding:0
+    }
+}
