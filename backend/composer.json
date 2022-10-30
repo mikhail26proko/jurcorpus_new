@@ -12,7 +12,6 @@
         "doctrine/orm": "^2.13",
         "lexik/jwt-authentication-bundle": "^2.16",
         "nelmio/cors-bundle": "^2.2",
-        "phpoffice/phpspreadsheet": "^1.24",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.1.*",
         "symfony/doctrine-messenger": "6.1.*",
@@ -21,12 +20,10 @@
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.1.*",
         "symfony/http-kernel": "6.1.*",
-        "symfony/messenger": "6.1.*",
         "symfony/proxy-manager-bridge": "6.1.*",
         "symfony/runtime": "6.1.*",
         "symfony/uid": "6.1.*",
-        "symfony/yaml": "6.1.*",
-        "wilsonglasser/spout": "^3.0"
+        "symfony/yaml": "6.1.*"
     },
     "config": {
         "allow-plugins": {
