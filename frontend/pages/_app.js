@@ -1,5 +1,6 @@
 import Layout from '../components/public/Layout'
 import AdminLayout from '../components/admin/Layout'
+import AuthLayout from '../components/auth/Layout'
 
 import { SessionProvider } from "next-auth/react"
 import { useRouter } from 'next/router';
@@ -7,7 +8,7 @@ import { lang } from "../locales/lang"
 
 import '../styles/globals.scss'
 
-function PublicPages({ Component, pageProps:{session, ...pageProps} }) {
+function JurCorpusApp({ Component, pageProps:{session, ...pageProps} }) {
 
   const router = useRouter();
   const language = router.locale
@@ -15,12 +16,16 @@ function PublicPages({ Component, pageProps:{session, ...pageProps} }) {
 
   const rout = router.pathname.split('/')[1];
 
+  console.log(rout)
+
   if (rout == 'auth'){
     return<>
       <SessionProvider session={session}>
-        <Component 
-          {...pageProps}
-        />
+        <AuthLayout>
+          <Component 
+            {...pageProps}
+          />
+        </AuthLayout>
       </SessionProvider>
     </>
   } else {
@@ -50,4 +55,4 @@ function PublicPages({ Component, pageProps:{session, ...pageProps} }) {
   
 }
 
-export default PublicPages;
+export default JurCorpusApp;
