@@ -7,6 +7,12 @@ const nextConfig = {
     defaultLocale: 'ru',
   },
   trailingSlash: true,
+  env:{
+    API_URL:process.env.NEXT_PUBLIC_BACK_URL
+  },
+  api: {
+    bodyParser: false,
+  },
 }
 
 module.exports = nextConfig
