@@ -5,7 +5,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions xdebug \
     zip \
     pgsql \
-    gd \
     pdo_pgsql
 
 ADD php.ini /usr/local/etc/php/php.ini

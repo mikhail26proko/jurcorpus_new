@@ -10,12 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends DefaultController
 {
     public function __construct(
         private readonly \Doctrine\Persistence\ManagerRegistry $registry,
         private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly TokenStorageInterface $tokenStorage,
     ) {}
 
     #[
@@ -156,5 +158,18 @@ class UserController extends DefaultController
             ->getRepository(User::class)
             ->findBy([]);
         return $this->json($users, 200);
+    }
+
+    #[
+        Route(
+            '/api/user/current',
+            name:'user_current',
+            methods:['GET'],
+        )
+    ]
+    public function currentUsers(): JsonResponse
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        return $this->json($user, 200);
     }
 }
