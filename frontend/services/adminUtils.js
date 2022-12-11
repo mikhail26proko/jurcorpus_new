@@ -1,17 +1,6 @@
-import { hasCookie, getCookie } from 'cookies-next';
+import { getCookie, hasCookie } from 'cookies-next';
 
-export const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
-// export const secret = process.env.NEXTAUTH_SECRET;
-
-const Leads = ( { leads } ) => {
-    return <>
-        
-    </>
-}
-
-export async function getServerSideProps({ req, res }){
-
-    
+async function getFetcher({url}) {
     if (await hasCookie('acess_token', { req, res }))
     {
         const token = await getCookie('acess_token', { req });
@@ -27,12 +16,14 @@ export async function getServerSideProps({ req, res }){
             redirect: 'follow'
         };
         
-        const res = await fetch(`http://${API_URL}/api/lead/all`,requestOptions)
+        const res = await fetch(`http://${API_URL}/api/${url}`,requestOptions)
         const leads = await res.json()
         return { props: { leads } }
     }
-    const data = {}
-    return {props: { data } }
 }
 
-export default Leads
+
+export const adminUtils = {
+    getFetcher,
+
+}

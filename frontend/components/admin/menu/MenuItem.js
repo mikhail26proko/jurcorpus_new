@@ -4,16 +4,17 @@ import styles from './../../../styles/public/Layout.module.scss'
 const AdminMenuItem = ( {menuItem} ) => {
 
     return <>
-        <div className={ styles.menuItemContainer }>
-            <Link 
-                href={`/admin${menuItem.k}`}
-                title={menuItem.l}
-            >
+        
+        <Link 
+            href={`/admin${menuItem.k}`}
+            title={menuItem.l}
+        >
+            <div className={ styles.menuItemContainer }>
                 <div>
                     {menuItem.v}
                 </div>
-            </Link>
-        </div>
+            </div>
+        </Link>
     </>
 }
 

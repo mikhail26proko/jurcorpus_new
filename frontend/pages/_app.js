@@ -16,8 +16,6 @@ function JurCorpusApp({ Component, pageProps:{session, ...pageProps} }) {
 
   const rout = router.pathname.split('/')[1];
 
-  console.log(rout)
-
   if (rout == 'auth'){
     return<>
       <SessionProvider session={session}>
