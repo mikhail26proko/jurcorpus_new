@@ -5,7 +5,7 @@ export const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
 
 const Leads = ( { leads } ) => {
     return <>
-        
+
     </>
 }
 
@@ -27,8 +27,8 @@ export async function getServerSideProps({ req, res }){
             redirect: 'follow'
         };
         
-        const res = await fetch(`http://${API_URL}/api/lead/all`,requestOptions)
-        const leads = await res.json()
+        const resp = await fetch(`http://${API_URL}/api/lead/all`,requestOptions)
+        const leads = await resp.json()
         return { props: { leads } }
     }
     const data = {}

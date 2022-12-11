@@ -5,6 +5,55 @@
     height: calc(100vh - $topBarheight - 50px);
     margin: 25px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
 }
+
+.TeamTitle, .TeamBoard{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px;
+}
+
+.TeamTitle{
+    justify-content: left;
+}
+
+.TeamBoard{
+
+    .TeamSlider{
+        display: flex;
+        flex-direction: row;
+
+        .TeamItem{
+            background: white;
+            border: 1px solid gray;
+            -webkit-filter: drop-shadow($shadow);
+            width: 60%;
+            max-width: 300px;
+            margin: 25px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h4, h5, h6{
+                margin: 0.3em!important;
+            }
+
+            .Description{
+                width: 100%;
+
+                .ItemDescription{
+                    margin-left: -10px;
+                    color: $redColor;
+                    span{
+                        color: black
+                    }
+                }
+            }
+        }
+    }
+}
+
