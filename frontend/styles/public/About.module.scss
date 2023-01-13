@@ -4,12 +4,15 @@
     width: 100%;
     height: calc(100vh - $topBarheight - 50px);
     margin: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     .Board{
-        width: 100%;
+        width: 90%;
+        height: calc(100vh - $topBarheight - 50px - 25px - ($stampDotsRadius / 2));
         align-items: center;
         justify-content: center;
         padding: -($stampDotsRadius / 2);
@@ -18,8 +21,42 @@
     }
 
     .white{
+        height: -webkit-fill-available;
         background: white;
         margin: -($stampDotsRadius / 2);
         padding: $stampDotsRadius;
+
+        .content{
+            margin: 20px;
+            height: -webkit-fill-available;
+
+            overflow: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+    
+            &::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+            }
+        }
+    }
+
+    .textAbout{
+        font-size: 16px;
+    }
+
+    .rightImage{
+        display: flex;
+        width: 300px;
+        height: 200px;
+        float:right;
+        margin: 10px;
+        border: 1px solid gray;
+        -webkit-filter: drop-shadow($shadow);
+
+        @media (max-width: 1024px) {
+            float: none;
+            margin: 0 auto;
+        }
     }
 }

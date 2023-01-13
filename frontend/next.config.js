@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
   swcMinify: true,
@@ -9,9 +8,6 @@ const nextConfig = {
   trailingSlash: true,
   env:{
     API_URL:process.env.NEXT_PUBLIC_BACK_URL
-  },
-  api: {
-    bodyParser: false,
   },
 }
 

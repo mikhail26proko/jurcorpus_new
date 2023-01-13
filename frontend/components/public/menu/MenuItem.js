@@ -3,13 +3,13 @@ import style from '../../../styles/public/Layout.module.scss'
 
 const MenuItem = ( { menuItem } ) => {
     return <>
-        <div className={ style.menuItemContainer }>
-            <Link
-                href={ menuItem.k }
-            >
+        <Link
+            href={ menuItem.k }
+        >
+            <div className={ style.menuItemContainer }>
                 { menuItem.v }
-            </Link>
-        </div>
+            </div>
+        </Link>
     </>
 }
 

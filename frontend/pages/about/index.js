@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import styles from '../../styles/public/About.module.scss'
 
 export default function About({language}) {
@@ -6,14 +8,24 @@ export default function About({language}) {
         <div className={styles.AboutContainer}>
             <div className={styles.Board}>
                 <div className={styles.white}>
-                    <h2>
-                        {language.about.about}
-                    </h2>
-                    <br/>
-                    <p>
-                        {language.about.context}
-                    </p>
+                    <div className={styles.content}>
+                        <h2>
+                            {language.about.about}
+                        </h2>
+                        <br/>
+                        <div className={styles.rightImage}>
+                            <Image
+                                src='/images/HalaimovG.jpg'
+                                width={300}
+                                height={200}
+                            >
+                            </Image>
+                        </div>
+                        <p className={styles.textAbout} dangerouslySetInnerHTML={{__html:language.about.context}}>
+                        </p>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </>

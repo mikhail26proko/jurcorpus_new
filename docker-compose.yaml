@@ -4,13 +4,13 @@ services:
   app-php:
     user: 1000:1000
     container_name: app-php
-    build: ./docker/php
+    build: ./docker/php/
     env_file:
       - ${PWD:-./}/.env
+    # ports:
+    #   - '8080:80'
     volumes:
-      - ${PWD:-./}/backend:/var/www
-      - ${PWD:-./}/.env:/var/www/.env
-      - ${PWD:-./}/backend/var/composer:/var/www/var/composer
+      - ${PWD:-./}:/var/
     environment:
       COMPOSER_HOME: /var/www/var/composer
       XDEBUG_CONFIG: client_host=${DOCKER_GATEWAY_HOST:-host.docker.internal}
@@ -42,7 +42,7 @@ services:
     image: nginx:latest
     volumes:
       - ${PWD:-./}/backend:/var/www
-      - ./docker/nginx/config:/etc/nginx/conf.d
+      - ./docker/nginx/config/project.conf:/etc/nginx/conf.d/project.conf
       - ./docker/nginx/logs:/var/log/nginx
     ports:
       - '8081:80'
