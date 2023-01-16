@@ -19,6 +19,7 @@ export default function Mentoring({language}) {
                                 src='/images/mentoring.jpg'
                                 width={300}
                                 height={400}
+                                alt=''
                             >
                             </Image>
                         </div>

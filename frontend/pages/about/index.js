@@ -17,6 +17,7 @@ export default function About({language}) {
                                 src='/images/HalaimovG.jpg'
                                 width={300}
                                 height={200}
+                                alt=''
                             >
                             </Image>
                         </div>

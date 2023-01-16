@@ -19,6 +19,7 @@ export default function Services({language}) {
                                 src='/images/lawyers/lawyer.jpg'
                                 width={300}
                                 height={200}
+                                alt=''
                             >
                             </Image>
                         </div>
