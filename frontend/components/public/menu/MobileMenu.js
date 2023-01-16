@@ -13,7 +13,7 @@ const MobileMenu = ( { language, menu } ) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget)
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -33,7 +33,8 @@ const MobileMenu = ( { language, menu } ) => {
             {language.menuText}
           </h3>
         </span>
-        <MenuIcon/>
+
+        <MenuIcon sx={{ color: "#900000"}}/>
       </Button>
       <Menu
         id="basic-menu"

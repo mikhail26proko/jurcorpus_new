@@ -12,7 +12,6 @@ export default function About({language}) {
                         <h2>
                             {language.about.about}
                         </h2>
-                        <br/>
                         <div className={styles.rightImage}>
                             <Image
                                 src='/images/HalaimovG.jpg'

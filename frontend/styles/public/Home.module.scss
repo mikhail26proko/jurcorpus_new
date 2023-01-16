@@ -8,12 +8,12 @@
     // background: $redColor;
     background:
       url('../../public/images/home_jurcorpus.svg'),
-      url('../../public/images/home_full_text.png'),
+      url('../../public/images/home_full_text2.png'),
       url('../../public/images/home_logo.png'),
       url('../../public/images/home_busines.png');
     background-position:
       20% 45%,
-      center 90%,
+      center 85%,
       7% 43%,
       150% center;
     background-size:
@@ -24,5 +24,22 @@
     background-repeat: no-repeat;
     @media (max-width:992px) {
       width:100%;
+      height: calc(100vh - 7.5rem - 50px);
+      background:
+      url('../../public/images/home_jurcorpus.svg'),
+      url('../../public/images/home_full_text2.png'),
+      url('../../public/images/home_logo.png'),
+      url('../../public/images/home_busines.png');
+    background-position:
+      60% 5%,
+      center 95%,
+      7% 20%,
+      center 40%;
+    background-size:
+      60%,
+      60%,
+      0%,
+      200%;
+    background-repeat: no-repeat;
     }
   }

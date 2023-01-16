@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .AboutContainer{
-    width: 100%;
+    width: 100wv;
     height: calc(100vh - $topBarheight - 50px);
     margin: 25px;
     margin-left: 5%;
@@ -9,6 +9,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width:992px) {
+        height: calc(100vh - 50px);
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 
     .Board{
         width: 90%;
@@ -18,6 +23,10 @@
         padding: -($stampDotsRadius / 2);
         border: $stampDotsRadius dotted white;
         -webkit-filter: drop-shadow($shadow);
+        @media (max-width:992px) {
+            border: 0px;
+            padding: 0px;
+        }
     }
 
     .white{
@@ -30,13 +39,29 @@
             margin: 20px;
             height: -webkit-fill-available;
 
-            overflow: scroll;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-    
+            overflow-y: auto;
+
             &::-webkit-scrollbar {
-                width: 0;
-                height: 0;
+                width: 4px;
+                background: lightgray;
+                border-radius: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                width: 4px;
+                background: gray;
+                border-radius: 4px;
+            }
+
+            @media (max-width: 1024px) {
+
+                margin: 0 auto;
+
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
             }
         }
     }

@@ -8,27 +8,32 @@ const TeamItem = ( { item } ) => {
             key = {item.id}
             className={styles.TeamItem}
         >
-            <div className={styles.avatar}>
-                <Image
-                    src="/images/lawer.jpg"
-                    width={300}
-                    height={400}
-                    alt="avatar"
-                >
-                </Image>
-            </div>
-            <div>
+            <div className={styles.person}>
                 <h3 className={styles.names}>
                     { item.fio }
                 </h3>
-                <h6 className={styles.title}>
-                    <i>{item.jobtitle}</i>
-                </h6>
-                    <br />
-                <div className={styles.description} dangerouslySetInnerHTML={{__html:item.description}}>
-                    
+                <h4 className={styles.title}>
+                    {item.jobtitle}
+                </h4>
+            </div>
+            <div className={styles.personInfo}>
+                <div className={styles.avatar}>
+                    <div className={styles.picture}>
+                        <Image
+                            src={"/images/lawyers"+(item.avatar ?? "/lawyer.jpg")}
+                            loading="lazy"
+                            width={300}
+                            height={400}
+                            alt="avatar"
+                        >
+                        </Image>
+                    </div>
+                </div>
+                <div className={styles.description}>
+                    <div dangerouslySetInnerHTML={{__html:item.description}}></div>
                 </div>
             </div>
+            
         </div>
     </>
 }

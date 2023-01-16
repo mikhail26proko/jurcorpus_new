@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-.menuItemContainer{
+.menuItemContainer, .menuItemContainerActive{
     // margin: 10px;
     padding: 20px;
     font-weight: bold;
@@ -35,11 +35,18 @@
     margin-left: 28px;
     &:active{
         background: lightgray;
-        border-left: 3px solid $redColor;
+        border-left: 5px solid $redColor;
     }
     &:hover{
         background: lightgray;
+        border-left: 5px solid $redColor;
+    }
 }
+
+.menuItemContainerActive{
+    background: #eee;
+    margin-left: 28px;
+    border-left: 5px solid $redColor;
 }
 
 .logo{
@@ -68,9 +75,10 @@
         min-height: 100px;
         display: flex;
         flex-direction: row;
+        z-index: 1;
     }
 
-    .menuItemContainer{
+    .menuItemContainer,.menuItemContainerActive{
         display: none;
     }
 

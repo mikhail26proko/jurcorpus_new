@@ -19,8 +19,9 @@ const Department = ( { item } ) => {
     return <>
         <Accordion
             key={("Accordion" + item.id)}
-            expanded={expanded === ("panel"+item.id)}
-            onChange={handleChange(("panel"+item.id))}
+            TransitionProps={{ unmountOnExit: true }}
+            expanded={expanded === ('panel'+item.id)}
+            onChange={handleChange('panel'+item.id)}
         >
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
