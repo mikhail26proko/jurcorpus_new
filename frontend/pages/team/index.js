@@ -1,3 +1,5 @@
+import {useState} from 'react';
+
 import Department from '../../components/public/Teams/Department'
 
 import company from '../../public/files/departments.json'
@@ -9,6 +11,13 @@ export const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
 export default function Team({ language }) {
 
     const departments = company.data
+
+    const [expanded, setExpanded] = useState('panel01');
+
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+
 
     return <>
         <div className={styles.TeamContainer}>
@@ -22,6 +31,8 @@ export default function Team({ language }) {
                     <Department
                         key={index}
                         item={item}
+                        isExpanded={expanded === ('panel'+item.id)}
+                        handle={handleChange('panel'+item.id)}
                     >
                     </Department>
                 ))}

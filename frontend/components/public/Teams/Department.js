@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -8,20 +7,14 @@ import TeamItem from "./TeamItem"
 
 import styles from '../../../styles/public/Team.module.scss'
 
-const Department = ( { item } ) => {
+const Department = ( { item, isExpanded, handle } ) => {
 
-    const [expanded, setExpanded] = React.useState('panel01');
-
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
 
     return <>
         <Accordion
-            key={("Accordion" + item.id)}
             TransitionProps={{ unmountOnExit: true }}
-            expanded={expanded === ('panel'+item.id)}
-            onChange={handleChange('panel'+item.id)}
+            expanded={isExpanded}
+            onChange={handle}
         >
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
