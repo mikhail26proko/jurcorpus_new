@@ -72,12 +72,23 @@
 
     .rightImage{
         display: flex;
+        flex-direction: column;
         width: 300px;
-        height: 300px;
+        height: calc(300px + 1rem);
         float:right;
         margin: 10px;
-        border: 1px solid gray;
-        -webkit-filter: drop-shadow($shadow);
+
+        .picture{
+            height: 300px;
+            margin: 0 auto;
+            border: 1px solid gray;
+            -webkit-filter: drop-shadow($shadow);
+        }
+        .figcaption{
+            display: flex;
+            color: gray;
+            justify-content: center;
+        }
 
         @media (max-width: 1024px) {
             float: none;

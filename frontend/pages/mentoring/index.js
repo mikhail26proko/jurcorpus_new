@@ -1,7 +1,4 @@
 import Image from 'next/image'
-import {useEffect} from 'react'
-
-
 import styles from '../../styles/public/Mentoring.module.scss'
 
 export default function Mentoring({language}) {
@@ -15,13 +12,18 @@ export default function Mentoring({language}) {
                             {language.mentoring.mentoring}
                         </h2>
                         <div className={styles.rightImage}>
-                            <Image
-                                src='/images/mentoring.jpg'
-                                width={300}
-                                height={400}
-                                alt=''
-                            >
-                            </Image>
+                            <div className={styles.picture}>
+                                <Image
+                                    src='/images/mentoring.jpg'
+                                    width={300}
+                                    height={400}
+                                    alt=''
+                                >
+                                </Image>
+                            </div>
+                            <div className={styles.figcaption}>
+                                {language.mentoring.figcaption}
+                            </div>
                         </div>
                         <p className={styles.textMentoring} dangerouslySetInnerHTML={{__html:language.mentoring.context}}>
                         </p>
@@ -31,4 +33,12 @@ export default function Mentoring({language}) {
             </div>
         </div>
     </>
+}
+
+export async function getStaticProps(context) {
+    return {
+        props: {
+            context,
+        },
+    };
 }

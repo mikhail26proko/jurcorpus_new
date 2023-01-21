@@ -1,7 +1,4 @@
 import Image from 'next/image'
-import {useEffect} from 'react'
-
-
 import styles from '../../styles/public/Services.module.scss'
 
 export default function Services({language}) {
@@ -15,13 +12,18 @@ export default function Services({language}) {
                             {language.services.services}
                         </h2>
                         <div className={styles.rightImage}>
-                            <Image
-                                src='/images/lawyers/lawyer.jpg'
-                                width={300}
-                                height={200}
-                                alt=''
-                            >
-                            </Image>
+                            <div className={styles.picture}>
+                                <Image
+                                    src='/images/lawyers/lawyer.jpg'
+                                    width={300}
+                                    height={300}
+                                    alt=''
+                                >
+                                </Image>
+                            </div>
+                            <div className={styles.figcaption}>
+                                {language.services.figcaption}
+                            </div>
                         </div>
                         <p className={styles.textServices} dangerouslySetInnerHTML={{__html:language.services.context}}>
                         </p>
@@ -31,4 +33,12 @@ export default function Services({language}) {
             </div>
         </div>
     </>
+}
+
+export async function getStaticProps(context) {
+    return {
+        props: {
+            context,
+        },
+    };
 }

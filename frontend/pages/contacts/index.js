@@ -31,3 +31,11 @@ export default function Contacts({language}) {
     </div>
   </>
 }
+
+export async function getStaticProps(context) {
+  return {
+      props: {
+          context,
+      },
+  };
+}
