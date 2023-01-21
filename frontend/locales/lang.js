@@ -1,6 +1,6 @@
-import { en } from './en';
-import { ru } from './ru';
-import { ua } from './ua';
+import ruJSON from '../public/files/ru.json';
+
+const ru = ruJSON.data
 
 export const lang = {
     ru
