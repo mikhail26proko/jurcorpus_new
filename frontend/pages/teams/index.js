@@ -1,14 +1,12 @@
 import {useState} from 'react';
 
-import Department from '../../components/public/Teams/Department'
+import Team from '../../components/public/Teams/Team'
 
 import company from '../../public/files/departments.json'
-
 import styles from '../../styles/public/Team.module.scss'
-
 export const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
 
-export default function Team({ language }) {
+export default function Teams({ language }) {
 
     const departments = company.data
 
@@ -28,33 +26,15 @@ export default function Team({ language }) {
             </div>
             <div className={styles.TeamBoard}>
                 {departments?.map((item, index) => (
-                    <Department
+                    <Team
                         key={index}
                         item={item}
                         isExpanded={expanded === ('panel'+item.id)}
                         handle={handleChange('panel'+item.id)}
                     >
-                    </Department>
+                    </Team>
                 ))}
             </div>
         </div>
     </>
 }
-
-// export async function getServerSideProps({ req, res }){
-
-//     const myHeaders = new Headers();
-
-//     myHeaders.append("Content-Type", "application/json");
-
-//     var requestOptions = {
-//         method: 'GET',
-//         headers: myHeaders,
-//         redirect: 'follow'
-//     };
-
-//     const resp = await fetch(`http://${API_URL}/api/user/public`,requestOptions)
-//     const team = await resp.json()
-
-//     return { props: { team } }
-// }

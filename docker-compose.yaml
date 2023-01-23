@@ -7,10 +7,9 @@ services:
     build: ./docker/php/
     env_file:
       - ${PWD:-./}/.env
-    # ports:
-    #   - '8080:80'
     volumes:
       - ${PWD:-./}:/var/
+      - ${PWD:-./}/public:/var/public
     environment:
       COMPOSER_HOME: /var/www/var/composer
       XDEBUG_CONFIG: client_host=${DOCKER_GATEWAY_HOST:-host.docker.internal}
@@ -51,15 +50,18 @@ services:
       - app-php
 
   app-frontend:
+    container_name: app_frontend
     image: node:16.16-alpine
     user: 1000:1000
     command: sh -c "yarn install && yarn run dev"
     working_dir: /app/
     volumes:
       - ${PWD:-./}/frontend:/app
+      - ${PWD:-./}/public:/app/public
       - ${PWD:-./}/.env:/app/.env
     ports:
       - "80:3000"
+      - "443:443"
 
 volumes:
   app-postgres-data:

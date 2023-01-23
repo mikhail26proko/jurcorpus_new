@@ -7,7 +7,7 @@ import TeamItem from "./TeamItem"
 
 import styles from '../../../styles/public/Team.module.scss'
 
-const Department = ( { item, isExpanded, handle } ) => {
+const Team = ( { item, isExpanded, handle } ) => {
 
 
     return <>
@@ -37,4 +37,4 @@ const Department = ( { item, isExpanded, handle } ) => {
     </>
 }
 
-export default Department;
+export default Team;

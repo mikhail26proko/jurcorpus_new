@@ -1,5 +1,5 @@
 import Header from './Header'
-import Menu from './menu/Menu'
+import Menu from './Menu/Menu'
 import styles from './../../styles/public/Layout.module.scss'
 
 const Layout = ( { children, language } ) => {

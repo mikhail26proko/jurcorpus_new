@@ -3,3 +3,4 @@
 /backend/.cache/
 /frontend/.next/
 /frontend/node_modules/
+/pgdumps/

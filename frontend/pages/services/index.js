@@ -3,18 +3,21 @@ import styles from '../../styles/public/Services.module.scss'
 
 export default function Services({language}) {
 
+    const lang = language.pages.find(($item) => {return $item.id == 'services'})
+    const {title, image, context} = lang
+
     return <>
         <div className={styles.ServicesContainer}>
             <div className={styles.Board}>
                 <div className={styles.white}>
                     <div className={styles.content}>
                         <h2>
-                            {language.services.services}
+                            {title}
                         </h2>
                         <div className={styles.rightImage}>
                             <div className={styles.picture}>
                                 <Image
-                                    src='/images/lawyers/lawyer.jpg'
+                                    src={image.src}
                                     width={300}
                                     height={300}
                                     alt=''
@@ -22,10 +25,10 @@ export default function Services({language}) {
                                 </Image>
                             </div>
                             <div className={styles.figcaption}>
-                                {language.services.figcaption}
+                                {image.capture}
                             </div>
                         </div>
-                        <p className={styles.textServices} dangerouslySetInnerHTML={{__html:language.services.context}}>
+                        <p className={styles.textServices} dangerouslySetInnerHTML={{__html:context}}>
                         </p>
                     </div>
                 </div>

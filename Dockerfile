@@ -11,6 +11,7 @@ ARG NODE_VERSION=16.16
 FROM node:16.16-alpine AS NODE
     WORKDIR /app
     COPY frontend /app/
+    COPY public /app/public
     ADD ./docker/supervisor/supervisor.conf \
         /etc/supervisor.conf
     RUN apk add \

@@ -3,18 +3,21 @@ import styles from '../../styles/public/About.module.scss'
 
 export default function About({language, props}) {
 
+    const lang = language.pages.find(($item) => {return $item.id == 'about'})
+    const {title, image, context} = lang
+
     return <>
         <div className={styles.AboutContainer}>
             <div className={styles.Board}>
                 <div className={styles.white}>
                     <div className={styles.content}>
                         <h2>
-                            {language.about.about}
+                            {title}
                         </h2>
                         <div className={styles.rightImage}>
                             <div className={styles.picture}>
                                 <Image
-                                    src='/images/HalaimovG.jpg'
+                                    src={image.src}
                                     width={300}
                                     height={200}
                                     alt=''
@@ -22,10 +25,10 @@ export default function About({language, props}) {
                                 </Image>
                             </div>
                             <div className={styles.figcaption}>
-                                {language.about.figcaption}
+                                {image.capture}
                             </div>
                         </div>
-                        <p className={styles.textAbout} dangerouslySetInnerHTML={{__html:language.about.context}}>
+                        <p className={styles.textAbout} dangerouslySetInnerHTML={{__html:context}}>
                         </p>
                     </div>
                 </div>
