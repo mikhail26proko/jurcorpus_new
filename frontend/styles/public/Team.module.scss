@@ -102,6 +102,16 @@
 
         .fullAvatar{
             width: 40%;
+            .picture{
+                display: flex;
+                justify-content: center;
+                border:1px solid gray;
+                -webkit-filter: drop-shadow($shadow);
+            }
+
+            @media (max-width:992px) {
+                width: 100%;
+            }
         }
 
         .fullDescription, .description{
@@ -122,6 +132,17 @@
 
         .fullDescription{
             width: 60%;
+            @media (max-width:992px) {
+                width: 100%;
+            }
+    
+            .ItemDescription{
+                margin-left: -10px;
+                color: $redColor;
+                span{
+                    color: black
+                }
+            }
         }
     }
 }
