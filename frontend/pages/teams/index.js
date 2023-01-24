@@ -16,7 +16,6 @@ export default function Teams({ language }) {
         setExpanded(isExpanded ? panel : false);
     };
 
-
     return <>
         <div className={styles.TeamContainer}>
             <div className={styles.TeamTitle}>

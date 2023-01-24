@@ -3,6 +3,10 @@ import Image from 'next/image'
 import styles from '../../../styles/public/Team.module.scss'
 
 const TeamItem = ( { item } ) => {
+
+    const isFully = item.description?.length > 250 ? true : false;
+    const isEmpty = item.description?.length===undefined
+
     return <>
         <div
             key = {item.id}
@@ -16,8 +20,8 @@ const TeamItem = ( { item } ) => {
                     {item.jobtitle}
                 </h4>
             </div>
-            <div className={styles.personInfo}>
-                <div className={styles.avatar}>
+            <div className={ isEmpty ? styles.personInfoNone : styles.personInfo}>
+                <div className={ isFully ? styles.fullAvatar : styles.avatar }>
                     <div className={styles.picture}>
                         <Image
                             src={"/images/lawyers"+(item.avatar ?? "/lawyer.jpg")}
@@ -29,7 +33,7 @@ const TeamItem = ( { item } ) => {
                         </Image>
                     </div>
                 </div>
-                <div className={styles.description}>
+                <div className={isFully ? styles.fullDescription : styles.description}>
                     <div dangerouslySetInnerHTML={{__html:item.description}}></div>
                 </div>
             </div>

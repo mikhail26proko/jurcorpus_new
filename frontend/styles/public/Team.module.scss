@@ -26,11 +26,16 @@
 
 .TeamBoard{
     padding: 0 25px 25px;
+
+    .details{
+        .adress{
+            text-align: center;
+        }
+    }
 }
 
 .TeamItem{
     max-width: 1000px;
-    min-height: 500px;
     background: white;
     border: 1px solid gray;
     -webkit-filter: drop-shadow($shadow);
@@ -60,6 +65,10 @@
         }
     }
 
+    .personInfoNone{
+        display:none
+    }
+
     .personInfo{
         width: 100%;
         display: flex;
@@ -70,9 +79,9 @@
             flex-direction: column;
         }
 
-        .avatar{
+        .fullAvatar, .avatar{
             display: flex;
-            width: 40%;
+            width: 20%;
             height: 100%;
             margin: 0 auto;
             padding: 5px;
@@ -91,8 +100,12 @@
             }
         }
 
-        .description{
-            width: 60%;
+        .fullAvatar{
+            width: 40%;
+        }
+
+        .fullDescription, .description{
+            width: 80%;
 
             @media (max-width:992px) {
                 width: 100%;
@@ -105,6 +118,10 @@
                     color: black
                 }
             }
+        }
+
+        .fullDescription{
+            width: 60%;
         }
     }
 }

@@ -21,11 +21,16 @@ const Team = ( { item, isExpanded, handle } ) => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <h3>{item.department}</h3>
+                <h3> {item.department} </h3>
+                
             </AccordionSummary>
             <AccordionDetails
                 className={styles.details}
             >
+                <div className={styles.adress}>
+                    <h4> Адрес : {item.adress} </h4>
+                </div>
+                <br/>
                 {item.team.map((worker,index)=>(
                     <TeamItem
                         key={index}

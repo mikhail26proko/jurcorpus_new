@@ -43,3 +43,5 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+// TODO: https://www.npmjs.com/package/next-with-polyfill

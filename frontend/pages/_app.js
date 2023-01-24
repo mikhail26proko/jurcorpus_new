@@ -1,4 +1,4 @@
-import Layout from '../components/public/Layout'
+import Layout from '../components/Layout'
 import AdminLayout from '../components/admin/Layout'
 import AuthLayout from '../components/auth/Layout'
 
@@ -14,30 +14,6 @@ function JurCorpusApp({ Component, pageProps:{session, ...pageProps} }) {
   const language = router.locale
     ? lang[router.locale] : lang.ru;
 
-  const rout = router.pathname.split('/')[1];
-
-  if (rout == 'auth'){
-    return<>
-      <SessionProvider session={session}>
-        <AuthLayout>
-          <Component 
-            {...pageProps}
-          />
-        </AuthLayout>
-      </SessionProvider>
-    </>
-  } else {
-    if (rout == 'admin'){
-      return<>
-          <SessionProvider session={session}>
-            <AdminLayout>
-              <Component 
-                {...pageProps}
-              />
-            </AdminLayout>
-          </SessionProvider>
-      </>
-    } else {
       return <>
         <Layout
           language={language}
@@ -48,9 +24,6 @@ function JurCorpusApp({ Component, pageProps:{session, ...pageProps} }) {
           />
         </Layout>
       </>
-    }
-  }
-  
 }
 
 export default JurCorpusApp;
