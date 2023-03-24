@@ -1,15 +1,54 @@
 version: '2.1'
 
 services:
+
+  app-nginx:
+    container_name: app-nginx
+    # image: nginx:latest
+    build: ./docker/nginx/
+    tty: true
+    volumes:
+      - ./docker/nginx/config/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/logs:/var/log/nginx
+      - ./jurcorpus.crt:/etc/ssl/jurcorpus.crt
+      - ./jurcorpus.key:/etc/ssl/jurcorpus.key
+      - ./ca.crt:/etc/ssl/ca.crt
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    working_dir: /var/www
+    depends_on:
+      - app-frontend
+      # - app-php
+    networks:
+      - local-network
+
+  app-frontend:
+    container_name: app-frontend
+    image: node:16.16-alpine
+    command: sh -c "yarn install && yarn run dev"
+    working_dir: /app/
+    volumes:
+      - ${PWD:-./}/frontend:/app
+      - ${PWD:-./}/.env:/app/.env
+    restart: always
+    ports:
+      - '3000:3000'
+    networks:
+      - local-network
+
   app-php:
-    user: 1000:1000
     container_name: app-php
     build: ./docker/php/
     env_file:
       - ${PWD:-./}/.env
+    ports:
+      - '9000:9000'
+    networks:
+      - local-network
     volumes:
-      - ${PWD:-./}:/var/
-      - ${PWD:-./}/public:/var/public
+      - ${PWD:-./}:/var/www
     environment:
       COMPOSER_HOME: /var/www/var/composer
       XDEBUG_CONFIG: client_host=${DOCKER_GATEWAY_HOST:-host.docker.internal}
@@ -17,6 +56,7 @@ services:
     depends_on:
       app-postgres:
         condition: service_healthy
+    restart: always
 
   app-postgres:
     container_name: app-postgres
@@ -35,33 +75,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-
-  app-nginx:
-    container_name: app-nginx
-    image: nginx:latest
-    volumes:
-      - ${PWD:-./}/backend:/var/www
-      - ./docker/nginx/config/project.conf:/etc/nginx/conf.d/project.conf
-      - ./docker/nginx/logs:/var/log/nginx
-    ports:
-      - '8081:80'
-      - '4434:443'
-    depends_on:
-      - app-php
-
-  app-frontend:
-    container_name: app_frontend
-    image: node:16.16-alpine
-    user: 1000:1000
-    command: sh -c "yarn install && yarn run dev"
-    working_dir: /app/
-    volumes:
-      - ${PWD:-./}/frontend:/app
-      - ${PWD:-./}/public:/app/public
-      - ${PWD:-./}/.env:/app/.env
-    ports:
-      - "80:3000"
-      - "443:443"
+    restart: always
 
 volumes:
   app-postgres-data:
+
+networks:
+  local-network:
+    driver: bridge

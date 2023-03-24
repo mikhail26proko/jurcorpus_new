@@ -14,4 +14,4 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && mv composer.phar /usr/bin/composer
 
 USER 1000:1000
-WORKDIR /var/www    
+WORKDIR /var/www
