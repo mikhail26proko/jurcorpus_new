@@ -38,6 +38,20 @@ services:
     networks:
       - local-network
 
+  app-admin-frontend:
+    container_name: app-admin-frontend
+    image: node:16.16-alpine
+    command: sh -c "yarn install && yarn start"
+    working_dir: /app/
+    volumes:
+      - ${PWD:-./}/admin:/app
+      - ${PWD:-./}/.env:/app/.env
+    restart: always
+    ports:
+      - '3001:3000'
+    networks:
+      - local-network
+
   app-php:
     container_name: app-php
     build: ./docker/php/
