@@ -1,5 +1,3 @@
-import AdminLayout from './admin/Layout'
-import AuthLayout from './auth/Layout'
 import PublicLayout from './public/Layout'
 
 import { SessionProvider } from "next-auth/react"

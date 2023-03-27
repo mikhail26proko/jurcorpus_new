@@ -1,8 +1,5 @@
 import Layout from '../components/Layout'
-import AdminLayout from '../components/admin/Layout'
-import AuthLayout from '../components/auth/Layout'
 
-import { SessionProvider } from "next-auth/react"
 import { useRouter } from 'next/router';
 import { lang } from "../locales/lang"
 
