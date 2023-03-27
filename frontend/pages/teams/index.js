@@ -10,7 +10,7 @@ export default function Teams({ language }) {
 
     const departments = company.data
 
-    const [expanded, setExpanded] = useState('panel01');
+    const [expanded, setExpanded] = useState();
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
