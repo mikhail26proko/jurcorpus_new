@@ -4,7 +4,6 @@ services:
 
   app-nginx:
     container_name: app-nginx
-    # image: nginx:latest
     build: ./docker/nginx/
     tty: true
     volumes:
@@ -13,6 +12,7 @@ services:
       - ./jurcorpus.crt:/etc/ssl/jurcorpus.crt
       - ./jurcorpus.key:/etc/ssl/jurcorpus.key
       - ./ca.crt:/etc/ssl/ca.crt
+      - ${PWD:-./}/backend:/var/www
     ports:
       - '80:80'
       - '443:443'
@@ -48,11 +48,7 @@ services:
     networks:
       - local-network
     volumes:
-      - ${PWD:-./}:/var/www
-    environment:
-      COMPOSER_HOME: /var/www/var/composer
-      XDEBUG_CONFIG: client_host=${DOCKER_GATEWAY_HOST:-host.docker.internal}
-      PHP_IDE_CONFIG: serverName=app
+      - ${PWD:-./}/backend:/var/www
     depends_on:
       app-postgres:
         condition: service_healthy
@@ -65,7 +61,9 @@ services:
       - app-postgres-data:/var/lib/postgresql/data
       - ${PWD:-./}/pgdumps:/var/www
     ports:
-      - '5433:5432'
+      - '5432:5432'
+    networks:
+      - local-network
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
