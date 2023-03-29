@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Symfony\Component\Uid\Uuid;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,154 +16,146 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class UserController extends DefaultController
 {
     public function __construct(
-        private readonly \Doctrine\Persistence\ManagerRegistry $registry,
-        private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly TokenStorageInterface $tokenStorage,
+        private UserPasswordHasherInterface $passwordHasher,
+        private TokenStorageInterface $tokenStorage,
+        private EntityManagerInterface $em,
     ) {}
 
     #[
         Route(
-            '/api/user/add',
-            name:'user_add',
+            '/user',
+            name:'user_create',
             methods:['POST'],
         )
     ]
-    public function addUser(Request $request): JsonResponse
+    public function create(Request $request): JsonResponse
     {
         $result = json_decode($request->getContent());
-        $entityManager = $this->registry->getManager();
+
         $uuid = Uuid::v4();
         $user = new User(
             $uuid,
             $result->login,
             $result->fio,
-            $result->jobTitle,
             $result->description,
-            $result->isPublic,
+            $result->isActive,
             "0123456789",
-            // '',
         );
 
-        $user->setPassword($this->passwordHasher->hashPassword($user, $result->password));
+        $user->setPassword(
+            $this->passwordHasher
+                ->hashPassword($user, $result->password)
+        );
 
-        $entityManager->persist($user);
-        $entityManager->flush();
-        return $this->json($user, 200);
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $this->json([
+            'status' => 'OK',
+            'user'   => $user
+        ], 200);
     }
 
     #[
         Route(
-            '/api/user/edit',
-            name:'user_edit',
-            methods:['POST'],
+            '/user/{id}',
+            name:'user_read',
+            methods:['GET'],
         )
     ]
-    public function editUser(Request $request): JsonResponse
+    public function read(string $id): JsonResponse
+    {
+        if (!empty($id)){
+            $user = $this->em
+                ->getRepository(User::class)
+                ->findOneBy(['id' => $id]);
+            return $this->json([
+                'status' => 'OK',
+                'user'   => $user
+            ], 200);
+        }
+
+        return $this->json([
+            'status' => 'Error',
+            'message'=> 'Пользователь отсутствует'
+        ], 404);    }
+
+    #[
+        Route(
+            '/user/{id}',
+            name:'user_update',
+            methods:['PUT'],
+        )
+    ]
+    public function update(string $id, Request $request,): JsonResponse
     {
         $result = json_decode($request->getContent());
-        if (!empty($result->login)){
-            $entityManager = $this->registry->getManager();
-            $user = $entityManager
+        if (!empty($result->id)){
+
+            $user = $this->em
                 ->getRepository(User::class)
-                ->findOneBy(['login' => $result->login]);
+                    ->findOneBy(['id' => $result->id]);
 
             $user->setFIO($result->fio ?? $user->getFIO());
 
-            $user->setJobTitle($result->jobTitle ?? $user->getJobTitle());
-
-            $user->setIsPublic($result->isPublic ?? $user->getIsPublic());
+            $user->setIsAcive($result->isActive ?? $user->getIsAcive());
 
             $user->setRoles($result->roles ?? $user->getRoles());
 
             $user->setDescription($result->description ?? $user->getDescription());
 
             if (!empty($result->password))
-                $user->setPassword($this->passwordHasher->hashPassword($user, $result->password));
+                $user->setPassword(
+                    $this->passwordHasher
+                        ->hashPassword($user, $result->password)
+                );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->em->persist($user);
+            $this->em->flush();
 
-            return $this->json($user, 200);
+            return $this->json([
+                'status' => 'OK',
+                'user'   => $user
+            ], 200);
         }
         
-        return $this->json(['Error'=>"Логин отсутствует"], 500);
+        return $this->json([
+            'status' => 'Error',
+            'message'=> 'Пользователь отсутствует'
+        ], 404);
     }
 
     #[
         Route(
-            '/api/user/view/{login}',
-            name:'user_view',
-            methods:['GET'],
+            '/user/{id}',
+            name:'user_delete',
+            methods:['DELETE'],
         )
     ]
-    public function viewUser(string $login): JsonResponse
+    public function delete(string $id): JsonResponse
     {
-        if (!empty($login)){
-            $entityManager = $this->registry->getManager();
-            $user = $entityManager
+        if (!empty($id)){
+            $user = $this->em
                 ->getRepository(User::class)
-                ->findOneBy(['login' => $login]);
-            return $this->json($user, 200);
+                    ->findOneBy(['id' => $id]);
+
+            $this->em->remove($user);
+            $this->em->flush();
+
+            return $this->json([
+                'status'  => 'OK',
+                'message' => 'Пользователь успешно удален'
+            ], 200);
         }
-        return $this->json(['Error'=>"Логин отсутствует"], 500);
+        return $this->json([
+            'status' => 'Error',
+            'message'=> 'Пользователь отсутствует'
+        ], 404);
     }
 
     #[
         Route(
-            '/api/user/remove/{login}',
-            name:'user_remove',
-            methods:['GET'],
-        )
-    ]
-    public function removeUser(string $login): JsonResponse
-    {
-        if (!empty($login)){
-            $entityManager = $this->registry->getManager();
-            $user = $entityManager
-                ->getRepository(User::class)
-                ->findOneBy(['login' => $login]);
-                $entityManager->remove($user);
-                $entityManager->flush();
-            return $this->json(['Status'=> "Пользователь успешно удален"], 200);
-        }
-        return $this->json(['Error'=>"Логин отсутствует"], 500);
-    }
-
-    #[
-        Route(
-            '/api/user/public',
-            name:'user_public',
-            methods:['GET'],
-        )
-    ]
-    public function publicUsers(): JsonResponse
-    {
-        $entityManager = $this->registry->getManager();
-        $users = $entityManager
-            ->getRepository(User::class)
-            ->findBy(['isPublic' => true]);
-        return $this->json($users, 200);
-    }
-
-    #[
-        Route(
-            '/api/user/all',
-            name:'user_all',
-            methods:['GET'],
-        )
-    ]
-    public function allUsers(): JsonResponse
-    {
-        $entityManager = $this->registry->getManager();
-        $users = $entityManager
-            ->getRepository(User::class)
-            ->findBy([]);
-        return $this->json($users, 200);
-    }
-
-    #[
-        Route(
-            '/api/user/current',
+            '/api/current',
             name:'user_current',
             methods:['GET'],
         )

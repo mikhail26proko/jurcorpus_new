@@ -26,12 +26,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \JsonSe
         private readonly string $login,
         #[ORM\Column(type: 'string', length: 255)]
         private string $fio,
-        #[ORM\Column(type: 'string', length: 255, nullable:true)]
-        private string $jobTitle,
-        #[ORM\Column(type: 'array', nullable:true)]
-        private array $description,
+        #[ORM\Column(type: 'string', nullable:true)]
+        private string $description,
         #[ORM\Column(type: 'boolean')]
-        private bool $isPublic,
+        private bool $isActive,
         #[ORM\Column(type: 'string', length: 60)]
         private string $password,
         #[ORM\Column(type: 'json')]
@@ -48,14 +46,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \JsonSe
         return $this->login;
     }
 
-    public function getIsPublic(): bool
+    public function getIsAcive(): bool
     {
-        return $this->isPublic;
+        return $this->isActive;
     }
 
-    public function setIsPublic(bool $isPublic): void
+    public function setIsAcive(bool $isActive): void
     {
-        $this->isPublic = $isPublic;
+        $this->isActive = $isActive;
     }
 
     public function getFIO(): string
@@ -68,22 +66,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \JsonSe
         $this->fio = $fio;
     }
 
-    public function getJobTitle(): string
+    public function getDescription(): string
     {
-        return $this->jobTitle ?? '';
+        return $this->description ?? '';
     }
 
-    public function setJobTitle(string $jobTitle): void
-    {
-        $this->jobTitle = $jobTitle;
-    }
-
-    public function getDescription(): array
-    {
-        return $this->description ?? [];
-    }
-
-    public function setDescription(array $description): void
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -133,7 +121,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \JsonSe
             'id'            => $this->getId(),
             'login'         => $this->getLogin(),
             'fio'           => $this->getFIO(),
-            'jobTitle'      => $this->getJobTitle(),
             'description'   => $this->getDescription(),
         ];
     }
