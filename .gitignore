@@ -6,9 +6,8 @@
 .gitignore
 /pgdumps/
 /uploads/
-/backend/var/
-/backend/.gitignore
-/backend/vendor/
-/frontend/.next/
-/frontend/.gitignore
-/frontend/node_modules/
+/**/var/
+/**/.gitignore
+/**/vendor/
+/**/.next/
+/**/node_modules/
