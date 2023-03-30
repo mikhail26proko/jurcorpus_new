@@ -1,37 +1,21 @@
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import style from './../../styles/public/Ymaps.module.scss'
+import Script from 'next/script'
+
 
 const YMap = () => {
-
-    const JurCorpusCords = [44.938885, 34.092143]
-    const mapState = {
-        center: JurCorpusCords,
-        zoom: 18,
-        controls: ["zoomControl", "fullscreenControl"],
-    };
-
     return <>
-        <YMaps
-            query={{
-                apikey:'d10f2783-3990-4d1a-9532-f26300d61372',
-                lang: 'ru_RU',
-                // ns: "use-load-option",
-                load: "Map,Placemark,control.ZoomControl,control.FullscreenControl",
+        <div id="yandex_map" className={style.ymap}></div>
+        <Script
+            id="yandex_map"
+            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9258bb772418d4001f36561b74613e0d98668d451d86dfe0598ae19c0b628971&amp;width=100%25&amp;id=yandex_map&amp;lang=ru_RU&amp;scroll=true"
+            strategy="lazyOnload"
+            async={false}
+            type="text/javascript"
+            onError={(e) => {
+                console.error('Script failed to load', e)
             }}
         >
-            <Map
-                defaultState={mapState}
-                width={"100%"}
-                height={"100%"}
-            >
-                <Placemark
-                    geometry={JurCorpusCords}
-                    options={{
-                        preset:'islands#circleIcon',
-                        iconColor:'red'
-                    }}
-                />
-            </Map>
-        </YMaps>
+        </Script>
     </>
 }
 
