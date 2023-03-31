@@ -23,6 +23,19 @@ class UserController extends DefaultController
 
     #[
         Route(
+            '/users',
+            name:'user_all',
+            methods:['GET'],
+        )
+    ]
+    public function all(Request $request): JsonResponse
+    {
+        $users = $this->em->getRepository(User::class)->findAll();
+        return $this->json($users, 200);
+    }
+
+    #[
+        Route(
             '/user',
             name:'user_create',
             methods:['POST'],
