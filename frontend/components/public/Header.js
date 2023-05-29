@@ -5,6 +5,8 @@ const Header = ( { language } ) => {
         <Head>
             <title>{language.title}</title>
             <link rel="icon" href="/favicon.ico" />
+            <meta name="description" content={language.description}></meta>
+            <meta name="keywords" content={language.keywords}></meta>
         </Head>
     </>
 }
