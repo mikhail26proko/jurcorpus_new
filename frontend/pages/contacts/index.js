@@ -13,9 +13,9 @@ export default function Contacts({language}) {
             </p>
             <h5>{language.contact.phoneAndMail}</h5>
             <p className={styles.Context}>
-              {language.contact.phoneInfo}
+              <a href={'tel:'+language.contact.phoneInfo}> {language.contact.phoneInfo} </a>
               <br/>
-              {language.contact.MailInfo}
+              <a href={'mailto:'+language.contact.MailInfo}> {language.contact.MailInfo} </a>
             </p>
           <br />
             <p className={styles.Notes}>
