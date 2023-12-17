@@ -1,0 +1,142 @@
+version: '3'
+
+services:
+
+  traefik:
+    container_name: ${COMPOSE_PROJECT_NAME}-traefik
+    image: traefik:v2.10
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik:/etc/traefik:ro
+      - ${PWD:-./}/jurcorpus.crt:/etc/certs/jurcorpus.crt
+      - ${PWD:-./}/jurcorpus.key:/etc/certs/jurcorpus.key
+      - ${PWD:-./}/logs/traefik:/etc/logs/
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik-secure.entrypoints=websecure
+      - traefik.http.routers.traefik-secure.rule=Host(`dashboard.${DOMAIN1}`)
+      - traefik.http.services.traefik-secure.loadBalancer.server.port=8080
+      - traefik.http.routers.traefik-secure.tls=true
+      - traefik.http.routers.traefik-secure.service=api@internal
+      - traefik.http.routers.traefik-secure.middlewares=traefik-auth
+      - traefik.http.middlewares.traefik-auth.basicauth.users=${DASHBOARD_USER}:${DASHBOARD_PASS}
+
+  frontend:
+    container_name: ${COMPOSE_PROJECT_NAME}-frontend
+    image: node:16.16-alpine
+    command: sh -c "yarn install && yarn run build && yarn run start"
+    working_dir: /app/
+    restart: always
+    volumes:
+      - ${PWD:-./}/frontend:/app
+      - ${PWD:-./}/.env:/app/.env
+    ports: [3000]
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.frontend.entrypoints=web
+      - traefik.http.routers.frontend.service=frontend
+      - traefik.http.routers.frontend-secure.entrypoints=websecure
+      - traefik.http.routers.frontend-secure.service=frontend
+      - traefik.http.routers.frontend.rule=Host(`${DOMAIN1}`,`${DOMAIN2}`)
+      - traefik.http.routers.frontend-secure.rule=Host(`${DOMAIN1}`)
+      - traefik.http.routers.frontend-secure.tls=true
+      - traefik.http.services.frontend.loadBalancer.server.port=3000
+      - traefik.http.services.frontend-secure.loadBalancer.server.port=3000
+
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}-nginx
+    image: nginx:1.21-alpine
+    tty: true
+    volumes:
+      - ${PWD:-./}/docker/prod/nginx/config:/etc/nginx/conf.d
+      - ${PWD:-./}/logs/nginx:/var/log/nginx
+      - ${PWD:-./}/backend:/var/www
+    ports: [443]
+    restart: always
+    working_dir: /var/www
+    depends_on:
+      - backend
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.nginx.entrypoints=web
+      # - traefik.http.routers.admin.entrypoints=web
+      - traefik.http.routers.nginx-secure.entrypoints=websecure
+      - traefik.http.routers.admin-secure.entrypoints=websecure
+      - traefik.http.routers.nginx.rule=Host(`api.${DOMAIN1}`)
+      # - traefik.http.routers.admin.rule=Host(`admin.${DOMAIN1}`)
+      - traefik.http.routers.nginx-secure.rule=Host(`api.${DOMAIN1}`)
+      - traefik.http.routers.admin-secure.rule=Host(`admin.${DOMAIN1}`)
+      - traefik.http.routers.nginx-secure.tls=true
+      - traefik.http.routers.admin-secure.tls=true
+      - traefik.http.routers.nginx.service=nginx
+      # - traefik.http.routers.admin.service=nginx
+      - traefik.http.routers.nginx-secure.service=nginx-secure
+      - traefik.http.routers.admin-secure.service=admin-secure
+      - traefik.http.services.nginx.loadBalancer.server.port=80
+      # - traefik.http.services.admin.loadBalancer.server.port=80
+      - traefik.http.services.nginx-secure.loadBalancer.server.port=443
+      - traefik.http.services.admin-secure.loadBalancer.server.port=443
+      - traefik.http.middlewares.nginx-secure.redirectscheme.scheme=https
+      - traefik.http.middlewares.admin-secure.redirectscheme.scheme=https
+      - traefik.http.middlewares.nginx-secure.redirectscheme.permanent=true
+      - traefik.http.middlewares.admin-secure.redirectscheme.permanent=true
+
+  backend:
+    container_name: ${COMPOSE_PROJECT_NAME}-backend
+    build: ./php/
+    env_file:
+      - ${PWD:-./}/.env
+    restart: always
+    working_dir: /var/www
+    ports: [9000]
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=false
+
+    volumes:
+      - ${PWD:-./}/backend:/var/www
+      - ${PWD:-./}/logs/backend:/var/www/storage/logs
+      - ${PWD:-./}/.env:/var/www/.env
+
+  postgres:
+    container_name: ${COMPOSE_PROJECT_NAME}-postgres
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    restart: always
+    volumes:
+      - app-postgres-data:/var/lib/postgresql/data
+      # - ${PWD:-./}/pgdumps/:/var/lib/postgresql/data
+    ports: [5432]
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=false
+    healthcheck:
+      test: pg_isready -U root -d ${POSTGRES_DB} -p 5432
+      interval: 15s
+      timeout: 15s
+      retries: 10
+
+networks:
+  traefik-public:
+    driver: bridge
+
+volumes:
+  app-postgres-data:

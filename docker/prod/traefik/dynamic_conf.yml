@@ -1,0 +1,11 @@
+tls:
+  certificates:
+    - certFile: /etc/certs/jurcorpus.crt
+      keyFile: /etc/certs/jurcorpus.key
+
+  options:
+    default:
+      sniStrict: true
+
+serversTransport:
+  insecureSkipVerify: true
