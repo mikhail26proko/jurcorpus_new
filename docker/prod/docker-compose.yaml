@@ -20,14 +20,12 @@ services:
       - traefik-public
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.entrypoints=web
-      - traefik.http.routers.traefik.rule=Host(`dashboard.${DOMAIN1}`)
       - traefik.http.routers.traefik-secure.entrypoints=websecure
       - traefik.http.routers.traefik-secure.rule=Host(`dashboard.${DOMAIN1}`)
-      - traefik.http.services.traefik.loadBalancer.server.port=8080
+      - traefik.http.services.traefik-secure.loadBalancer.server.port=8080
       - traefik.http.routers.traefik-secure.tls=true
-      - traefik.http.routers.traefik-secure.service=traefik
-      - traefik.http.routers.traefik.middlewares=traefik-auth
+      - traefik.http.routers.traefik-secure.service=api@internal
+      - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       - traefik.http.middlewares.traefik-auth.basicauth.users=${DASHBOARD_USER}:${DASHBOARD_PASS}
 
   frontend:
@@ -124,7 +122,7 @@ services:
     restart: always
     volumes:
       - app-postgres-data:/var/lib/postgresql/data
-      - ${PWD:-./}/pgdumps:/var/lib/postgresql/data
+      # - ${PWD:-./}/pgdumps/:/var/lib/postgresql/data
     ports: [5432]
     networks:
       - traefik-public

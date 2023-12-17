@@ -2,7 +2,6 @@ global:
   sendAnonymousUsage: false
 
 api:
-  insecure: true
   dashboard: true
 
 providers:
@@ -26,18 +25,21 @@ entrypoints:
   websecure:
     address: :443
     # asDefault: true
-### METRICS:
 
-# metrics:
-#   prometheus: true
+### METRICS:
+metrics:
+  prometheus:
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+
 
 ### LOGS:
-
-log:
+# log:
   # filePath: /etc/logs/traefik.log
   # format: json
   # INFO \ DEBUG \
-  level: DEBUG
+  # level: INFO
 
 accesslog:
   format: common # common, json, logfmt
