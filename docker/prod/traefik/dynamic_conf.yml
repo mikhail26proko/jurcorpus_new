@@ -17,6 +17,8 @@ tls:
   certificates:
     - certFile: /etc/certs/jurcorpus.crt
       keyFile: /etc/certs/jurcorpus.key
+    - certFile: /etc/certs/jur.crt.pem
+      keyFile: /etc/certs/jur.key.pem
 
   options:
     default:

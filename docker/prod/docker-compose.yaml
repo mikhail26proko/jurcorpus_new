@@ -13,9 +13,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik:/etc/traefik:ro
-      - ${PWD:-./}/jurcorpus.crt:/etc/certs/jurcorpus.crt
-      - ${PWD:-./}/jurcorpus.key:/etc/certs/jurcorpus.key
-      - ${PWD:-./}/logs/traefik:/etc/logs/
+      - ${PWD:-./}/certs/:/etc/certs/
     networks:
       - traefik-public
     labels:
