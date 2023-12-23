@@ -43,6 +43,11 @@ class Employee extends Model
         return $this->belongsToMany(JobTitle::class, 'employee_job_title');
     }
 
+    public function directions()
+    {
+        return $this->belongsToMany(Direction::class, 'employee_direction');
+    }
+
     public function getFullNameAttribute()
     {
         return implode(' ',[$this->last_name, $this->first_name, $this->sur_name]);

@@ -101,7 +101,10 @@ class EmployeeScreen extends Screen
         $employee = ($this->employeeService->get($employee->id))->toArray();
 
         $job_titles = array_column($employee['job_titles'],'id');
+        $directions = array_column($employee['directions'],'id');
+
         $employee['job_titles'] = $job_titles;
+        $employee['directions'] = $directions;
 
         return $employee;
     }
@@ -122,6 +125,7 @@ class EmployeeScreen extends Screen
         }
 
         $employee->job_titles()->sync($validated['job_titles']);
+        $employee->directions()->sync($validated['directions']);
         $employee->attachment()->sync($validated['photo']);
 
         Toast::success(__('platform.messages.'.$message));

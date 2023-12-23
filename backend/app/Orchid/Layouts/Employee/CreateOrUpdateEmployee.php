@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Employee;
 
+use App\Models\Direction;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Cropper;
@@ -77,6 +78,14 @@ class CreateOrUpdateEmployee extends Rows
                     ->title(__('platform.fuilds.branch'))
                     ->clear()
                     ->fromModel(Branch::class, 'title'),
+            ]),
+
+            Group::make([
+                Relation::make('directions.')
+                    ->title('platform.fuilds.directions')
+                    ->multiple()
+                    ->allowAdd(true)
+                    ->fromModel(Direction::class,'title'),
             ]),
 
             Group::make([

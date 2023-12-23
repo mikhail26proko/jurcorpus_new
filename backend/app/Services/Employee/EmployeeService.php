@@ -16,6 +16,7 @@ class EmployeeService
 
     protected array $relationship = [
         'job_titles',
+        'directions',
         'attachment',
     ];
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Employee;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Direction;
 use App\Models\JobTitle;
 
 class OrchidEmployeeRequest extends FormRequest
@@ -24,6 +25,7 @@ class OrchidEmployeeRequest extends FormRequest
             'description'   => 'sometimes|string',
             'branch_id'     => 'sometimes|integer|exists:branches,id|nullable',
             'job_titles.*'  => 'sometimes|integer|exists:job_titles,id|nullable',
+            'directions.*'  => 'sometimes|integer|exists:directions,id|nullable',
             'photo'         => 'sometimes|integer|exists:attachments,id|nullable',
         ];
     }
@@ -36,20 +38,21 @@ class OrchidEmployeeRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'job_titles' => $this->prepareJobTitles($this->get('job_titles'))
+            'job_titles' => $this->prepare(JobTitle::class, $this->get('job_titles')),
+            'directions' => $this->prepare(Direction::class, $this->get('directions'))
         ]);
     }
 
-    private function prepareJobTitles(array $jobTitles)
+    private function prepare($type, array $items)
     {
         $finished = [];
 
-        foreach ($jobTitles as $item) {
+        foreach ($items as $item) {
             if (is_numeric($item)){
                 $finished[] = $item;
             } else {
-                $jobTitle = JobTitle::create(['title'=>$item]);
-                $finished[] = $jobTitle->id;
+                $row = $type::create(['title'=>$item]);
+                $finished[] = $row->id;
             }
         }
 
