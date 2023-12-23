@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Branch;
 
+use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Field;
@@ -25,37 +26,41 @@ class CreateOrUpdateBranch extends Rows
                 ->type('text')
                 ->max(255)
                 ->required()
-                ->title(__('Title'))
-                ->placeholder(__('Title')),
+                ->title(__('platform.fuilds.title'))
+                ->placeholder(__('platform.fuilds.title')),
 
             Input::make('address')
                 ->type('text')
                 ->max(255)
                 ->required()
-                ->title(__('Address'))
-                ->placeholder(__('Address')),
+                ->title(__('platform.fuilds.address'))
+                ->placeholder(__('platform.fuilds.address')),
 
-            Input::make('phone')
-                ->mask('(999) 999-9999')
-                // ->required()
-                ->title(__('Phone'))
-                ->placeholder(__('Phone')),
+            Group::make([
+                Input::make('phone')
+                    ->mask(__('platform.masks.phone'))
+                    // ->required()
+                    ->title(__('platform.fuilds.phone'))
+                    ->placeholder(__('platform.fuilds.phone')),
 
-            Input::make('email')
-                ->type('email')
-                // ->required()
-                ->title(__('Email'))
-                ->placeholder(__('Email')),
+                Input::make('email')
+                    ->type('email')
+                    // ->required()
+                    ->title(__('platform.fuilds.email'))
+                    ->placeholder(__('platform.fuilds.email')),
+            ]),
 
-            Input::make('latitude')
-                ->type('number')
-                ->title(__('Latitude'))
-                ->placeholder(__('Latitude')),
+            Group::make([
+                Input::make('latitude')
+                    ->type('number')
+                    ->title(__('Latitude'))
+                    ->placeholder(__('Latitude')),
 
-            Input::make('longitude')
-                ->type('number')
-                ->title(__('Longitude'))
-                ->placeholder(__('Longitude')),
+                Input::make('longitude')
+                    ->type('number')
+                    ->title(__('Longitude'))
+                    ->placeholder(__('Longitude')),
+            ]),
         ];
     }
 }

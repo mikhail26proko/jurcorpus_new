@@ -118,14 +118,14 @@ class EmployeeScreen extends Screen
             $message = 'WasUpdated';
         }
 
-        Toast::success(__($message));
+        Toast::success(__('platform.messages.'.$message));
     }
 
     public function delete(Employee $employee)
     {
         $this->employeeService->delete($employee->id);
 
-        Toast::error($employee->title . ' ' . __('WasDeleted'));
+        Toast::error($employee->title . ' ' . __('platform.messages.WasDeleted'));
     }
 
 }

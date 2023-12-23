@@ -24,6 +24,7 @@ class Employee extends Model
         'sur_name',
         'email',
         'phone',
+        'branch_id'
     ];
 
     protected $appends = [
@@ -32,7 +33,7 @@ class Employee extends Model
 
     public function branch()
     {
-        return $this->hasOne(Branch::class);
+        return $this->belongsTo(Branch::class);
     }
 
     public function getFullNameAttribute()

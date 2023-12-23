@@ -32,10 +32,10 @@ class BranchListLayout extends Table
                 return $loop->index + 1;
             }),
 
-            TD::make('title', __('Title'))
+            TD::make('title', __('platform.fuilds.title'))
                 ->sort(),
 
-            TD::make('email', __('Email'))
+            TD::make('email', __('platform.fuilds.email'))
                 ->sort()
                 ->cantHide(),
 
@@ -74,7 +74,7 @@ class BranchListLayout extends Table
 
                             Button::make(__('Delete'))
                                 ->icon('bs.trash3')
-                                ->confirm(__('AreYouSureDelete?'))
+                                ->confirm(__('SureDelete'))
                                 ->method('delete', [
                                     'branch' => $branch->id,
                                 ]),

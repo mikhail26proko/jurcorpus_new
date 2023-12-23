@@ -118,14 +118,14 @@ class BranchScreen extends Screen
             $message = 'WasUpdated';
         }
 
-        Toast::success(__($message));
+        Toast::success(__('platform.messages.'.$message));
     }
 
     public function delete(Branch $branch)
     {
         $this->branchService->delete($branch->id);
 
-        Toast::error($branch->title . ' ' . __('WasDeleted'));
+        Toast::error($branch->title . ' ' . __('platform.messages.WasDeleted'));
     }
 
 }

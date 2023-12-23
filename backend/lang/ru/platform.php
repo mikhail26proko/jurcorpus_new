@@ -70,5 +70,25 @@ return [
                 'index' => "Выход"
             ]
         ]
+    ],
+    'messages' => [
+        'WasCreated'    => 'Создано',
+        'WasUpdated'    => 'Обновлено',
+        'WasDeleted'    => 'Удалено',
+        'SureDelete'    => 'Подтвердите удаление',
+    ],
+    'fuilds' => [
+        'title'         => 'Название',
+        'full_name'     => 'ФИО',
+        'last_name'     => 'Фамилия',
+        'first_name'    => 'Имя',
+        'sur_name'      => 'Отчество',
+        'email'         => 'Почта',
+        'address'       => 'Адрес',
+        'phone'         => 'Телефон',
+        'branch'        => 'Филиал',
+    ],
+    'masks' => [
+        'phone' => '+7 (999) 999-9999',
     ]
 ];
