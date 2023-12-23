@@ -46,7 +46,18 @@ use Tabuna\Breadcrumbs\Trail;
             ->parent('platform.index')
             ->push(__('Profile'), route('platform.profile')));
 
-    Route::group(['name'=>'Users'],function(){
+
+    Route::group(['name' => 'Branch'], function(){
+        Route::screen('branches', BranchScreen::class)
+            ->name('platform.branches');
+    });
+
+    Route::group(['name' => 'Employee'], function(){
+        Route::screen('employees', EmployeeScreen::class)
+            ->name('platform.employees');
+    });
+
+    Route::group(['name' => 'Users'], function(){
         // Platform > System > Users > User
         Route::screen('users/{user}/edit', UserEditScreen::class)
             ->name('platform.systems.users.edit')
@@ -69,7 +80,7 @@ use Tabuna\Breadcrumbs\Trail;
                 ->push(__('Users'), route('platform.systems.users')));
     });
 
-    Route::group(['name'=>'Roles'], function(){
+    Route::group(['name' => 'Roles'], function(){
         // Platform > System > Roles > Role
         Route::screen('roles/{role}/edit', RoleEditScreen::class)
             ->name('platform.systems.roles.edit')
@@ -92,41 +103,30 @@ use Tabuna\Breadcrumbs\Trail;
                 ->push(__('Roles'), route('platform.systems.roles')));
     });
 
-    Route::group(['name'=>'JobTitle'], function(){
+    Route::group(['name' => 'JobTitle'], function(){
         Route::screen('job_title', JobTitleScreen::class)
             ->name('platform.directories.job_titles');
     });
 
-    Route::group(['name'=>'Direction'], function(){
+    Route::group(['name' => 'Direction'], function(){
         Route::screen('directions', DirectionScreen::class)
             ->name('platform.directories.directions');
     });
 
-    Route::group(['name'=>'Branch'],function(){
-        Route::screen('branches', BranchScreen::class)
-            ->name('platform.branches');
+    Route::group(['name' => 'Example'], function(){
+        Route::screen('example', ExampleScreen::class)
+            ->name('platform.example')
+            ->breadcrumbs(fn (Trail $trail) => $trail
+                ->parent('platform.index')
+                ->push('Example Screen'));
+
+        Route::screen('/examples/form/fields', ExampleFieldsScreen::class)->name('platform.example.fields');
+        Route::screen('/examples/form/advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
+        Route::screen('/examples/form/editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
+        Route::screen('/examples/form/actions', ExampleActionsScreen::class)->name('platform.example.actions');
+
+        Route::screen('/examples/layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
+        Route::screen('/examples/grid', ExampleGridScreen::class)->name('platform.example.grid');
+        Route::screen('/examples/charts', ExampleChartsScreen::class)->name('platform.example.charts');
+        Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.example.cards');
     });
-
-    Route::group(['name'=>'Employee'],function(){
-        Route::screen('employees', EmployeeScreen::class)
-            ->name('platform.employees');
-    });
-
-    // Example...
-    Route::screen('example', ExampleScreen::class)
-        ->name('platform.example')
-        ->breadcrumbs(fn (Trail $trail) => $trail
-            ->parent('platform.index')
-            ->push('Example Screen'));
-
-    Route::screen('/examples/form/fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-    Route::screen('/examples/form/advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-    Route::screen('/examples/form/editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-    Route::screen('/examples/form/actions', ExampleActionsScreen::class)->name('platform.example.actions');
-
-    Route::screen('/examples/layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-    Route::screen('/examples/grid', ExampleGridScreen::class)->name('platform.example.grid');
-    Route::screen('/examples/charts', ExampleChartsScreen::class)->name('platform.example.charts');
-    Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.example.cards');
-
-    //Route::screen('idea', Idea::class, 'platform.screens.idea');
