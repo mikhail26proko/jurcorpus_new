@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\User;
+namespace App\Orchid\Screens\System\User;
 
-use App\Orchid\Layouts\User\UserEditLayout;
-use App\Orchid\Layouts\User\UserFiltersLayout;
-use App\Orchid\Layouts\User\UserListLayout;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Orchid\Platform\Models\User;
-use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
+use App\Orchid\Layouts\System\User\UserEditLayout;
+use App\Orchid\Layouts\System\User\UserFiltersLayout;
+use App\Orchid\Layouts\System\User\UserListLayout;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Orchid\Platform\Models\User;
+use Illuminate\Validation\Rule;
+use Orchid\Screen\Actions\Link;
+use Illuminate\Http\Request;
+use Orchid\Screen\Screen;
 
 class UserListScreen extends Screen
 {

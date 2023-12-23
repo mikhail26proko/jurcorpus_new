@@ -2,23 +2,24 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\Branch\BranchScreen;
-use App\Orchid\Screens\Employee\EmployeeScreen;
-use App\Orchid\Screens\Examples\ExampleActionsScreen;
-use App\Orchid\Screens\Examples\ExampleCardsScreen;
-use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsScreen;
-use App\Orchid\Screens\Examples\ExampleGridScreen;
-use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\System\JobTitle\JobTitleScreen;
+use App\Orchid\Screens\System\User\UserProfileScreen;
+use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
+use App\Orchid\Screens\Examples\ExampleActionsScreen;
+use App\Orchid\Screens\Examples\ExampleChartsScreen;
+use App\Orchid\Screens\Examples\ExampleFieldsScreen;
+use App\Orchid\Screens\Examples\ExampleCardsScreen;
+use App\Orchid\Screens\System\Role\RoleEditScreen;
+use App\Orchid\Screens\System\Role\RoleListScreen;
+use App\Orchid\Screens\System\User\UserEditScreen;
+use App\Orchid\Screens\System\User\UserListScreen;
+use App\Orchid\Screens\Examples\ExampleGridScreen;
+use App\Orchid\Screens\Employee\EmployeeScreen;
+use App\Orchid\Screens\Examples\ExampleScreen;
+use App\Orchid\Screens\Branch\BranchScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\Role\RoleEditScreen;
-use App\Orchid\Screens\Role\RoleListScreen;
-use App\Orchid\Screens\User\UserEditScreen;
-use App\Orchid\Screens\User\UserListScreen;
-use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -88,6 +89,11 @@ use Tabuna\Breadcrumbs\Trail;
             ->breadcrumbs(fn (Trail $trail) => $trail
                 ->parent('platform.index')
                 ->push(__('Roles'), route('platform.systems.roles')));
+    });
+
+    Route::group(['name'=>'JobTitle'], function(){
+        Route::screen('job_title', JobTitleScreen::class)
+            ->name('platform.directories.job_titles');
     });
 
     Route::group(['name'=>'Branch'],function(){

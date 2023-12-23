@@ -2,24 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\User;
+namespace App\Orchid\Screens\System\User;
 
-use App\Orchid\Layouts\Role\RolePermissionLayout;
-use App\Orchid\Layouts\User\UserEditLayout;
-use App\Orchid\Layouts\User\UserPasswordLayout;
-use App\Orchid\Layouts\User\UserRoleLayout;
+use App\Orchid\Layouts\System\Role\RolePermissionLayout;
+use App\Orchid\Layouts\System\User\UserEditLayout;
+use App\Orchid\Layouts\System\User\UserPasswordLayout;
+use App\Orchid\Layouts\System\User\UserRoleLayout;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Orchid\Access\Impersonation;
-use Orchid\Platform\Models\User;
-use Orchid\Screen\Action;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Screen;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Orchid\Screen\Actions\Button;
+use Orchid\Access\Impersonation;
+use Orchid\Platform\Models\User;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
+use Orchid\Screen\Action;
+use Orchid\Screen\Screen;
+use Orchid\Support\Color;
+
 
 class UserEditScreen extends Screen
 {

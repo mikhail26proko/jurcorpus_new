@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\User;
+namespace App\Orchid\Screens\System\User;
 
-use App\Orchid\Layouts\User\ProfilePasswordLayout;
-use App\Orchid\Layouts\User\UserEditLayout;
-use Illuminate\Http\Request;
+use App\Orchid\Layouts\System\User\ProfilePasswordLayout;
+use App\Orchid\Layouts\System\User\UserEditLayout;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Orchid\Access\Impersonation;
-use Orchid\Platform\Models\User;
-use Orchid\Screen\Action;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Screen;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Orchid\Screen\Actions\Button;
+use Orchid\Access\Impersonation;
+use Orchid\Platform\Models\User;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
+use Orchid\Screen\Action;
+use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 
 class UserProfileScreen extends Screen
 {

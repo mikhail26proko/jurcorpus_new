@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
-use Orchid\Platform\Dashboard;
-use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
-use Orchid\Screen\Actions\Button;
+use Orchid\Platform\ItemPermission;
 use Orchid\Screen\Actions\Menu;
-use Orchid\Support\Color;
+use Orchid\Platform\Dashboard;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -37,7 +35,7 @@ class PlatformProvider extends OrchidServiceProvider
         return [
 
             Menu::make(__('platform.pages.menu.main.index'))
-                ->icon('bs.book')
+                ->icon('bs.orchid-old')
                 ->route(config('platform.index')),
 
             Menu::make(__('platform.pages.menu.branches.index'))
@@ -62,6 +60,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('platform.pages.menu.system.index'))
                 ->icon('bs.gear-wide-connected')
+                ->parent('system')
                     ->list([
                         Menu::make(__('platform.pages.menu.system.users.index'))
                             ->icon('bs.people')
@@ -72,6 +71,18 @@ class PlatformProvider extends OrchidServiceProvider
                                 ->icon('bs.shield')
                                     ->route('platform.systems.roles')
                                         ->permission('platform.systems.roles'),
+
+                        Menu::make(__('platform.pages.menu.system.directories.index'))
+                            ->icon('bs.notebook')
+                                ->parent('directories')
+                                ->list([
+                                    Menu::make(__('platform.pages.menu.system.directories.job_titles.index'))
+                                        ->permission('platform.systems.directories')
+                                            ->route('platform.directories.job_titles'),
+                                    Menu::make(__('platform.pages.menu.system.directories.directions.index'))
+                                        ->permission('platform.systems.directories'),
+                                            // ->route('platform.directions'),
+                                ])
 
                     ]),
 
@@ -120,7 +131,8 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             ItemPermission::group(__('platform.pages.menu.system.index'))
                 ->addPermission('platform.systems.users', __('platform.pages.menu.system.users.index'))
-                ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index')),
+                ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index'))
+                ->addPermission('platform.systems.directories', __('platform.pages.menu.system.directories.index')),
 
             ItemPermission::group(__('platform.pages.menu.examples.index'))
                 ->addPermission('platform.examples', __('platform.pages.menu.examples.index')),

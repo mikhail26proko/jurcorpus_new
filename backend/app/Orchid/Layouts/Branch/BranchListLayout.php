@@ -76,7 +76,7 @@ class BranchListLayout extends Table
 
                             Button::make(__('Delete'))
                                 ->icon('bs.trash3')
-                                ->confirm(__('SureDelete'))
+                                ->confirm(__('platform.messages.SureDelete'))
                                 ->method('delete', [
                                     'branch' => $branch->id,
                                 ]),

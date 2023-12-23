@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Role;
+namespace App\Orchid\Layouts\System\Role;
 
 use Illuminate\Support\Collection;
 use Orchid\Platform\Models\User;
