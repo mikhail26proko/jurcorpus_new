@@ -27,9 +27,10 @@ class JobTitleListLayout extends Table
             // TD::make('id', __('Id'))
             //     ->sort(),
 
-            TD::make()->render(function (JobTitle $jobTitle, object $loop) {
-                return $loop->index + 1;
-            }),
+            TD::make('#')->width(60)
+                ->render(function (JobTitle $jobTitle, object $loop) {
+                    return $loop->index + 1;
+                }),
 
             TD::make('title', __('platform.fuilds.title'))
                 ->sort(),

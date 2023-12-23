@@ -27,9 +27,10 @@ class DirectionListLayout extends Table
             // TD::make('id', __('Id'))
             //     ->sort(),
 
-            TD::make()->render(function (Direction $direction, object $loop) {
-                return $loop->index + 1;
-            }),
+            TD::make('#')->width(60)
+                ->render(function (Direction $direction, object $loop) {
+                    return $loop->index + 1;
+                }),
 
             TD::make('title', __('platform.fuilds.title'))
                 ->sort(),

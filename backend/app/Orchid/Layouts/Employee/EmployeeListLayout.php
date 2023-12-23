@@ -28,9 +28,10 @@ class EmployeeListLayout extends Table
             // TD::make('id', __('Id'))
             //     ->sort(),
 
-            TD::make()->render(function (Employee $employee, object $loop) {
-                return $loop->index + 1;
-            }),
+            TD::make('#')->width(60)
+                ->render(function (Employee $employee, object $loop) {
+                    return $loop->index + 1;
+                }),
 
             TD::make('full_name', __('platform.fuilds.full_name'))
                 ->sort()
