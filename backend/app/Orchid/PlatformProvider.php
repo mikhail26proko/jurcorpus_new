@@ -80,8 +80,8 @@ class PlatformProvider extends OrchidServiceProvider
                                         ->permission('platform.systems.directories')
                                             ->route('platform.directories.job_titles'),
                                     Menu::make(__('platform.pages.menu.system.directories.directions.index'))
-                                        ->permission('platform.systems.directories'),
-                                            // ->route('platform.directions'),
+                                        ->permission('platform.systems.directories')
+                                            ->route('platform.directories.directions'),
                                 ])
 
                     ]),

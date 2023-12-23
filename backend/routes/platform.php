@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\System\Direction\DirectionScreen;
 use App\Orchid\Screens\System\JobTitle\JobTitleScreen;
 use App\Orchid\Screens\System\User\UserProfileScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
@@ -94,6 +95,11 @@ use Tabuna\Breadcrumbs\Trail;
     Route::group(['name'=>'JobTitle'], function(){
         Route::screen('job_title', JobTitleScreen::class)
             ->name('platform.directories.job_titles');
+    });
+
+    Route::group(['name'=>'Direction'], function(){
+        Route::screen('directions', DirectionScreen::class)
+            ->name('platform.directories.directions');
     });
 
     Route::group(['name'=>'Branch'],function(){
