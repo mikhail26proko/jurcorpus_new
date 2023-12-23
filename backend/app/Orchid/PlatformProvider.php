@@ -35,7 +35,7 @@ class PlatformProvider extends OrchidServiceProvider
         return [
 
             Menu::make(__('platform.pages.menu.main.index'))
-                ->icon('bs.orchid-old')
+                ->icon('orchid-old')
                 ->route(config('platform.index')),
 
             Menu::make(__('platform.pages.menu.branches.index'))
@@ -73,7 +73,7 @@ class PlatformProvider extends OrchidServiceProvider
                                         ->permission('platform.systems.roles'),
 
                         Menu::make(__('platform.pages.menu.system.directories.index'))
-                            ->icon('bs.notebook')
+                            ->icon('notebook')
                                 ->parent('directories')
                                 ->list([
                                     Menu::make(__('platform.pages.menu.system.directories.job_titles.index'))
