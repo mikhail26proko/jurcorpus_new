@@ -14,6 +14,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik:/etc/traefik:ro
       - ${PWD:-./}/certs/:/etc/certs/
+      - ${PWD:-./}/logs/traefik:/etc/logs/
     networks:
       - traefik-public
     labels:
@@ -23,7 +24,9 @@ services:
       - traefik.http.services.traefik-secure.loadBalancer.server.port=8080
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.service=api@internal
-      - traefik.http.routers.traefik-secure.middlewares=traefik-auth
+      - traefik.http.routers.traefik-secure.middlewares=traefik-auth,to_ru
+      - traefik.http.middlewares.to_ru.redirectregex.regex=^https?://(www\.)?jurcorpus\.com/(.*)
+      - traefik.http.middlewares.to_ru.redirectregex.replacement=https:jurcorpus.ru/$$1
       - traefik.http.middlewares.traefik-auth.basicauth.users=${DASHBOARD_USER}:${DASHBOARD_PASS}
 
   frontend:
