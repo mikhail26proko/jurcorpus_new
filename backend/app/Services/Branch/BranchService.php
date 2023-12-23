@@ -15,7 +15,7 @@ class BranchService
     protected $model = Branch::class;
 
     protected array $relationship = [
-        // Связи по умолчанию
+        'employees',
     ];
 
     public function index(): LengthAwarePaginator

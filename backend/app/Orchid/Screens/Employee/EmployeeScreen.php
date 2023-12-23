@@ -7,13 +7,14 @@ namespace App\Orchid\Screens\Employee;
 use App\Orchid\Layouts\Employee\CreateOrUpdateEmployee;
 use App\Http\Requests\Employee\OrchidEmployeeRequest;
 use App\Orchid\Layouts\Employee\EmployeeListLayout;
-use Orchid\Screen\Actions\ModalToggle;
 use App\Services\Employee\EmployeeService;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use App\Models\Employee;
+use Carbon\Carbon;
 
 class EmployeeScreen extends Screen
 {
@@ -95,12 +96,14 @@ class EmployeeScreen extends Screen
         ];
     }
 
-    /**
-     * @return array
-     */
     public function asyncGetEmployee(Employee $employee): array
     {
-        return $employee->toArray();
+        $employee = ($this->employeeService->get($employee->id))->toArray();
+
+        $job_titles = array_column($employee['job_titles'],'id');
+        $employee['job_titles'] = $job_titles;
+
+        return $employee;
     }
 
     public function createOrUpdateEmployee(OrchidEmployeeRequest $request): void
@@ -117,6 +120,9 @@ class EmployeeScreen extends Screen
             $employee = $this->employeeService->update($validated['id'], $validated);
             $message = 'WasUpdated';
         }
+
+        $employee->job_titles()->sync($validated['job_titles']);
+        $employee->attachment()->sync($validated['photo']);
 
         Toast::success(__('platform.messages.'.$message));
     }

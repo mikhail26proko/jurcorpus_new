@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Orchid\Presenters\EmployeePresenter;
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Attachment\Attachable;
 use Orchid\Platform\Concerns\Sortable;
+use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -24,7 +25,8 @@ class Employee extends Model
         'sur_name',
         'email',
         'phone',
-        'branch_id'
+        'branch_id',
+        'description',
     ];
 
     protected $appends = [
@@ -36,9 +38,19 @@ class Employee extends Model
         return $this->belongsTo(Branch::class);
     }
 
+    public function job_titles()
+    {
+        return $this->belongsToMany(JobTitle::class, 'employee_job_title');
+    }
+
     public function getFullNameAttribute()
     {
         return implode(' ',[$this->last_name, $this->first_name, $this->sur_name]);
+    }
+
+    public function presenter(): EmployeePresenter
+    {
+        return new EmployeePresenter($this);
     }
 
     // public function lozalization(){

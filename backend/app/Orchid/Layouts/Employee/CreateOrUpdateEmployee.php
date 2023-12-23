@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Employee;
 
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Field;
+use App\Models\JobTitle;
 use App\Models\Branch;
 
 class CreateOrUpdateEmployee extends Rows
@@ -48,6 +51,14 @@ class CreateOrUpdateEmployee extends Rows
             ]),
 
             Group::make([
+                Relation::make('job_titles.')
+                    ->title('platform.fuilds.job_titles')
+                    ->multiple()
+                    ->allowAdd(true)
+                    ->fromModel(JobTitle::class,'title'),
+            ]),
+
+            Group::make([
                 Input::make('email')
                     ->type('email')
                     // ->required()
@@ -61,11 +72,28 @@ class CreateOrUpdateEmployee extends Rows
                     ->placeholder(__('platform.fuilds.phone')),
             ]),
 
-            Relation::make('branch_id')
-                ->title(__('platform.fuilds.branch'))
-                ->allowAdd(true)
-                ->fromModel(Branch::class, 'title'),
+            Group::make([
+                Relation::make('branch_id')
+                    ->title(__('platform.fuilds.branch'))
+                    ->clear()
+                    ->fromModel(Branch::class, 'title'),
+            ]),
 
+            Group::make([
+                TextArea::make('description')
+                    ->title(__('platform.fuilds.description'))
+                    ->rows(5),
+
+            ]),
+
+            Group::make([
+                Cropper::make('photo')
+                    ->title(__('platform.fuilds.photo'))
+                    ->acceptedFiles('.jpg,.jpeg,.png')
+                    ->targetId()
+                    ->width(300)
+                    ->height(400)
+            ]),
         ];
     }
 }

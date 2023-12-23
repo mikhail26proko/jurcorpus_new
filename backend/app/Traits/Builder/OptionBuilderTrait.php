@@ -10,6 +10,7 @@ trait OptionBuilderTrait {
     {
         return (new $this->model)
             ->with($this->relationship)
+            ->withCount($this->relationship)
                 ->orderBy('created_at','desc');
     }
 

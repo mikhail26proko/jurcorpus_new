@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $stack = [];
+        $stack = [ProductionSeeder::class];
 
         if (!App::environment('production')) {
             $stack[] = DevelopmentSeeder::class;

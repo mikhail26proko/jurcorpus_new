@@ -6,6 +6,7 @@ namespace App\Orchid\Layouts\Employee;
 
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Layouts\Table;
 use App\Models\Employee;
@@ -32,15 +33,26 @@ class EmployeeListLayout extends Table
             }),
 
             TD::make('full_name', __('platform.fuilds.full_name'))
-                ->sort(),
+                ->sort()
+                ->cantHide()
+                ->render(fn (Employee $employee) => new Persona($employee->presenter())),
 
             TD::make('branch',__('platform.fuilds.branch'))
                 ->render(function (Employee $employee) {
                     return
                         !empty($employee->branch)
                             ? $employee->branch->title
-                            : 'без филиала';
-            }),
+                            : __('platform.messages.UnsetedValue');
+                }),
+
+            TD::make('job_titles.', __('platform.fuilds.job_titles'))
+                ->render(function (Employee $employee) {
+                    if (!empty($employee->job_titles)){
+                        return implode(', ',array_column($employee->job_titles->toArray(),'title'));
+                    } else {
+                        return __('platform.messages.UnsetedValue');
+                    }
+                }),
 
             TD::make(__('Actions'))->alignRight()
                 ->render(function (Employee $employee) {
@@ -56,7 +68,7 @@ class EmployeeListLayout extends Table
 
                             Button::make(__('Delete'))
                                 ->icon('bs.trash3')
-                                ->confirm(__('SureDelete'))
+                                ->confirm(__('platform.messages.SureDelete'))
                                 ->method('delete', [
                                     'employee' => $employee->id,
                                 ]),

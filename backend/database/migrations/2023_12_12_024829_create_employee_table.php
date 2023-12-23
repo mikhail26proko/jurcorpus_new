@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sur_name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->text('description')->nullable();
             $table->foreignIdFor(Branch::class)->nullable();
             $table->timestamps();
             $table->softDeletes();

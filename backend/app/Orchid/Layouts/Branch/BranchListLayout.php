@@ -39,7 +39,9 @@ class BranchListLayout extends Table
                 ->sort()
                 ->cantHide(),
 
-            TD::make('employee_count', __('employee_count'))->render(fn(Branch $branch)=>($branch->employees_count)),
+            TD::make('employee_count', __('platform.fuilds.employee_count'))
+                ->alignCenter()->width(100)
+                ->render(fn(Branch $branch)=>($branch->employees_count > 0 ? $branch->employee_count : '')),
 
             TD::make('created_at', __('created_at'))
                 ->asComponent(

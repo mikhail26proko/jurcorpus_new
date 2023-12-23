@@ -15,7 +15,8 @@ class EmployeeService
     protected $model = Employee::class;
 
     protected array $relationship = [
-        // Связи по умолчанию
+        'job_titles',
+        'attachment',
     ];
 
     public function index(): LengthAwarePaginator
