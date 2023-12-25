@@ -38,6 +38,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('orchid-old')
                 ->route(config('platform.index')),
 
+            Menu::make(__('platform.pages.menu.crm.leads.index'))
+                ->permission('platform.crm.leads')
+                    ->icon('note')
+                        ->route('platform.lead'),
+
             Menu::make(__('platform.pages.menu.branches.index'))
                 ->permission('platform.branches')
                     ->icon('person-vcard')
@@ -129,6 +134,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function permissions(): array
     {
         return [
+
+            ItemPermission::group(__('platform.pages.menu.crm.index'))
+                ->addPermission('platform.crm.leads', __('platform.pages.menu.crm.leads.index')),
+
             ItemPermission::group(__('platform.pages.menu.system.index'))
                 ->addPermission('platform.systems.users', __('platform.pages.menu.system.users.index'))
                 ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index'))

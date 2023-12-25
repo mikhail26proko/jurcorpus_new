@@ -20,6 +20,7 @@ use App\Orchid\Screens\Examples\ExampleGridScreen;
 use App\Orchid\Screens\Employee\EmployeeScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Branch\BranchScreen;
+use App\Orchid\Screens\Lead\LeadScreen;
 use App\Orchid\Screens\PlatformScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -46,6 +47,10 @@ use Tabuna\Breadcrumbs\Trail;
             ->parent('platform.index')
             ->push(__('Profile'), route('platform.profile')));
 
+    Route::group(['name' => 'Lead'], function(){
+        Route::screen('lead', LeadScreen::class)
+            ->name('platform.lead');
+    });
 
     Route::group(['name' => 'Branch'], function(){
         Route::screen('branches', BranchScreen::class)
