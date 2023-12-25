@@ -8,11 +8,13 @@ use App\Orchid\Layouts\Lead\CreateOrUpdateLead;
 use App\Http\Requests\Lead\OrchidLeadRequest;
 use App\Orchid\Layouts\Lead\LeadListLayout;
 use Orchid\Screen\Actions\ModalToggle;
+use App\Orchid\Components\DateTime;
 use Orchid\Support\Facades\Layout;
 use App\Services\Lead\LeadService;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
+use Orchid\Screen\Sight;
 use App\Models\Lead;
 
 class LeadScreen extends Screen
@@ -31,7 +33,6 @@ class LeadScreen extends Screen
     public function query(): iterable
     {
         return [
-            // 'lead' => $this->leadService->index(),
             __('platform.tabs.all').'_lead' => $this->leadService->index(),
             __('platform.tabs.new').'_lead' => $this->leadService->index('new'),
             __('platform.tabs.process').'_lead' => $this->leadService->index('process'),
@@ -99,24 +100,38 @@ class LeadScreen extends Screen
                 __('platform.tabs.draft')       => new LeadListLayout(__('platform.tabs.draft').'_lead'),
             ])->activeTab(__('platform.tabs.new')),
 
-            Layout::modal('createLead', CreateOrUpdateLead::class)
+
+            Layout::blank([
+                Layout::modal('createLead', CreateOrUpdateLead::class)
                 ->title(__('Create'))
                     ->applyButton(__('Create')),
 
-            Layout::modal('editLead', CreateOrUpdateLead::class)
-                ->title(__('Update'))
-                    ->applyButton(__('Save'))
-                        ->async('asyncGetLead'),
+                Layout::modal('asyncEditLead', CreateOrUpdateLead::class)
+                    ->title(__('Update'))
+                        ->applyButton(__('Save'))
+                            ->async('asyncGetLead'),
+            ]),
+
+            Layout::modal('asyncOpenLead', Layout::legend('', [
+                Sight::make('created_at', __('platform.fuilds.created_at'))->usingComponent(DateTime::class,'d.m.Y H:i'),
+                Sight::make('fio', __('platform.fuilds.full_name')),
+                Sight::make('email', __('platform.fuilds.email')),
+                Sight::make('phone', __('platform.fuilds.phone')),
+                Sight::make('message', __('platform.fuilds.message')),
+            ]))
+                ->async('asyncGetLead')
+                ->withoutApplyButton(true)
+                ->withoutCloseButton(true),
         ];
     }
 
     /**
-     * @return array
-     */
-    public function asyncGetLead(Lead $lead): array
-    {
-        return $lead->toArray();
-    }
+    * @return array
+    */
+   public function asyncGetLead(Lead $lead): array
+   {
+       return $this->leadService->get($lead->id)->toArray();
+   }
 
     public function createOrUpdateLead(OrchidLeadRequest $request): void
     {

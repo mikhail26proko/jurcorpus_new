@@ -33,10 +33,7 @@ class LeadListLayout extends Table
             // TD::make('id', __('Id'))
             //     ->sort(),
 
-            TD::make('#')->width(60)
-                ->render(function (Lead $lead, object $loop) {
-                    return $loop->index + 1;
-                }),
+            TD::make('id','#')->width(60),
 
             TD::make('fio', __('platform.fuilds.full_name'))
                 ->sort(),
@@ -55,10 +52,18 @@ class LeadListLayout extends Table
                     return DropDown::make()
                         ->icon('bs.three-dots-vertical')
                         ->list([
-                            ModalToggle::make(__('Edit'))
+                            ModalToggle::make('open')
+                                ->name(__('platform.messages.Open'))
+                                ->icon('magnifier')
+                                ->modal('asyncOpenLead')
+                                ->modalTitle(__('platform.pages.menu.crm.leads.uno').' №'. $lead->id)
+                                ->asyncParameters(['lead' => $lead->id]),
+
+                            ModalToggle::make('edit')
+                                ->name(__('Edit'))
                                 ->icon('bs.pencil')
-                                ->modal('editLead')
-                                ->modalTitle(__('Edit'). ' ' . $lead->title)
+                                ->modal('asyncEditLead')
+                                ->modalTitle(__('Edit'))
                                 ->method('createOrUpdateLead')
                                 ->asyncParameters(['lead' => $lead->id]),
 

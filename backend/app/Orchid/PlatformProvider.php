@@ -8,6 +8,8 @@ use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Platform\ItemPermission;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Platform\Dashboard;
+use Orchid\Support\Color;
+use App\Models\Lead;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -39,6 +41,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route(config('platform.index')),
 
             Menu::make(__('platform.pages.menu.crm.leads.index'))
+                ->badge(function(){
+                    return Lead::where('status','Новая')->count();
+                },Color::DANGER)
                 ->permission('platform.crm.leads')
                     ->icon('note')
                         ->route('platform.lead'),

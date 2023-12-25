@@ -14,6 +14,7 @@ return [
                 'description'   => 'Работа с заявками и контактами',
                 'leads'=> [
                     'index' => 'Заявки',
+                    'uno'   => 'Заявка',
                     'description'   => 'Страница заявок',
                 ],
                 'clients'=> [
@@ -84,6 +85,7 @@ return [
         ]
     ],
     'messages' => [
+        'Open'          => 'Открыть',
         'WasCreated'    => 'Создано',
         'WasUpdated'    => 'Обновлено',
         'WasDeleted'    => 'Удалено',
@@ -109,6 +111,8 @@ return [
         'directions'    => 'Направления работы',
         'direction'     => 'Направление работы',
         'employee_count'=> 'Кол-во сотрудников',
+        'created_at'    => 'Дата создания',
+        'edited_at'     => 'Дата редактирования',
     ],
     'tabs' => [
         'all'       => 'Все',
