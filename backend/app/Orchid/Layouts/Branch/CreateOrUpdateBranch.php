@@ -22,19 +22,23 @@ class CreateOrUpdateBranch extends Rows
             Input::make('id')
                 ->type('hidden'),
 
-            Input::make('title')
-                ->type('text')
-                ->max(255)
-                ->required()
-                ->title(__('platform.fuilds.title'))
-                ->placeholder(__('platform.fuilds.title')),
+            Group::make([
+                Input::make('title')
+                    ->type('text')
+                    ->max(255)
+                    ->required()
+                    ->title(__('platform.fuilds.title'))
+                    ->placeholder(__('platform.fuilds.title')),
+            ]),
 
-            Input::make('address')
-                ->type('text')
-                ->max(255)
-                ->required()
-                ->title(__('platform.fuilds.address'))
-                ->placeholder(__('platform.fuilds.address')),
+            Group::make([
+                Input::make('address')
+                    ->type('text')
+                    ->max(255)
+                    ->required()
+                    ->title(__('platform.fuilds.address'))
+                    ->placeholder(__('platform.fuilds.address')),
+            ]),
 
             Group::make([
                 Input::make('phone')

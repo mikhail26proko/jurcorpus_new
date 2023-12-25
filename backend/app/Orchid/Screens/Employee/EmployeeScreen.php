@@ -85,14 +85,16 @@ class EmployeeScreen extends Screen
         return [
             EmployeeListLayout::class,
 
-            Layout::modal('createEmployee', CreateOrUpdateEmployee::class)
-                ->title(__('Create'))
-                    ->applyButton(__('Create')),
+            Layout::blank([
+                Layout::modal('createEmployee', CreateOrUpdateEmployee::class)
+                    ->title(__('Create'))
+                        ->applyButton(__('Create')),
 
-            Layout::modal('editEmployee', CreateOrUpdateEmployee::class)
-                ->title(__('Update'))
-                    ->applyButton(__('Save'))
-                        ->async('asyncGetEmployee'),
+                Layout::modal('editEmployee', CreateOrUpdateEmployee::class)
+                    ->title(__('Update'))
+                        ->applyButton(__('Save'))
+                            ->async('asyncGetEmployee'),
+            ]),
         ];
     }
 

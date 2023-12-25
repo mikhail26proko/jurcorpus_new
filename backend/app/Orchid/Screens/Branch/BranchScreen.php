@@ -84,14 +84,16 @@ class BranchScreen extends Screen
         return [
             BranchListLayout::class,
 
-            Layout::modal('createBranch', CreateOrUpdateBranch::class)
-                ->title(__('Create'))
-                    ->applyButton(__('Create')),
+            Layout::blank([
+                Layout::modal('createBranch', CreateOrUpdateBranch::class)
+                    ->title(__('Create'))
+                        ->applyButton(__('Create')),
 
-            Layout::modal('editBranch', CreateOrUpdateBranch::class)
-                ->title(__('Update'))
-                    ->applyButton(__('Save'))
-                        ->async('asyncGetBranch'),
+                Layout::modal('editBranch', CreateOrUpdateBranch::class)
+                    ->title(__('Update'))
+                        ->applyButton(__('Save'))
+                            ->async('asyncGetBranch'),
+            ]),
         ];
     }
 

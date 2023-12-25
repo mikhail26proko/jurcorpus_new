@@ -113,7 +113,8 @@ class LeadScreen extends Screen
             ]),
 
             Layout::modal('asyncOpenLead', Layout::legend('', [
-                Sight::make('created_at', __('platform.fuilds.created_at'))->usingComponent(DateTime::class,'d.m.Y H:i'),
+                Sight::make('created_at', __('platform.fuilds.created_at'))
+                    ->usingComponent(DateTime::class,'d.m.Y H:i'),
                 Sight::make('fio', __('platform.fuilds.full_name')),
                 Sight::make('email', __('platform.fuilds.email')),
                 Sight::make('phone', __('platform.fuilds.phone')),
