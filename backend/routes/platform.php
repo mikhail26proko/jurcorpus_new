@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Lead\UserLeadScreen;
 use App\Orchid\Screens\System\Direction\DirectionScreen;
 use App\Orchid\Screens\System\SystemLog\SystemLogScreen;
 use App\Orchid\Screens\System\JobTitle\JobTitleScreen;
@@ -51,6 +52,11 @@ use Tabuna\Breadcrumbs\Trail;
     Route::group(['name' => 'Lead'], function(){
         Route::screen('lead', LeadScreen::class)
             ->name('platform.lead');
+    });
+
+    Route::group(['name' => 'UserLead'], function(){
+        Route::screen('user_lead', UserLeadScreen::class)
+            ->name('platform.user_lead');
     });
 
     Route::group(['name' => 'Branch'], function(){

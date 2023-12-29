@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('journals', function (Blueprint $table) {
-            $table->id();
-            $table->text('message');
-            $table->foreignId('lead_id');
-            $table->foreignId('user_id');
-            $table->timestamps();
+        Schema::table('leads', function (Blueprint $table) {
+            $table->foreignId('user_id')->nullable();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('journals');
+        Schema::dropColumns('leads', [
+            'user_id',
+        ]);
     }
 };

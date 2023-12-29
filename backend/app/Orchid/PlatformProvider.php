@@ -48,6 +48,14 @@ class PlatformProvider extends OrchidServiceProvider
                     ->icon('note')
                         ->route('platform.lead'),
 
+            Menu::make(__('platform.pages.menu.crm.user_leads.index'))
+                ->badge(function(){
+                    return Lead::where('status','Новая')->where('user_id', auth()->id())->count();
+                },Color::DANGER)
+                ->permission('platform.crm.user_leads')
+                    ->icon('note')
+                        ->route('platform.user_lead'),
+
             Menu::make(__('platform.pages.menu.branches.index'))
                 ->permission('platform.branches')
                     ->icon('person-vcard')
@@ -146,6 +154,7 @@ class PlatformProvider extends OrchidServiceProvider
         return [
 
             ItemPermission::group(__('platform.pages.menu.crm.index'))
+                ->addPermission('platform.crm.user_leads', __('platform.pages.menu.crm.user_leads.index'))
                 ->addPermission('platform.crm.leads', __('platform.pages.menu.crm.leads.index')),
 
             ItemPermission::group(__('platform.pages.menu.system.index'))

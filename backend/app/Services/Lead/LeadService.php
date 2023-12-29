@@ -18,7 +18,7 @@ class LeadService extends CommonService
 
     public function index(array $filters = []): LengthAwarePaginator
     {
-        $leads = Lead::byStatus($filters['status'])
+        $leads = Lead::byFilters($filters)
             ->paginate(config('app.orchid_one_page'));
 
         if (!$leads) {

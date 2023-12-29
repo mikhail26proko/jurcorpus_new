@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Lead;
+namespace App\Orchid\Layouts\UserLeads;
 
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Actions\DropDown;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Layouts\Table;
-use App\Models\Lead;
 use Orchid\Screen\TD;
+use App\Models\Lead;
 
-class LeadListLayout extends Table
+class UserLeadListLayout extends Table
 {
     public $target = 'lead';
 
@@ -55,17 +54,10 @@ class LeadListLayout extends Table
                             ModalToggle::make('edit')
                                 ->name(__('Edit'))
                                 ->icon('bs.pencil')
-                                ->modal('asyncEditLead')
+                                ->modal('asyncEditUserLead')
                                 ->modalTitle(__('Edit'))
                                 ->method('createOrUpdateLead')
                                 ->asyncParameters(['lead' => $lead->id]),
-
-                            Button::make(__('Delete'))
-                                ->icon('bs.trash3')
-                                ->confirm(__('platform.messages.SureDelete'))
-                                ->method('delete', [
-                                    'lead' => $lead->id,
-                                ]),
                         ]);
                 }),
         ];

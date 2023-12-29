@@ -25,6 +25,8 @@ class OrchidLeadRequest extends FormRequest
                 'sometimes',
                 new Enum(StatusEnum::class),
             ],
+            'user_id'   => 'sometimes|integer|exists:users,id|nullable',
+
         ];
     }
 

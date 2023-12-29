@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Lead;
+namespace App\Orchid\Layouts\UserLeads;
 
 use App\Models\User;
 use Orchid\Screen\Fields\Relation;
@@ -15,7 +15,7 @@ use App\Enums\StatusEnum;
 use Orchid\Screen\Field;
 use App\Models\Branch;
 
-class CreateOrUpdateLead extends Rows
+class CreateOrUpdateUserLead extends Rows
 {
     /**
      * The screen's layout elements.

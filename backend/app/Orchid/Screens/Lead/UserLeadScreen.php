@@ -4,32 +4,26 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\Lead;
 
+use App\Orchid\Layouts\UserLeads\CreateOrUpdateUserLead;
 use App\Orchid\Layouts\Lead\CreateOrUpdateLeadJournal;
-use App\Http\Requests\Lead\OrchidLeadJournalRequest;
-use App\Orchid\Layouts\Lead\CreateOrUpdateLead;
-use App\Http\Requests\Lead\OrchidLeadRequest;
-use App\Orchid\Layouts\Lead\LeadListLayout;
-use App\Services\Lead\JournalService;
+use App\Orchid\Layouts\UserLeads\UserLeadListLayout;
 use Orchid\Screen\Actions\ModalToggle;
+use App\Services\Lead\JournalService;
 use App\Orchid\Components\DateTime;
-use Orchid\Support\Facades\Layout;
 use App\Services\Lead\LeadService;
-use Orchid\Support\Facades\Toast;
+use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Screen\Sight;
-use App\Models\Journal;
-use App\Models\Lead;
 
-class LeadScreen extends Screen
+class UserLeadScreen extends Screen
 {
     public function __construct(
         private LeadService $leadService,
         private JournalService $journalService,
     )
     {}
-
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -38,13 +32,13 @@ class LeadScreen extends Screen
     public function query(): iterable
     {
         return [
-            __('platform.tabs.all').'_lead' => $this->leadService->index(['status'=>['Все']]),
-            __('platform.tabs.new').'_lead' => $this->leadService->index(['status' => ['Новая']]),
-            __('platform.tabs.process').'_lead' => $this->leadService->index(['status' => ['В процессе']]),
-            __('platform.tabs.processed').'_lead' => $this->leadService->index(['status' => ['Обработана']]),
-            __('platform.tabs.done').'_lead' => $this->leadService->index(['status' => ['Готово']]),
-            __('platform.tabs.refuse').'_lead' => $this->leadService->index(['status' => ['Отказ']]),
-            __('platform.tabs.draft').'_lead' => $this->leadService->index(['status' => ['Черновик']]),
+            __('platform.tabs.all').'_lead' => $this->leadService->index(['status'=>['Все'],'user'=>[auth()->id()]]),
+            __('platform.tabs.new').'_lead' => $this->leadService->index(['status' => ['Новая'],'user'=>[auth()->id()]]),
+            __('platform.tabs.process').'_lead' => $this->leadService->index(['status' => ['В процессе'],'user'=>[auth()->id()]]),
+            __('platform.tabs.processed').'_lead' => $this->leadService->index(['status' => ['Обработана'],'user'=>[auth()->id()]]),
+            __('platform.tabs.done').'_lead' => $this->leadService->index(['status' => ['Готово'],'user'=>[auth()->id()]]),
+            __('platform.tabs.refuse').'_lead' => $this->leadService->index(['status' => ['Отказ'],'user'=>[auth()->id()]]),
+            __('platform.tabs.draft').'_lead' => $this->leadService->index(['status' => ['Черновик'],'user'=>[auth()->id()]]),
         ];
     }
 
@@ -53,7 +47,7 @@ class LeadScreen extends Screen
      */
     public function name(): ?string
     {
-        return __('platform.pages.menu.crm.leads.index');
+        return __('platform.pages.menu.crm.user_leads.index');
     }
 
     /**
@@ -61,13 +55,13 @@ class LeadScreen extends Screen
      */
     public function description(): ?string
     {
-        return __('platform.pages.menu.crm.leads.description');
+        return __('platform.pages.menu.crm.user_leads.description');
     }
 
     public function permission(): ?iterable
     {
         return [
-            'platform.crm.leads',
+            'platform.crm.user_leads',
         ];
     }
 
@@ -79,11 +73,7 @@ class LeadScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            ModalToggle::make(__('Create'))
-                ->type(Color::DARK)
-                    ->icon('plus')
-                        ->modal('createLead')
-                            ->method('createOrUpdateLead'),
+            //
         ];
     }
 
@@ -96,21 +86,17 @@ class LeadScreen extends Screen
     {
         return [
             Layout::tabs([
-                __('platform.tabs.all')         => new LeadListLayout(__('platform.tabs.all').'_lead'),
-                __('platform.tabs.new')         => new LeadListLayout(__('platform.tabs.new').'_lead'),
-                __('platform.tabs.process')     => new LeadListLayout(__('platform.tabs.process').'_lead'),
-                __('platform.tabs.processed')   => new LeadListLayout(__('platform.tabs.processed').'_lead'),
-                __('platform.tabs.done')        => new LeadListLayout(__('platform.tabs.done').'_lead'),
-                __('platform.tabs.refuse')      => new LeadListLayout(__('platform.tabs.refuse').'_lead'),
-                __('platform.tabs.draft')       => new LeadListLayout(__('platform.tabs.draft').'_lead'),
+                __('platform.tabs.all')         => new UserLeadListLayout(__('platform.tabs.all').'_lead'),
+                __('platform.tabs.new')         => new UserLeadListLayout(__('platform.tabs.new').'_lead'),
+                __('platform.tabs.process')     => new UserLeadListLayout(__('platform.tabs.process').'_lead'),
+                __('platform.tabs.processed')   => new UserLeadListLayout(__('platform.tabs.processed').'_lead'),
+                __('platform.tabs.done')        => new UserLeadListLayout(__('platform.tabs.done').'_lead'),
+                __('platform.tabs.refuse')      => new UserLeadListLayout(__('platform.tabs.refuse').'_lead'),
+                __('platform.tabs.draft')       => new UserLeadListLayout(__('platform.tabs.draft').'_lead'),
             ]),
 
             Layout::blank([
-                Layout::modal('createLead', CreateOrUpdateLead::class)
-                    ->title(__('Create'))
-                        ->applyButton(__('Create')),
-
-                Layout::modal('asyncEditLead', CreateOrUpdateLead::class)
+                Layout::modal('asyncEditUserLead', CreateOrUpdateUserLead::class)
                     ->title(__('Update'))
                         ->applyButton(__('Save'))
                             ->async('asyncGetLead'),
@@ -170,61 +156,6 @@ class LeadScreen extends Screen
                     ->title(__('platform.fuilds.journal'))
             ]),
         ];
-    }
-
-    public function asyncGetLead(Lead $lead): array
-    {
-       return $this->leadService->get($lead->id)->toArray();
-    }
-
-    public function createOrUpdateLead(OrchidLeadRequest $request): void
-    {
-        $validated = $request -> validated();
-
-        if (empty($validated['id']))
-        {
-            $lead = $this->leadService->create($validated);
-            $message = 'WasCreated';
-        }
-        else
-        {
-            $lead = $this->leadService->update($validated['id'], $validated);
-            $message = 'WasUpdated';
-        }
-
-        Toast::success(__('platform.messages.'.$message));
-    }
-
-    public function CreateOrUpdateLeadJournal(OrchidLeadJournalRequest $request): void
-    {
-        $validated = $request -> validated();
-
-        if (empty($validated['id']))
-        {
-            $journal = $this->journalService->create($validated);
-            $message = 'WasAdded';
-        }
-        else
-        {
-            $journal = $this->journalService->update($validated['id'], $validated);
-            $message = 'WasUpdated';
-        }
-
-        Toast::success(__('platform.messages.'.$message));
-    }
-
-    public function delete(Lead $lead): void
-    {
-        $this->leadService->delete($lead->id);
-
-        Toast::error($lead->title . ' ' . __('platform.messages.WasDeleted'));
-    }
-
-    public function deleteJournal(Journal $journal): void
-    {
-        $this->journalService->delete($journal->id);
-
-        Toast::error(__('platform.messages.WasDeleted'));
     }
 
 }
