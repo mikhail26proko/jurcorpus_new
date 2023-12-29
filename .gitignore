@@ -4,6 +4,7 @@
 *.log
 *.lock
 .gitignore
+.vscode/
 /pgdumps/
 /uploads/
 /**/var/
