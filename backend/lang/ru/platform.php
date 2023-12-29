@@ -70,6 +70,10 @@ return [
                         'description'   => 'Страница управления направлениями работ',
                     ],
                 ],
+                'system_log'=>[
+                    'index' => 'Системный лог',
+                    'description' => 'Список всех действий с сущностями всех пользователей',
+                ],
                 'lang'=> [
                     'index' => 'Язык',
                     'description'   => 'Страница управления языковыми файлами',
@@ -92,6 +96,16 @@ return [
         'WasDeleted'    => 'Удалено',
         'SureDelete'    => 'Подтвердите удаление',
         'UnsetedValue'  => 'Отсутствует',
+    ],
+    'entityes' => [
+        'App\Models\Lead'       => 'Заявки',
+        'App\Models\Branch'     => 'Филиалы',
+        'App\Models\Direction'  => 'Направления работы',
+        'App\Models\Employee'   => 'Сотрудники',
+        'App\Models\JobTitle'   => 'Должности',
+        'App\Models\Journal'    => 'Журнал заявки',
+        'App\Models\User'       => 'Пользователи',
+        'App\Models\Role'       => 'Роли',
     ],
     'fuilds' => [
         'title'         => 'Название',
@@ -116,6 +130,13 @@ return [
         'employee_count'=> 'Кол-во сотрудников',
         'created_at'    => 'Дата создания',
         'edited_at'     => 'Дата редактирования',
+        'system_log'    => [
+            'type'          => 'Тип',
+            'entity'        => 'Сущность',
+            'created_at'    => 'Дата',
+            'data'          => 'Данные',
+            'user'          => 'Пользователь',
+        ],
     ],
     'tabs' => [
         'all'       => 'Все',

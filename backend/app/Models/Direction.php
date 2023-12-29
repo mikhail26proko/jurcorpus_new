@@ -2,19 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Orchid\Platform\Concerns\Sortable;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
-
-class Direction extends Model
+class Direction extends ExtendModel
 {
-    use HasFactory,
-        AsSource,
-        Sortable,
-        Filterable;
-
     protected $fillable = [
         'title'
     ];

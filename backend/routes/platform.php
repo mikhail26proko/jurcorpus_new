@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\System\Direction\DirectionScreen;
+use App\Orchid\Screens\System\SystemLog\SystemLogScreen;
 use App\Orchid\Screens\System\JobTitle\JobTitleScreen;
 use App\Orchid\Screens\System\User\UserProfileScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
@@ -106,6 +107,18 @@ use Tabuna\Breadcrumbs\Trail;
             ->breadcrumbs(fn (Trail $trail) => $trail
                 ->parent('platform.index')
                 ->push(__('Roles'), route('platform.systems.roles')));
+    });
+
+    Route::group(['name' => 'SystemLog'], function(){
+        Route::screen('system_log', SystemLogScreen::class)
+            ->name('platform.systems.system_log')
+            ->breadcrumbs(fn (Trail $trail) => $trail
+                ->parent('platform.index')
+                ->push(
+                    __('platform.pages.menu.system.system_log.index'),
+                    route('platform.systems.system_log')
+                )
+            );
     });
 
     Route::group(['name' => 'JobTitle'], function(){

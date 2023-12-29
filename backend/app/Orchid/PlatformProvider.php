@@ -92,7 +92,12 @@ class PlatformProvider extends OrchidServiceProvider
                                     Menu::make(__('platform.pages.menu.system.directories.directions.index'))
                                         ->permission('platform.systems.directories')
                                             ->route('platform.directories.directions'),
-                                ])
+                                ]),
+
+                        Menu::make(__('platform.pages.menu.system.system_log.index'))
+                            ->icon('history')
+                                ->route('platform.systems.system_log')
+                                    ->permission('platform.systems.system_log'),
 
                     ]),
 
@@ -146,6 +151,7 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('platform.pages.menu.system.index'))
                 ->addPermission('platform.systems.users', __('platform.pages.menu.system.users.index'))
                 ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index'))
+                ->addPermission('platform.systems.system_log', __('platform.pages.menu.system.system_log.index'))
                 ->addPermission('platform.systems.directories', __('platform.pages.menu.system.directories.index')),
 
             ItemPermission::group(__('platform.pages.menu.examples.index'))

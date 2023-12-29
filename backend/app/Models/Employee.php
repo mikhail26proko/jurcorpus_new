@@ -2,22 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Orchid\Presenters\EmployeePresenter;
-use Illuminate\Database\Eloquent\Model;
-use Orchid\Platform\Concerns\Sortable;
 use Orchid\Attachment\Attachable;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
 
-class Employee extends Model
+class Employee extends ExtendModel
 {
-
-    use HasFactory,
-        AsSource,
-        Sortable,
-        Filterable,
-        Attachable;
+    use Attachable;
 
     protected $fillable = [
         'last_name',

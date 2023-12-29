@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\System\Role;
+namespace App\Orchid\Screens\System\SystemLog;
 
-use App\Orchid\Layouts\System\Role\RoleListLayout;
-use Orchid\Screen\Actions\Link;
+use App\Orchid\Layouts\System\SystemLog\SystemLogListLayout;
 use Orchid\Screen\Screen;
-use Orchid\Screen\Action;
-use App\Models\Role;
+use App\Models\SystemLog;
 
-class RoleListScreen extends Screen
+class SystemLogScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -20,7 +18,9 @@ class RoleListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'roles' => Role::filters()->defaultSort('id', 'desc')->paginate(),
+            'system_log' => SystemLog::with('user')
+                ->orderByDesc('created_at')
+                    ->paginate(config('app.orchid_one_page')),
         ];
     }
 
@@ -29,7 +29,7 @@ class RoleListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Role Management';
+        return __('platform.pages.menu.system.system_log.index');
     }
 
     /**
@@ -37,27 +37,25 @@ class RoleListScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'A comprehensive list of all roles, including their permissions and associated users.';
+        return __('platform.pages.menu.system.system_log.description');
     }
 
     public function permission(): ?iterable
     {
         return [
-            'platform.systems.roles',
+            'platform.systems.system_log',
         ];
     }
 
     /**
      * The screen's action buttons.
      *
-     * @return Action[]
+     * @return \Orchid\Screen\Action[]
      */
     public function commandBar(): iterable
     {
         return [
-            Link::make(__('Add'))
-                ->icon('bs.plus-circle')
-                ->href(route('platform.systems.roles.create')),
+            //
         ];
     }
 
@@ -69,7 +67,8 @@ class RoleListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            RoleListLayout::class,
+            SystemLogListLayout::class,
         ];
     }
+
 }

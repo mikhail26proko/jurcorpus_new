@@ -2,19 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Orchid\Platform\Concerns\Sortable;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
-
-class Branch extends Model
+class Branch extends ExtendModel
 {
-    use HasFactory,
-        AsSource,
-        Sortable,
-        Filterable;
-
     protected $fillable = [
         'title',
         'address',
@@ -28,28 +17,6 @@ class Branch extends Model
     protected $appends = [
         'employee_count'
     ];
-
-    // /**
-    //  * The attributes for which can use sort in url.
-    //  *
-    //  * @var array
-    //  */
-    // protected $allowedSorts = [
-    //     'title',
-    //     'address',
-    //     'email',
-    // ];
-
-    // /**
-    //  * The attributes for which you can use filters in url.
-    //  *
-    //  * @var array
-    //  */
-    // protected $allowedFilters = [
-    //     'title',
-    //     'address',
-    //     'email',
-    // ];
 
     public function employees()
     {

@@ -9,11 +9,11 @@ use App\Orchid\Layouts\System\Role\RoleEditLayout;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Support\Facades\Toast;
-use Orchid\Platform\Models\Role;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Orchid\Screen\Action;
 use Orchid\Screen\Screen;
+use App\Models\Role;
 
 class RoleEditScreen extends Screen
 {
