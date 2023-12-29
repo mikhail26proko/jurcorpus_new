@@ -31,4 +31,17 @@ class Lead extends Model
         'status',
     ];
 
+    public function journals()
+    {
+        return $this->hasMany(Journal::class,'lead_id')->orderByDesc('created_at');
+    }
+
+    public function scopeByStatus($query, array $status): void
+    {
+        if (empty($status) || in_array('Все', $status))
+            return;
+
+        $query->whereIn('status', $status);
+    }
+
 }

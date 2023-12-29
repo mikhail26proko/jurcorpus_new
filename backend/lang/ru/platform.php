@@ -86,6 +86,7 @@ return [
     ],
     'messages' => [
         'Open'          => 'Открыть',
+        'WasAdded'      => 'Добавлено',
         'WasCreated'    => 'Создано',
         'WasUpdated'    => 'Обновлено',
         'WasDeleted'    => 'Удалено',
@@ -107,6 +108,8 @@ return [
         'contact'       => 'Контактные данные',
         'description'   => 'Описание',
         'message'       => 'Сообщение',
+        'journals'      => 'Журнал',
+        'journal'       => 'Обращение',
         'branch'        => 'Филиал',
         'directions'    => 'Направления работы',
         'direction'     => 'Направление работы',
