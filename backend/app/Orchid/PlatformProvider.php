@@ -23,8 +23,6 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
-
-        // ...
     }
 
     /**
@@ -37,107 +35,112 @@ class PlatformProvider extends OrchidServiceProvider
         return [
 
             Menu::make(__('platform.pages.menu.main.index'))
-                ->icon('orchid-old')
-                ->route(config('platform.index')),
+                ->route(config('platform.index'))
+                ->icon('orchid-old'),
 
             Menu::make(__('platform.pages.menu.crm.leads.index'))
-                ->badge(function(){
-                    return Lead::where('status','Новая')->count();
-                },Color::DANGER)
-                ->permission('platform.crm.leads')
-                    ->icon('note')
-                        ->route('platform.lead'),
+                ->badge(function () {
+                    return Lead::where('status', 'Новая')->count();
+                }, Color::DANGER)
+                ->permission('crm.leads.*')
+                ->route('platform.lead')
+                ->icon('note'),
 
             Menu::make(__('platform.pages.menu.crm.user_leads.index'))
-                ->badge(function(){
-                    return Lead::where('status','Новая')->where('user_id', auth()->id())->count();
-                },Color::DANGER)
-                ->permission('platform.crm.user_leads')
-                    ->icon('note')
-                        ->route('platform.user_lead'),
+                ->badge(function () {
+                    return Lead::where('status', 'Новая')->where('user_id', auth()->id())->count();
+                }, Color::DANGER)
+                ->permission('crm.user_leads.*')
+                ->route('platform.user_lead')
+                ->icon('note'),
 
             Menu::make(__('platform.pages.menu.branches.index'))
-                ->permission('platform.branches')
-                    ->icon('person-vcard')
-                        ->route('platform.branches'),
+                ->permission('branches.*')
+                ->route('platform.branches')
+                ->icon('person-vcard'),
 
             Menu::make(__('platform.pages.menu.employees.index'))
-                ->permission('platform.employees')
-                    ->icon('person-vcard')
-                        ->route('platform.employees'),
+                ->permission('employees.*')
+                ->route('platform.employees')
+                ->icon('person-vcard'),
 
             Menu::make(__('platform.pages.menu.publications.index'))
-                    ->permission('platform.publications')
-                    ->icon('fa.newspaper-solid'),
-                        // ->route('platform.news'),
+                ->permission('publications.*')
+                // ->route('platform.news')
+                ->icon('fa.newspaper-solid'),
 
             Menu::make(__('platform.pages.menu.vacancies.index'))
-                ->permission('platform.vacancies')
+                ->permission('vacancies.*')
+                // ->route('platform.vacancies')
                 ->icon('briefcase'),
-                    // ->route('platform.vacancies'),
 
             Menu::make(__('platform.pages.menu.system.index'))
+                ->permission('system.*')
                 ->icon('bs.gear-wide-connected')
                 ->parent('system')
-                    ->list([
-                        Menu::make(__('platform.pages.menu.system.users.index'))
-                            ->icon('bs.people')
-                                ->route('platform.systems.users')
-                                    ->permission('platform.systems.users'),
+                ->list([
 
-                        Menu::make(__('platform.pages.menu.system.roles.index'))
-                                ->icon('bs.shield')
-                                    ->route('platform.systems.roles')
-                                        ->permission('platform.systems.roles'),
+                    Menu::make(__('platform.pages.menu.system.users.index'))
+                        ->permission('system.users.*')
+                        ->route('platform.systems.users')
+                        ->icon('bs.people'),
 
-                        Menu::make(__('platform.pages.menu.system.directories.index'))
-                            ->icon('notebook')
-                                ->parent('directories')
-                                ->list([
-                                    Menu::make(__('platform.pages.menu.system.directories.job_titles.index'))
-                                        ->permission('platform.systems.directories')
-                                            ->route('platform.directories.job_titles'),
-                                    Menu::make(__('platform.pages.menu.system.directories.directions.index'))
-                                        ->permission('platform.systems.directories')
-                                            ->route('platform.directories.directions'),
-                                ]),
+                    Menu::make(__('platform.pages.menu.system.roles.index'))
+                        ->permission('system.roles.*')
+                        ->route('platform.systems.roles')
+                        ->icon('bs.shield'),
 
-                        Menu::make(__('platform.pages.menu.system.system_log.index'))
-                            ->icon('history')
-                                ->route('platform.systems.system_log')
-                                    ->permission('platform.systems.system_log'),
+                    Menu::make(__('platform.pages.menu.system.directories.index'))
+                        ->permission('system.directories.*')
+                        ->icon('notebook')
+                        ->parent('directories')
+                        ->list([
 
-                    ]),
+                            Menu::make(__('platform.pages.menu.system.directories.job_titles.index'))
+                                ->permission('system.directories.job_titles.*')
+                                ->route('platform.directories.job_titles'),
+
+                            Menu::make(__('platform.pages.menu.system.directories.directions.index'))
+                                ->permission('system.directories.directions.*')
+                                ->route('platform.directories.directions'),
+                        ]),
+
+                    Menu::make(__('platform.pages.menu.system.system_log.index'))
+                        ->permission('system.system_log.*')
+                        ->route('platform.systems.system_log')
+                        ->icon('history'),
+                ]),
 
             Menu::make(__('platform.pages.menu.examples.index'))
-            ->permission('platform.examples')
+                ->permission('examples.*')
                 ->icon('settings')
                 ->list([
+
                     Menu::make('Sample Screen')
-                        ->icon('bs.collection')
+                        ->badge(fn() => 6)
                         ->route('platform.example')
-                        ->badge(fn () => 6),
+                        ->icon('bs.collection'),
 
                     Menu::make('Form Elements')
-                        ->icon('bs.card-list')
                         ->route('platform.example.fields')
+                        ->icon('bs.card-list')
                         ->active('*/examples/form/*'),
 
                     Menu::make('Overview Layouts')
-                        ->icon('bs.window-sidebar')
-                        ->route('platform.example.layouts'),
+                        ->route('platform.example.layouts')
+                        ->icon('bs.window-sidebar'),
 
                     Menu::make('Grid System')
-                        ->icon('bs.columns-gap')
-                        ->route('platform.example.grid'),
+                        ->route('platform.example.grid')
+                        ->icon('bs.columns-gap'),
 
                     Menu::make('Charts')
-                        ->icon('bs.bar-chart')
-                        ->route('platform.example.charts'),
+                        ->route('platform.example.charts')
+                        ->icon('bs.bar-chart'),
 
                     Menu::make('Cards')
-                        ->icon('bs.card-text')
                         ->route('platform.example.cards')
+                        ->icon('bs.card-text')
                         ->divider(),
                 ]),
 
@@ -153,30 +156,85 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
 
-            ItemPermission::group(__('platform.pages.menu.crm.index'))
-                ->addPermission('platform.crm.user_leads', __('platform.pages.menu.crm.user_leads.index'))
-                ->addPermission('platform.crm.leads', __('platform.pages.menu.crm.leads.index')),
+            ItemPermission::group(__('platform.pages.menu.crm.leads.index'))
+                ->addPermission('crm.leads.full', __('platform.actions.full'))
+                ->addPermission('crm.leads.read', __('platform.actions.read'))
+                ->addPermission('crm.leads.create', __('platform.actions.create'))
+                ->addPermission('crm.leads.update', __('platform.actions.update'))
+                ->addPermission('crm.leads.delete', __('platform.actions.delete')),
 
-            ItemPermission::group(__('platform.pages.menu.system.index'))
-                ->addPermission('platform.systems.users', __('platform.pages.menu.system.users.index'))
-                ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index'))
-                ->addPermission('platform.systems.system_log', __('platform.pages.menu.system.system_log.index'))
-                ->addPermission('platform.systems.directories', __('platform.pages.menu.system.directories.index')),
-
-            ItemPermission::group(__('platform.pages.menu.examples.index'))
-                ->addPermission('platform.examples', __('platform.pages.menu.examples.index')),
+            ItemPermission::group(__('platform.pages.menu.crm.user_leads.index'))
+                ->addPermission('crm.user_leads.full', __('platform.actions.full'))
+                ->addPermission('crm.user_leads.read', __('platform.actions.read'))
+                ->addPermission('crm.user_leads.create', __('platform.actions.create'))
+                ->addPermission('crm.user_leads.update', __('platform.actions.update'))
+                ->addPermission('crm.user_leads.delete', __('platform.actions.delete')),
 
             ItemPermission::group(__('platform.pages.menu.branches.index'))
-                ->addPermission('platform.branches', __('platform.pages.menu.branches.index')),
+                ->addPermission('branches.full', __('platform.actions.full'))
+                ->addPermission('branches.read', __('platform.actions.read'))
+                ->addPermission('branches.create', __('platform.actions.create'))
+                ->addPermission('branches.update', __('platform.actions.update'))
+                ->addPermission('branches.delete', __('platform.actions.delete')),
 
             ItemPermission::group(__('platform.pages.menu.employees.index'))
-                ->addPermission('platform.employees', __('platform.pages.menu.employees.index')),
+                ->addPermission('employees.full', __('platform.actions.full'))
+                ->addPermission('employees.read', __('platform.actions.read'))
+                ->addPermission('employees.create', __('platform.actions.create'))
+                ->addPermission('employees.update', __('platform.actions.update'))
+                ->addPermission('employees.delete', __('platform.actions.delete')),
 
-            ItemPermission::group(__('platform.pages.menu.publications.index'))
-                ->addPermission('platform.publications', __('platform.pages.menu.publications.index')),
+            ItemPermission::group(__('platform.pages.menu.system.users.index'))
+                ->addPermission('system.users.full', __('platform.actions.full'))
+                ->addPermission('system.users.read', __('platform.actions.read'))
+                ->addPermission('system.users.create', __('platform.actions.create'))
+                ->addPermission('system.users.update', __('platform.actions.update'))
+                ->addPermission('system.users.delete', __('platform.actions.delete')),
 
-            ItemPermission::group(__('platform.pages.menu.vacancies.index'))
-                ->addPermission('platform.vacancies', __('platform.pages.menu.vacancies.index')),
+            ItemPermission::group(__('platform.pages.menu.system.roles.index'))
+                ->addPermission('system.roles.full', __('platform.actions.full'))
+                ->addPermission('system.roles.read', __('platform.actions.read'))
+                ->addPermission('system.roles.create', __('platform.actions.create'))
+                ->addPermission('system.roles.update', __('platform.actions.update'))
+                ->addPermission('system.roles.delete', __('platform.actions.delete')),
+
+            ItemPermission::group(__('platform.pages.menu.system.system_log.index'))
+                ->addPermission('system.system_log.full', __('platform.actions.full')),
+
+            ItemPermission::group(__('platform.pages.menu.system.directories.job_titles.index'))
+                ->addPermission('system.directories.job_titles.full', __('platform.actions.full'))
+                ->addPermission('system.directories.job_titles.read', __('platform.actions.read'))
+                ->addPermission('system.directories.job_titles.create', __('platform.actions.create'))
+                ->addPermission('system.directories.job_titles.update', __('platform.actions.update'))
+                ->addPermission('system.directories.job_titles.delete', __('platform.actions.delete')),
+
+            ItemPermission::group(__('platform.pages.menu.system.directories.directions.index'))
+                ->addPermission('system.directories.directions.full', __('platform.actions.full'))
+                ->addPermission('system.directories.directions.read', __('platform.actions.read'))
+                ->addPermission('system.directories.directions.create', __('platform.actions.create'))
+                ->addPermission('system.directories.directions.update', __('platform.actions.update'))
+                ->addPermission('system.directories.directions.delete', __('platform.actions.delete')),
+
+            ItemPermission::group(__('platform.pages.menu.examples.index'))
+                ->addPermission('examples.full', __('platform.actions.full')),
+
+            // ItemPermission::group(__('platform.pages.menu.system.index'))
+            // ->addPermission('platform.systems.users', __('platform.pages.menu.system.users.index'))
+            // ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index'))
+            // ->addPermission('platform.systems.system_log', __('platform.pages.menu.system.system_log.index'))
+            // ->addPermission('platform.systems.directories', __('platform.pages.menu.system.directories.index')),
+
+            // ItemPermission::group(__('platform.pages.menu.branches.index'))
+            //     ->addPermission('platform.branches', __('platform.pages.menu.branches.index')),
+
+            // ItemPermission::group(__('platform.pages.menu.employees.index'))
+            //     ->addPermission('platform.employees', __('platform.pages.menu.employees.index')),
+
+            // ItemPermission::group(__('platform.pages.menu.publications.index'))
+            //     ->addPermission('platform.publications', __('platform.pages.menu.publications.index')),
+
+            // ItemPermission::group(__('platform.pages.menu.vacancies.index'))
+            //     ->addPermission('platform.vacancies', __('platform.pages.menu.vacancies.index')),
         ];
     }
 }

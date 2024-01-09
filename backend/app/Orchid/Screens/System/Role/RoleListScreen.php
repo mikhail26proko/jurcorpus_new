@@ -42,9 +42,7 @@ class RoleListScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.systems.roles',
-        ];
+        return ['system.roles.*',];
     }
 
     /**

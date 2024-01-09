@@ -42,9 +42,7 @@ class SystemLogScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.systems.system_log',
-        ];
+        return ['system.system_log.*',];
     }
 
     /**

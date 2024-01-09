@@ -9,6 +9,7 @@ use App\Http\Requests\Branch\OrchidBranchRequest;
 use App\Orchid\Layouts\Branch\BranchListLayout;
 use Orchid\Screen\Actions\ModalToggle;
 use App\Services\Branch\BranchService;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Screen;
@@ -20,8 +21,8 @@ class BranchScreen extends Screen
 
     public function __construct(
         private BranchService $branchService,
-    )
-    {}
+    ) {
+    }
 
     /**
      * Fetch data to be displayed on the screen.
@@ -53,9 +54,12 @@ class BranchScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.branches',
-        ];
+        return ['branches.*'];
+    }
+
+    public static function unaccessed(): RedirectResponse
+    {
+        return redirect('/');
     }
 
     /**
@@ -67,10 +71,11 @@ class BranchScreen extends Screen
     {
         return [
             ModalToggle::make(__('Create'))
+                ->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.create']))
+                ->method('createOrUpdateBranch')
+                ->modal('createBranch')
                 ->type(Color::DARK)
-                    ->icon('plus')
-                        ->modal('createBranch')
-                            ->method('createOrUpdateBranch'),
+                ->icon('plus'),
         ];
     }
 
@@ -82,18 +87,22 @@ class BranchScreen extends Screen
     public function layout(): iterable
     {
         return [
-            BranchListLayout::class,
-
             Layout::blank([
+
+                BranchListLayout::class,
+
                 Layout::modal('createBranch', CreateOrUpdateBranch::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.create']))
                     ->title(__('Create'))
-                        ->applyButton(__('Create')),
+                    ->applyButton(__('Create')),
 
                 Layout::modal('editBranch', CreateOrUpdateBranch::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.edit']))
                     ->title(__('Update'))
-                        ->applyButton(__('Save'))
-                            ->async('asyncGetBranch'),
-            ]),
+                    ->applyButton(__('Save'))
+                    ->async('asyncGetBranch'),
+
+            ])->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.read'])),
         ];
     }
 
@@ -107,20 +116,17 @@ class BranchScreen extends Screen
 
     public function createOrUpdateBranch(OrchidBranchRequest $request): void
     {
-        $validated = $request -> validated();
+        $validated = $request->validated();
 
-        if (empty($validated['id']))
-        {
-            $branch = $this->branchService->create($validated);
+        if (empty($validated['id'])) {
+            $branch  = $this->branchService->create($validated);
             $message = 'WasCreated';
-        }
-        else
-        {
-            $branch = $this->branchService->update($validated['id'], $validated);
+        } else {
+            $branch  = $this->branchService->update($validated['id'], $validated);
             $message = 'WasUpdated';
         }
 
-        Toast::success(__('platform.messages.'.$message));
+        Toast::success(__('platform.messages.' . $message));
     }
 
     public function delete(Branch $branch)

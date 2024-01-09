@@ -54,9 +54,7 @@ class EmployeeScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.employees',
-        ];
+        return ['employees.*',];
     }
 
     /**
@@ -68,10 +66,11 @@ class EmployeeScreen extends Screen
     {
         return [
             ModalToggle::make(__('Create'))
+                ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.create']))
+                ->method('createOrUpdateEmployee')
+                ->modal('createEmployee')
                 ->type(Color::DARK)
-                    ->icon('plus')
-                        ->modal('createEmployee')
-                            ->method('createOrUpdateEmployee'),
+                ->icon('plus')
         ];
     }
 
@@ -83,17 +82,19 @@ class EmployeeScreen extends Screen
     public function layout(): iterable
     {
         return [
-            EmployeeListLayout::class,
-
             Layout::blank([
+                EmployeeListLayout::class,
+
                 Layout::modal('createEmployee', CreateOrUpdateEmployee::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.create']))
                     ->title(__('Create'))
-                        ->applyButton(__('Create')),
+                    ->applyButton(__('Create')),
 
                 Layout::modal('editEmployee', CreateOrUpdateEmployee::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.edit']))
                     ->title(__('Update'))
-                        ->applyButton(__('Save'))
-                            ->async('asyncGetEmployee'),
+                    ->applyButton(__('Save'))
+                    ->async('asyncGetEmployee'),
             ]),
         ];
     }

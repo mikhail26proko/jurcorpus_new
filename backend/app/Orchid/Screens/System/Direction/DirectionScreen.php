@@ -53,9 +53,7 @@ class DirectionScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.systems.directories',
-        ];
+        return ['system.directories.directions.*',];
     }
 
     /**
@@ -67,10 +65,11 @@ class DirectionScreen extends Screen
     {
         return [
             ModalToggle::make(__('Create'))
+                ->canSee(auth()->user()->hasAnyAccess(['system.directories.directions.full', 'system.directories.directions.create']))
+                ->method('createOrUpdateDirection')
+                ->modal('createDirection')
                 ->type(Color::DARK)
-                    ->icon('plus')
-                        ->modal('createDirection')
-                            ->method('createOrUpdateDirection'),
+                ->icon('plus')
         ];
     }
 
@@ -82,16 +81,20 @@ class DirectionScreen extends Screen
     public function layout(): iterable
     {
         return [
-            DirectionListLayout::class,
+            Layout::blank([
+                DirectionListLayout::class,
 
-            Layout::modal('createDirection', CreateOrUpdateDirection::class)
-                ->title(__('Create'))
+                Layout::modal('createDirection', CreateOrUpdateDirection::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['system.directories.directions.full', 'system.directories.directions.create']))
+                    ->title(__('Create'))
                     ->applyButton(__('Create')),
 
-            Layout::modal('editDirection', CreateOrUpdateDirection::class)
-                ->title(__('Update'))
+                Layout::modal('editDirection', CreateOrUpdateDirection::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['system.directories.directions.full', 'system.directories.directions.edit']))
+                    ->title(__('Update'))
                     ->applyButton(__('Save'))
-                        ->async('asyncGetDirection'),
+                    ->async('asyncGetDirection'),
+            ])
         ];
     }
 

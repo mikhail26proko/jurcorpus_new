@@ -53,9 +53,7 @@ class JobTitleScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.systems.directories',
-        ];
+        return ['system.directories.job_titles.*',];
     }
 
     /**
@@ -67,10 +65,11 @@ class JobTitleScreen extends Screen
     {
         return [
             ModalToggle::make(__('Create'))
+                ->canSee(auth()->user()->hasAnyAccess(['system.directories.job_titles.full', 'system.directories.job_titles.create']))
+                ->method('createOrUpdateJobTitle')
+                ->modal('createJobTitle')
                 ->type(Color::DARK)
-                    ->icon('plus')
-                        ->modal('createJobTitle')
-                            ->method('createOrUpdateJobTitle'),
+                ->icon('plus')
         ];
     }
 
@@ -82,16 +81,20 @@ class JobTitleScreen extends Screen
     public function layout(): iterable
     {
         return [
-            JobTitleListLayout::class,
+            Layout::blank([
+                JobTitleListLayout::class,
 
-            Layout::modal('createJobTitle', CreateOrUpdateJobTitle::class)
-                ->title(__('Create'))
+                Layout::modal('createJobTitle', CreateOrUpdateJobTitle::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['system.directories.job_titles.full', 'system.directories.job_titles.create']))
+                    ->title(__('Create'))
                     ->applyButton(__('Create')),
 
-            Layout::modal('editJobTitle', CreateOrUpdateJobTitle::class)
-                ->title(__('Update'))
+                Layout::modal('editJobTitle', CreateOrUpdateJobTitle::class)
+                    ->canSee(auth()->user()->hasAnyAccess(['system.directories.job_titles.full', 'system.directories.job_titles.edit']))
+                    ->title(__('Update'))
                     ->applyButton(__('Save'))
-                        ->async('asyncGetJobTitle'),
+                    ->async('asyncGetJobTitle'),
+            ])
         ];
     }
 

@@ -60,9 +60,7 @@ class UserLeadScreen extends Screen
 
     public function permission(): ?iterable
     {
-        return [
-            'platform.crm.user_leads',
-        ];
+        return ['crm.user_leads.*',];
     }
 
     /**
