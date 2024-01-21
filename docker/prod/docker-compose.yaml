@@ -19,6 +19,7 @@ services:
       - traefik-public
     labels:
       - traefik.enable=true
+      - traefik.docker.network=traefik-public
       - traefik.http.routers.traefik-secure.entrypoints=websecure
       - traefik.http.routers.traefik-secure.rule=Host(`dashboard.${DOMAIN1}`)
       - traefik.http.services.traefik-secure.loadBalancer.server.port=8080
@@ -137,7 +138,7 @@ services:
 
 networks:
   traefik-public:
-    driver: bridge
+    external: true
 
 volumes:
   app-postgres-data:
