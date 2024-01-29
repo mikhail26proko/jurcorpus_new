@@ -48,14 +48,18 @@ class BranchSeeder extends Seeder
                 'created_at'=> Carbon::now(),
             ]);
 
+            echo "\n" . $employee['fio'] . "\n";
+
             foreach ($branch['team'] as $employee) {
 
                 $fio = explode(' ', $employee['fio']);
 
+                echo "\t" . $employee['fio'] . "\n";
+
                 $current_employee = Employee::create([
-                    'last_name'     => $fio[0],
-                    'first_name'    => $fio[1],
-                    'sur_name'      => $fio[2],
+                    'last_name'     => $fio[0] ?? '',
+                    'first_name'    => $fio[1] ?? '',
+                    'sur_name'      => $fio[2] ?? '',
                     'email'         => 'employee@jurcorpus.ru',
                     'phone'         => '88002504043',
                     'branch_id'     => $current_branch->id,
@@ -65,7 +69,7 @@ class BranchSeeder extends Seeder
                             ';',
                             strip_tags($employee['description'] ?? '')
                         )
-                    ),
+                    ) ?? '',
                 ]);
 
                 if (!empty($employee['jobtitle'])) {
