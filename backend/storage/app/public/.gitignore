@@ -1,4 +1,6 @@
 *
 !.gitignore
 !employees/
+!old_employees/
+!old_employees/**
 !employees/JurCorpusDefault.png
