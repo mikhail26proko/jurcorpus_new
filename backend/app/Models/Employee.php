@@ -4,15 +4,16 @@ namespace App\Models;
 
 use App\Orchid\Presenters\EmployeePresenter;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 class Employee extends ExtendModel
 {
-    use Attachable;
+    use AsSource, Attachable;
 
     protected $fillable = [
-        'last_name',
-        'first_name',
-        'sur_name',
+        'last_name',    // Фамилия
+        'first_name',   // Имя
+        'sur_name',     // Отчество
         'email',
         'phone',
         'branch_id',

@@ -15,7 +15,7 @@ class Branch extends ExtendModel
     ];
 
     protected $appends = [
-        'employee_count'
+        // 'employees_count'
     ];
 
     public function employees()

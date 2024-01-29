@@ -111,7 +111,12 @@ class BranchScreen extends Screen
      */
     public function asyncGetBranch(Branch $branch): array
     {
-        return $branch->toArray();
+        $branches = $this->branchService->get($branch->id)->toArray();
+
+        $employees = array_column($branches['employees'],'id');
+        $branches['employees'] = $employees;
+
+        return $branches;
     }
 
     public function createOrUpdateBranch(OrchidBranchRequest $request): void

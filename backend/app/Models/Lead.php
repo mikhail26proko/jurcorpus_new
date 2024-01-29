@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Orchid\Filters\Types\WhereIn;
-
 class Lead extends ExtendModel
 {
     protected $fillable = [
+        'branch_id',
         'fio',
         'email',
         'phone',
@@ -14,6 +13,11 @@ class Lead extends ExtendModel
         'status',
         'user_id',
     ];
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 
     public function journals()
     {

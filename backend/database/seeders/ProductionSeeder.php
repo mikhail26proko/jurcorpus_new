@@ -14,8 +14,9 @@ class ProductionSeeder extends Seeder
     public function run()
     {
         $this->call([
-            Production\AttachmentSeeder::class,
-            Production\JobTitleSeeder::class,
+            // Production\AttachmentSeeder::class,
+            // Production\JobTitleSeeder::class,
+            Production\BranchSeeder::class,
         ]);
     }
 }
