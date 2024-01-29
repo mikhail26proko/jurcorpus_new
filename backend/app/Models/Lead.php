@@ -2,8 +2,32 @@
 
 namespace App\Models;
 
-class Lead extends ExtendModel
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Orchid\Platform\Concerns\Sortable;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
+
+class Lead extends Model
 {
+    use HasFactory,
+        AsSource,
+        Sortable,
+        Filterable;
+
+    protected static function booted()
+    {
+        static::updated(function(Lead $lead){
+            if (auth()->id()){
+                SystemLog::create([
+                    'type'      => 'updated',
+                    'entity'    => $lead::class,
+                    'data'      => $lead->toJson(JSON_UNESCAPED_UNICODE),
+                ]);
+            }
+        });
+    }
+
     protected $fillable = [
         'branch_id',
         'fio',

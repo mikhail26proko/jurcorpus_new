@@ -17,6 +17,7 @@ class OrchidLeadRequest extends FormRequest
     {
         return [
             'id'        => 'sometimes|integer|exists:leads,id|nullable',
+            'branch_id' => 'sometimes|integer|exists:branches,id|nullable',
             'fio'       => 'sometimes|string',
             'email'     => 'sometimes|string|max:255',
             'phone'     => 'sometimes|string|max:25',
