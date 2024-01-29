@@ -63,7 +63,7 @@ class BranchSeeder extends Seeder
                     'email'         => 'employee@jurcorpus.ru',
                     'phone'         => '88002504043',
                     'branch_id'     => $current_branch->id,
-                    'description'   => strip_tags($employee['description']) ?? '',
+                    'description'   => strip_tags($employee['description'] ?? '') ,
                 ]);
 
                 if (!empty($employee['jobtitle'])) {
