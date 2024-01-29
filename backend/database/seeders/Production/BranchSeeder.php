@@ -48,7 +48,7 @@ class BranchSeeder extends Seeder
                 'created_at'=> Carbon::now(),
             ]);
 
-            echo "\n" . $employee['fio'] . "\n";
+            echo "\n" . $branch['department'] . "\n";
 
             foreach ($branch['team'] as $employee) {
 
