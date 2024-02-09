@@ -30,7 +30,7 @@
     "react-dom": "18.2.0",
     "react-jvectormap": "^0.0.16",
     "sass": "1.55.0",
-    "sharp": "0.31.3"
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "eslint": "8.22.0",
