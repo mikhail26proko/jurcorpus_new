@@ -17,10 +17,10 @@ class OrchidBranchRequest extends FormRequest
             'id'         => 'sometimes|integer|exists:branches,id|nullable',
             'title'      => 'required|string',
             'address'    => 'required|string',
-            'phone'      => 'required|string',
-            'email'      => 'required|string',
-            'latitude'   => 'sometimes|numeric',
-            'longitude'  => 'sometimes|numeric',
+            'phone'      => 'sometimes|string|nullable',
+            'email'      => 'sometimes|string|nullable',
+            'latitude'   => 'sometimes|numeric|nullable',
+            'longitude'  => 'sometimes|numeric|nullable',
         ];
     }
 

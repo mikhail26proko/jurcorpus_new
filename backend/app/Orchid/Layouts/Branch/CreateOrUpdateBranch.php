@@ -42,14 +42,11 @@ class CreateOrUpdateBranch extends Rows
 
             Group::make([
                 Input::make('phone')
-                    ->mask(__('platform.masks.phone'))
-                    // ->required()
                     ->title(__('platform.fuilds.phone'))
                     ->placeholder(__('platform.fuilds.phone')),
 
                 Input::make('email')
                     ->type('email')
-                    // ->required()
                     ->title(__('platform.fuilds.email'))
                     ->placeholder(__('platform.fuilds.email')),
             ]),
