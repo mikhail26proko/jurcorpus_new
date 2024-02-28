@@ -29,7 +29,7 @@ class JobTitleListLayout extends Table
 
             TD::make('#')->width(60)
                 ->render(function (JobTitle $jobTitle, object $loop) {
-                    return $loop->index + 1;
+                    return $loop->index + 1 + (((\request()->get('page')?? 1) - 1) * config('app.orchid_one_page'));
                 }),
 
             TD::make('title', __('platform.fuilds.title'))

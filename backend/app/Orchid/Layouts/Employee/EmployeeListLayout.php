@@ -25,12 +25,10 @@ class EmployeeListLayout extends Table
     public function columns(): array
     {
         return [
-            // TD::make('id', __('Id'))
-            //     ->sort(),
 
             TD::make('#')->width(60)
                 ->render(function (Employee $employee, object $loop) {
-                    return $loop->index + 1;
+                    return $loop->index + 1 + (((\request()->get('page')?? 1) - 1) * config('app.orchid_one_page'));
                 }),
 
             TD::make('full_name', __('platform.fuilds.full_name'))
@@ -47,6 +45,7 @@ class EmployeeListLayout extends Table
                 }),
 
             TD::make('job_titles.', __('platform.fuilds.job_titles'))
+                ->defaultHidden()
                 ->render(function (Employee $employee) {
                     if (!empty($employee->job_titles)){
                         return implode(', ',array_column($employee->job_titles->toArray(),'title'));

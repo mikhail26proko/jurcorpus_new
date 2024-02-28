@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
-use App\Orchid\Screens\Lead\UserLeadScreen;
 use App\Orchid\Screens\System\Direction\DirectionScreen;
 use App\Orchid\Screens\System\SystemLog\SystemLogScreen;
 use App\Orchid\Screens\System\JobTitle\JobTitleScreen;
@@ -22,6 +21,7 @@ use App\Orchid\Screens\Examples\ExampleGridScreen;
 use App\Orchid\Screens\Employee\EmployeeScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Branch\BranchScreen;
+use App\Orchid\Screens\Lead\UserLeadScreen;
 use App\Orchid\Screens\Lead\LeadScreen;
 use App\Orchid\Screens\PlatformScreen;
 use Illuminate\Support\Facades\Route;
