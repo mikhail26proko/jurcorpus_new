@@ -34,7 +34,12 @@ class EmployeePresenter extends Presenter implements Personable, Searchable
      */
     public function subTitle(): string
     {
-        return '';
+        if (!empty($this->entity->job_titles)){
+            return $this->entity->job_titles[0]->title;
+        } else {
+            return __('platform.messages.UnsetedValue');
+        }
+        // return '';
     }
 
     /**
