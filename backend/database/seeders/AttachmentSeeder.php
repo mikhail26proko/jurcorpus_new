@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Production;
+namespace Database\Seeders;
 
 use Orchid\Attachment\Models\Attachment;
 use Illuminate\Database\Seeder;
@@ -14,7 +14,11 @@ class AttachmentSeeder extends Seeder
      */
     public function run()
     {
-        Attachment::create([
+
+        $empty = Attachment::find(1);
+
+        if (empty($empty)){
+            Attachment::create([
                 "id"=> "1",
                 "name"=> "JurCorpusDefault",
                 "original_name"=> "JurCorpusDefault.png",
@@ -31,8 +35,7 @@ class AttachmentSeeder extends Seeder
                 "group"=> null,
                 "created_at"=> "2023-12-01 00:00:00",
                 "updated_at"=> "2023-12-01 00:00:00"
-        ]);
-
-
+            ]);
+        }
     }
 }

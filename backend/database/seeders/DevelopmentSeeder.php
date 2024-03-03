@@ -16,7 +16,7 @@ class DevelopmentSeeder extends Seeder
     {
         $this->call([
             // Development\UserSeeder::class,
-            Development\BranchSeeder::class
+            // Development\BranchSeeder::class
         ]);
     }
 }

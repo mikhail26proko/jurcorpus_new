@@ -10,7 +10,6 @@ use Orchid\Attachment\File;
 use App\Models\Employee;
 use App\Models\Branch;
 use Carbon\Carbon;
-use Orchid\Attachment\Models\Attachment;
 
 class BranchSeeder extends Seeder
 {
