@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Employee;
 
 use App\Models\Direction;
+use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Cropper;
@@ -49,12 +50,22 @@ class CreateOrUpdateEmployee extends Rows
                     ->required()
                     ->title(__('platform.fuilds.sur_name'))
                     ->placeholder(__('platform.fuilds.sur_name')),
+
+            ]),
+
+            Group::make([
+                DateTimer::make('birthday')
+                    ->title(__('platform.fuilds.birthday'))
+                    ->format(__('platform.masks.date'))
+                    ->enableTime(false)
+                    ->placeholder(__('platform.fuilds.birthday')),
             ]),
 
             Group::make([
                 Relation::make('job_titles.')
                     ->title('platform.fuilds.job_titles')
                     ->multiple()
+                    ->nullable(true)
                     ->allowAdd(true)
                     ->fromModel(JobTitle::class,'title'),
             ]),
@@ -84,6 +95,7 @@ class CreateOrUpdateEmployee extends Rows
                 Relation::make('directions.')
                     ->title('platform.fuilds.directions')
                     ->multiple()
+                    ->nullable(true)
                     ->allowAdd(true)
                     ->fromModel(Direction::class,'title'),
             ]),

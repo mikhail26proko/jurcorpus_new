@@ -20,6 +20,7 @@ class OrchidEmployeeRequest extends FormRequest
             'last_name'     => 'sometimes|string|max:255',
             'first_name'    => 'sometimes|string|max:255',
             'sur_name'      => 'sometimes|string|max:255',
+            'birthday'      => 'sometimes|date',
             'email'         => 'sometimes|string|max:255',
             'phone'         => 'sometimes|string|max:25',
             'description'   => 'sometimes|string',
@@ -37,10 +38,18 @@ class OrchidEmployeeRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge([
-            'job_titles' => $this->prepare(JobTitle::class, $this->get('job_titles')),
-            'directions' => $this->prepare(Direction::class, $this->get('directions'))
-        ]);
+
+        if (!empty($job_titles = $this->get('job_titles'))) {
+            $this->merge([
+                'job_titles' => $this->prepare(JobTitle::class, $job_titles),
+            ]);
+        }
+
+        if (!empty($directions = $this->get('directions'))) {
+            $this->merge([
+                'directions' => $this->prepare(JobTitle::class, $directions),
+            ]);
+        }
     }
 
     private function prepare($type, array $items)

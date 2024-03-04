@@ -37,6 +37,14 @@ class EmployeeListLayout extends Table
                 ->cantHide()
                 ->render(fn (Employee $employee) => new Persona($employee->presenter())),
 
+            TD::make('birthday', __('platform.fuilds.birthday'))
+                ->sort()
+                ->render(function (Employee $employee) {
+                    return $employee->birthday ? $employee->birthday->format(__('platform.masks.date')) : '';
+                })
+                ->width(150)
+                ->cantHide(),
+
             TD::make('branch',__('platform.fuilds.branch'))
                 ->render(function (Employee $employee) {
                     return

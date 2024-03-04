@@ -16,6 +16,7 @@ class Employee extends ExtendModel
         'last_name',    // Фамилия
         'first_name',   // Имя
         'sur_name',     // Отчество
+        'birthday',
         'email',
         'phone',
         'branch_id',
@@ -37,6 +38,11 @@ class Employee extends ExtendModel
         'last_name',    // Фамилия
         'first_name',   // Имя
         'sur_name',     // Отчество
+        'birthday',
+    ];
+
+    protected $casts = [
+        'birthday' => 'datetime:d.m.Y',
     ];
 
     public function branch()

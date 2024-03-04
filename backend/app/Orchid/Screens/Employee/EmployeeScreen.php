@@ -101,11 +101,13 @@ class EmployeeScreen extends Screen
 
     public function asyncGetEmployee(Employee $employee): array
     {
+        $photo    = $employee->attachment()->first()['id'] ?? 1;
         $employee = ($this->employeeService->get($employee->id))->toArray();
 
         $job_titles = array_column($employee['job_titles'],'id');
         $directions = array_column($employee['directions'],'id');
 
+        $employee['photo']      = $photo;
         $employee['job_titles'] = $job_titles;
         $employee['directions'] = $directions;
 
@@ -127,9 +129,8 @@ class EmployeeScreen extends Screen
             $message = 'WasUpdated';
         }
 
-        $employee->job_titles()->sync($validated['job_titles']);
-        $employee->directions()->sync($validated['directions']);
-        $employee->attachment()->sync($validated['photo']);
+        $employee->job_titles()->sync($validated['job_titles']??[]);
+        $employee->directions()->sync($validated['directions']??[]);
 
         Toast::success(__('platform.messages.'.$message));
     }

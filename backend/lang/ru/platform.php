@@ -124,6 +124,7 @@ return [
         'full_name'     => 'ФИО',
         'last_name'     => 'Фамилия',
         'first_name'    => 'Имя',
+        'birthday'      => 'День рождения',
         'sur_name'      => 'Отчество',
         'photo'         => 'Фото',
         'job_titles'    => 'Должности',
@@ -161,7 +162,8 @@ return [
         'draft'     => 'Черновик',
     ],
     'masks' => [
-        'email' => '',
-        'phone' => '+{0,1}9 999 999 99 99',
+        'date'      => 'd.m.Y',
+        'email'     => '',
+        'phone'     => '+{0,1}9 999 999 99 99',
     ]
 ];
