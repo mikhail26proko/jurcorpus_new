@@ -9,6 +9,8 @@ class BranchService extends CommonService
 {
     protected $model = Branch::class;
 
+    protected array $filters = [];
+
     protected array $relationship = [
         'employees',
     ];

@@ -26,7 +26,8 @@ class EmployeeListLayout extends Table
     {
         return [
 
-            TD::make('#')->width(60)
+            TD::make('#')->width(70)
+                ->sort()
                 ->render(function (Employee $employee, object $loop) {
                     return $loop->index + 1 + (((\request()->get('page')?? 1) - 1) * config('app.orchid_one_page'));
                 }),

@@ -12,6 +12,8 @@ class LeadService extends CommonService
 {
     protected $model = Lead::class;
 
+    protected array $filters = [];
+
     protected array $relationship = [
         'branch',
         'journals',

@@ -13,13 +13,12 @@ class CommonService
 
     protected $model;
 
+    protected array $filters = [];
     protected array $relationship = [];
 
     public function index(): LengthAwarePaginator
     {
-        $entity = $this->builder()->filters([
-            // common_filters
-        ])
+        $entity = $this->builder()->filters($this->filters)
             ->paginate(config('app.orchid_one_page'));
 
         if (!$entity) {

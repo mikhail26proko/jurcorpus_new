@@ -9,6 +9,8 @@ class JournalService extends CommonService
 {
     protected $model = Journal::class;
 
+    protected array $filters = [];
+
     protected array $relationship = [
         'user',
     ];
