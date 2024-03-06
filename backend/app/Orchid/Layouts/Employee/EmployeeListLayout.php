@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Employee;
 
+use App\Models\Branch;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Layouts\Persona;
@@ -26,7 +27,7 @@ class EmployeeListLayout extends Table
     {
         return [
 
-            TD::make('#')->width(70)
+            TD::make('id', '#')->width(70)
                 ->sort()
                 ->render(function (Employee $employee, object $loop) {
                     return $loop->index + 1 + (((\request()->get('page')?? 1) - 1) * config('app.orchid_one_page'));
@@ -46,6 +47,8 @@ class EmployeeListLayout extends Table
                 ->cantHide(),
 
             TD::make('branch',__('platform.fuilds.branch'))
+                // TODO: Кешировать филиалы
+                ->filter(TD::FILTER_SELECT,array_column(Branch::all()->toArray(),'title', 'id'))
                 ->render(function (Employee $employee) {
                     return
                         !empty($employee->branch)

@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use App\Orchid\Presenters\EmployeePresenter;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Types\Where;
-use Orchid\Filters\Filterable;
-use Orchid\Screen\AsSource;
+use Carbon\Carbon;
 
 class Employee extends ExtendModel
 {
-    use AsSource, Attachable, Filterable;
+    use Attachable, SoftDeletes;
 
     protected $fillable = [
         'last_name',    // Фамилия
@@ -45,6 +45,8 @@ class Employee extends ExtendModel
         'birthday' => 'datetime:d.m.Y',
     ];
 
+    // Связи
+
     public function branch()
     {
         return $this->belongsTo(Branch::class);
@@ -60,9 +62,18 @@ class Employee extends ExtendModel
         return $this->belongsToMany(Direction::class, 'employee_direction');
     }
 
+    // Аксессоры
+
     public function getFullNameAttribute()
     {
         return implode(' ',[$this->last_name, $this->first_name, $this->sur_name]);
+    }
+
+    // Мутаторы
+
+    public function setBirthdayAttribute($value)
+    {
+        $this->attributes['birthday'] = new Carbon($value);
     }
 
     public function presenter(): EmployeePresenter

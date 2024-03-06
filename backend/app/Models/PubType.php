@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class JobTitle extends ExtendModel
+class PubType extends ExtendModel
 {
     use SoftDeletes;
 
@@ -12,9 +12,8 @@ class JobTitle extends ExtendModel
         'title'
     ];
 
-    public function employees()
+    public function publications()
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->hasMany(Publication::class);
     }
-
 }

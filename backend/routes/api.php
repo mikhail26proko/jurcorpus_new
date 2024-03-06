@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LeadController;
@@ -26,6 +27,9 @@ Route::apiResource('branch', BranchController::class)
 
 Route::apiResource('employee', EmployeeController::class)
     ->only(['index','show']);
+
+Route::apiResource('publication', PublicationController::class)
+    ->only(['index']);
 
 Route::apiResource('lead', LeadController::class)
     ->only(['store']);

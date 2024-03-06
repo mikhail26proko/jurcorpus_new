@@ -118,11 +118,6 @@ class EmployeeScreen extends Screen
     {
         $validated = $request -> validated();
 
-        if(!empty($validated['birthday']))
-        {
-            $validated['birthday'] = new Carbon($validated['birthday']);
-        }
-
         if (empty($validated['id']))
         {
             $employee = $this->employeeService->create($validated);

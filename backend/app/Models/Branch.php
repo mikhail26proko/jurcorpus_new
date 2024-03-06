@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Branch extends ExtendModel
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'title',
         'address',

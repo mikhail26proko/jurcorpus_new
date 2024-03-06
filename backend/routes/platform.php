@@ -5,11 +5,14 @@ declare(strict_types=1);
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\System\Direction\DirectionScreen;
+use App\Orchid\Screens\System\PubSource\PubSourceScreen;
 use App\Orchid\Screens\System\SystemLog\SystemLogScreen;
 use App\Orchid\Screens\System\JobTitle\JobTitleScreen;
 use App\Orchid\Screens\System\User\UserProfileScreen;
+use App\Orchid\Screens\Publication\PublicationScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
+use App\Orchid\Screens\System\PubType\PubTypeScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
@@ -67,6 +70,11 @@ use Tabuna\Breadcrumbs\Trail;
     Route::group(['name' => 'Employee'], function(){
         Route::screen('employees', EmployeeScreen::class)
             ->name('platform.employees');
+    });
+
+    Route::group(['name' => 'Publication'], function(){
+        Route::screen('publications', PublicationScreen::class)
+            ->name('platform.publications');
     });
 
     Route::group(['name' => 'Users'], function(){
@@ -135,6 +143,16 @@ use Tabuna\Breadcrumbs\Trail;
     Route::group(['name' => 'Direction'], function(){
         Route::screen('directions', DirectionScreen::class)
             ->name('platform.directories.directions');
+    });
+
+    Route::group(['name' => 'PubSource'], function(){
+        Route::screen('pub_source', PubSourceScreen::class)
+            ->name('platform.directories.pub_sources');
+    });
+
+    Route::group(['name' => 'PubType'], function(){
+        Route::screen('pub_type', PubTypeScreen::class)
+            ->name('platform.directories.pub_types');
     });
 
     Route::group(['name' => 'Example'], function(){

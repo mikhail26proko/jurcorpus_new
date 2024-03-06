@@ -66,8 +66,8 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('platform.pages.menu.publications.index'))
                 ->permission('publications.*')
-                // ->route('platform.news')
-                ->icon('fa.newspaper-solid'),
+                ->route('platform.publications')
+                ->icon('person-vcard'),
 
             Menu::make(__('platform.pages.menu.vacancies.index'))
                 ->permission('vacancies.*')
@@ -103,6 +103,14 @@ class PlatformProvider extends OrchidServiceProvider
                             Menu::make(__('platform.pages.menu.system.directories.directions.index'))
                                 ->permission('system.directories.directions.*')
                                 ->route('platform.directories.directions'),
+
+                            Menu::make(__('platform.pages.menu.system.directories.pub_sources.index'))
+                                ->permission('system.directories.pub_sources.*')
+                                ->route('platform.directories.pub_sources'),
+
+                            Menu::make(__('platform.pages.menu.system.directories.pub_types.index'))
+                                ->permission('system.directories.pub_types.*')
+                                ->route('platform.directories.pub_types'),
                         ]),
 
                     Menu::make(__('platform.pages.menu.system.system_log.index'))
@@ -184,6 +192,13 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('employees.update', __('platform.actions.update'))
                 ->addPermission('employees.delete', __('platform.actions.delete')),
 
+            ItemPermission::group(__('platform.pages.menu.publications.index'))
+                ->addPermission('publications.full', __('platform.actions.full'))
+                ->addPermission('publications.read', __('platform.actions.read'))
+                ->addPermission('publications.create', __('platform.actions.create'))
+                ->addPermission('publications.update', __('platform.actions.update'))
+                ->addPermission('publications.delete', __('platform.actions.delete')),
+
             ItemPermission::group(__('platform.pages.menu.system.users.index'))
                 ->addPermission('system.users.full', __('platform.actions.full'))
                 ->addPermission('system.users.read', __('platform.actions.read'))
@@ -215,26 +230,23 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('system.directories.directions.update', __('platform.actions.update'))
                 ->addPermission('system.directories.directions.delete', __('platform.actions.delete')),
 
+            ItemPermission::group(__('platform.pages.menu.system.directories.pub_sources.index'))
+                ->addPermission('system.directories.pub_sources.full', __('platform.actions.full'))
+                ->addPermission('system.directories.pub_sources.read', __('platform.actions.read'))
+                ->addPermission('system.directories.pub_sources.create', __('platform.actions.create'))
+                ->addPermission('system.directories.pub_sources.update', __('platform.actions.update'))
+                ->addPermission('system.directories.pub_sources.delete', __('platform.actions.delete')),
+
+            ItemPermission::group(__('platform.pages.menu.system.directories.pub_types.index'))
+                ->addPermission('system.directories.pub_types.full', __('platform.actions.full'))
+                ->addPermission('system.directories.pub_types.read', __('platform.actions.read'))
+                ->addPermission('system.directories.pub_types.create', __('platform.actions.create'))
+                ->addPermission('system.directories.pub_types.update', __('platform.actions.update'))
+                ->addPermission('system.directories.pub_types.delete', __('platform.actions.delete')),
+
             ItemPermission::group(__('platform.pages.menu.examples.index'))
                 ->addPermission('examples.full', __('platform.actions.full')),
 
-            // ItemPermission::group(__('platform.pages.menu.system.index'))
-            // ->addPermission('platform.systems.users', __('platform.pages.menu.system.users.index'))
-            // ->addPermission('platform.systems.roles', __('platform.pages.menu.system.roles.index'))
-            // ->addPermission('platform.systems.system_log', __('platform.pages.menu.system.system_log.index'))
-            // ->addPermission('platform.systems.directories', __('platform.pages.menu.system.directories.index')),
-
-            // ItemPermission::group(__('platform.pages.menu.branches.index'))
-            //     ->addPermission('platform.branches', __('platform.pages.menu.branches.index')),
-
-            // ItemPermission::group(__('platform.pages.menu.employees.index'))
-            //     ->addPermission('platform.employees', __('platform.pages.menu.employees.index')),
-
-            // ItemPermission::group(__('platform.pages.menu.publications.index'))
-            //     ->addPermission('platform.publications', __('platform.pages.menu.publications.index')),
-
-            // ItemPermission::group(__('platform.pages.menu.vacancies.index'))
-            //     ->addPermission('platform.vacancies', __('platform.pages.menu.vacancies.index')),
         ];
     }
 }

@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Journal extends ExtendModel
 {
+    use SoftDeletes;
+
     protected static function booted()
     {
         parent::booted();
