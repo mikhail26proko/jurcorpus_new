@@ -34,6 +34,7 @@ class EmployeeListLayout extends Table
                 }),
 
             TD::make('full_name', __('platform.fuilds.full_name'))
+                ->filter(TD::FILTER_TEXT)
                 ->sort()
                 ->cantHide()
                 ->render(fn (Employee $employee) => new Persona($employee->presenter())),
@@ -46,9 +47,9 @@ class EmployeeListLayout extends Table
                 ->width(150)
                 ->cantHide(),
 
-            TD::make('branch',__('platform.fuilds.branch'))
+            TD::make('branch_id',__('platform.fuilds.branch'))
                 // TODO: Кешировать филиалы
-                ->filter(TD::FILTER_SELECT,array_column(Branch::all()->toArray(),'title', 'id'))
+                ->filter(TD::FILTER_SELECT, array_column(Branch::all()->toArray(),'title', 'id'))
                 ->render(function (Employee $employee) {
                     return
                         !empty($employee->branch)
@@ -60,7 +61,7 @@ class EmployeeListLayout extends Table
                 ->defaultHidden()
                 ->render(function (Employee $employee) {
                     if (!empty($employee->job_titles)){
-                        return implode(', ',array_column($employee->job_titles->toArray(),'title'));
+                        return implode(', ', array_column($employee->job_titles->toArray(),'title'));
                     } else {
                         return __('platform.messages.UnsetedValue');
                     }
@@ -74,7 +75,7 @@ class EmployeeListLayout extends Table
                             ModalToggle::make(__('Edit'))
                                 ->icon('bs.pencil')
                                 ->modal('editEmployee')
-                                ->modalTitle(__('Edit'). ' ' . $employee->title)
+                                ->modalTitle(__('Edit') . ' ' . $employee->title)
                                 ->method('createOrUpdateEmployee')
                                 ->asyncParameters(['employee' => $employee->id]),
 

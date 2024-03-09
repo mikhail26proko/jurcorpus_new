@@ -9,18 +9,18 @@ use App\Services\Employee\EmployeeService;
 class EmployeeController extends Controller
 {
 
-    private EmployeeService $branchService;
+    private EmployeeService $employeeService;
 
     public function __construct()
     {
-        $this->branchService = new EmployeeService();
+        $this->employeeService = new EmployeeService();
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return new EmployeeCollection($this->branchService->index());
+        return new EmployeeCollection($this->employeeService->index());
     }
 
     /**
@@ -28,6 +28,6 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        return new EmployeeResource($this->branchService->get($id));
+        return new EmployeeResource($this->employeeService->get($id));
     }
 }

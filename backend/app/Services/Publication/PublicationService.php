@@ -5,6 +5,7 @@ namespace App\Services\Publication;
 use App\Orchid\Filters\PubSourceFilter;
 use App\Orchid\Filters\EmployeeFilter;
 use App\Orchid\Filters\PubTypeFilter;
+use App\Orchid\Filters\TitleFilter;
 use App\Services\CommonService;
 use App\Models\Publication;
 
@@ -16,6 +17,7 @@ class PublicationService extends CommonService
         EmployeeFilter::class,
         PubSourceFilter::class,
         PubTypeFilter::class,
+        TitleFilter::class
     ];
 
     protected string $orderByFuild = 'publicated_at';

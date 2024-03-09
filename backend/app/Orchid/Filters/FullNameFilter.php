@@ -7,7 +7,7 @@ namespace App\Orchid\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use Orchid\Filters\Filter;
 
-class PubSourceFilter extends Filter
+class FullNameFilter extends Filter
 {
     /**
      * The array of matched parameters.
@@ -32,17 +32,9 @@ class PubSourceFilter extends Filter
 
         if (!empty($filter))
         {
-            if (!empty($pub_source = $filter['pub_source_id'] ?? null))
+            if (!empty($full_name = $filter['full_name'] ?? null))
             {
-                return $builder->whereHas('pub_source', function (Builder $query) use ($pub_source) {
-                    return $query->whereIn('id', $pub_source);
-                });
-            }
-            if (!empty($pub_source = $filter['pub_source'] ?? null))
-            {
-                return $builder->whereHas('pub_source', function (Builder $query) use ($pub_source) {
-                    return $query->whereIn('title', $pub_source);
-                });
+                return $builder->where('last_name','like',"%$full_name%");
             }
         }
         return $builder;

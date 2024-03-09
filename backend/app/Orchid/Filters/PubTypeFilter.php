@@ -38,6 +38,12 @@ class PubTypeFilter extends Filter
                     return $query->whereIn('id', $pub_type);
                 });
             }
+            if (!empty($pub_type = $filter['pub_type'] ?? null))
+            {
+                return $builder->whereHas('pub_type', function (Builder $query) use ($pub_type) {
+                    return $query->whereIn('title', $pub_type);
+                });
+            }
         }
         return $builder;
     }

@@ -49,12 +49,14 @@ class PublicationListLayout extends Table
                     return $publication->pub_source->title;
                 }),
 
-            TD::make('pub_type_id', __('platform.fuilds.pub_source'))
+            TD::make('pub_type_id', __('platform.fuilds.pub_type'))
                 ->cantHide()
                 ->filter(TD::FILTER_SELECT, array_column(PubType::all()->toArray(),'title','id'))
                 ->render(function (Publication $publication) {
                     return $publication->pub_type->title;
                 }),
+
+            TD::make('title',__('platform.fuilds.title')),
 
             TD::make('employee_id', __('platform.fuilds.employee'))
                 // TODO: Передать список сотрудников у которых есть публикации

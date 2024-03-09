@@ -31,10 +31,16 @@ class BranchFilter extends Filter
         $filter = $this->request->get('filter');
         if (!empty($filter))
         {
-            if (!empty($branches =  $filter['branch'] ?? null))
+            if (!empty($branches =  $filter['branch_id'] ?? null))
             {
                 return $builder->whereHas('branch', function (Builder $query) use ($branches) {
                     return $query->whereIn('id', $branches);
+                });
+            }
+            if (!empty($branches =  $filter['branch'] ?? null))
+            {
+                return $builder->whereHas('branch', function (Builder $query) use ($branches) {
+                    return $query->whereIn('title', $branches);
                 });
             }
         }
