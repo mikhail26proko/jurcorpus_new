@@ -47,7 +47,7 @@ return [
                     'description'   => 'Страница по работе с медиа материалами сми',
                 ],
             ],
-            'vacancies'=> [
+            'vacansies'=> [
                 'index' => 'Вакансии',
                 'description'   => 'Страница настроек',
             ],

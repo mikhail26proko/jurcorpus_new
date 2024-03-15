@@ -74,9 +74,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.services')
                 ->icon('briefcase'),
 
-            Menu::make(__('platform.pages.menu.vacancies.index'))
-                ->permission('vacancies.*')
-                // ->route('platform.vacancies')
+            Menu::make(__('platform.pages.menu.vacansies.index'))
+                ->permission('vacansies.*')
+                ->route('platform.vacansies')
                 ->icon('briefcase'),
 
             Menu::make(__('platform.pages.menu.system.index'))
@@ -211,12 +211,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('services.update', __('platform.actions.update'))
                 ->addPermission('services.delete', __('platform.actions.delete')),
 
-            ItemPermission::group(__('platform.pages.menu.vacancies.index'))
-                ->addPermission('vacancies.full', __('platform.actions.full'))
-                ->addPermission('vacancies.read', __('platform.actions.read'))
-                ->addPermission('vacancies.create', __('platform.actions.create'))
-                ->addPermission('vacancies.update', __('platform.actions.update'))
-                ->addPermission('vacancies.delete', __('platform.actions.delete')),
+            ItemPermission::group(__('platform.pages.menu.vacansies.index'))
+                ->addPermission('vacansies.full', __('platform.actions.full'))
+                ->addPermission('vacansies.read', __('platform.actions.read'))
+                ->addPermission('vacansies.create', __('platform.actions.create'))
+                ->addPermission('vacansies.update', __('platform.actions.update'))
+                ->addPermission('vacansies.delete', __('platform.actions.delete')),
 
             ItemPermission::group(__('platform.pages.menu.system.users.index'))
                 ->addPermission('system.users.full', __('platform.actions.full'))

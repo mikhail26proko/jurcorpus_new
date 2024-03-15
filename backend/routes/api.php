@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\VacansyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,9 @@ Route::apiResource('publication', PublicationController::class)
     ->only(['index']);
 
 Route::apiResource('service', ServiceController::class)
+    ->only(['index','show']);
+
+Route::apiResource('vacansy', VacansyController::class)
     ->only(['index','show']);
 
 Route::apiResource('lead', LeadController::class)
