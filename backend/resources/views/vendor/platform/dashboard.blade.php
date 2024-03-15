@@ -6,7 +6,6 @@
             <a href="#" class="header-toggler d-xl-none me-auto order-first d-flex align-items-center lh-1"
                data-action="click->menu#toggle">
                 <x-orchid-icon path="bs.three-dots-vertical" class="icon-menu"/>
-
                 <span class="ms-2">@yield('title')</span>
             </a>
 
@@ -15,7 +14,6 @@
             </a>
 
         </header>
-
         <nav class="aside-collapse w-100 d-xl-flex flex-column collapse-horizontal" id="headerMenuCollapse">
 
             @include('platform::partials.search')
@@ -42,7 +40,11 @@
             </div>
 
             <footer class="position-sticky bottom-0">
-                {{--  --}}
+                <hr />
+                    <div class="w-100 m-auto align-items-center justify-content-center small">
+                        © ООО "ЮРКОРПУС", 2023
+                    </div>
+                    <div class="small">current version: {{ __(config('app.version')) }}</div>
             </footer>
         </nav>
     </div>
