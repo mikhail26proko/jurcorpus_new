@@ -23,6 +23,7 @@ use App\Orchid\Screens\System\User\UserListScreen;
 use App\Orchid\Screens\Examples\ExampleGridScreen;
 use App\Orchid\Screens\Employee\EmployeeScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
+use App\Orchid\Screens\Service\ServiceScreen;
 use App\Orchid\Screens\Branch\BranchScreen;
 use App\Orchid\Screens\Lead\UserLeadScreen;
 use App\Orchid\Screens\Lead\LeadScreen;
@@ -76,6 +77,16 @@ use Tabuna\Breadcrumbs\Trail;
         Route::screen('publications', PublicationScreen::class)
             ->name('platform.publications');
     });
+
+    Route::group(['name' => 'Service'], function(){
+        Route::screen('services', ServiceScreen::class)
+            ->name('platform.services');
+    });
+
+    // Route::group(['name' => 'Vacancy'], function(){
+    //     Route::screen('vacancies', VacancyScreen::class)
+    //         ->name('platform.vacancies');
+    // });
 
     Route::group(['name' => 'Users'], function(){
         // Platform > System > Users > User

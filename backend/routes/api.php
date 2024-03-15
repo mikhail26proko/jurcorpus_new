@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\LeadController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::apiResource('employee', EmployeeController::class)
 
 Route::apiResource('publication', PublicationController::class)
     ->only(['index']);
+
+Route::apiResource('service', ServiceController::class)
+    ->only(['index','show']);
 
 Route::apiResource('lead', LeadController::class)
     ->only(['store']);
