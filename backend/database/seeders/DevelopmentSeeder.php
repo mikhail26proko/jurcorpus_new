@@ -15,8 +15,7 @@ class DevelopmentSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // Development\UserSeeder::class,
-            // Development\BranchSeeder::class
+            Development\AdminSeeder::class,
         ]);
     }
 }

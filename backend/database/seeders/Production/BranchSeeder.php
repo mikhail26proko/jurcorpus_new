@@ -37,7 +37,6 @@ class BranchSeeder extends Seeder
 
         foreach ($data as $key => $branch) {
             $current_branch = Branch::create([
-                'id'        => $key + 1,
                 'title'     => $branch['department'],
                 'address'   => $branch['adress'],
                 'phone'     => '88002504043',

@@ -2,13 +2,10 @@
 
 namespace Database\Seeders\Development;
 
-use Orchid\Support\Facades\Dashboard;
-use Illuminate\Support\Facades\Hash;
 use Orchid\Platform\Models\User;
 use Illuminate\Database\Seeder;
-// use App\Models\User;
 
-class UserSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.

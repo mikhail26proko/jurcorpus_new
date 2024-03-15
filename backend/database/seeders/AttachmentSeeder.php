@@ -19,7 +19,6 @@ class AttachmentSeeder extends Seeder
 
         if (empty($empty)){
             Attachment::create([
-                "id"=> "1",
                 "name"=> "JurCorpusDefault",
                 "original_name"=> "JurCorpusDefault.png",
                 "mime"=> "image/png",
