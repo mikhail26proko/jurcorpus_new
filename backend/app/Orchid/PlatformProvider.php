@@ -169,103 +169,37 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
 
-            ItemPermission::group(__('platform.pages.menu.crm.leads.index'))
-                ->addPermission('crm.leads.full', __('platform.actions.full'))
-                ->addPermission('crm.leads.read', __('platform.actions.read'))
-                ->addPermission('crm.leads.create', __('platform.actions.create'))
-                ->addPermission('crm.leads.update', __('platform.actions.update'))
-                ->addPermission('crm.leads.delete', __('platform.actions.delete')),
+            $this->permissionsGenerate('crm.leads'),
+            $this->permissionsGenerate('crm.user_leads'),
+            $this->permissionsGenerate('branches'),
+            $this->permissionsGenerate('employees'),
+            $this->permissionsGenerate('publications'),
+            $this->permissionsGenerate('services'),
+            $this->permissionsGenerate('vacansies'),
+            $this->permissionsGenerate('system.users'),
+            $this->permissionsGenerate('system.roles'),
+            $this->permissionsGenerate('system.directories.job_titles'),
+            $this->permissionsGenerate('system.directories.directions'),
+            $this->permissionsGenerate('system.directories.pub_sources'),
+            $this->permissionsGenerate('system.directories.pub_types'),
 
-            ItemPermission::group(__('platform.pages.menu.crm.user_leads.index'))
-                ->addPermission('crm.user_leads.full', __('platform.actions.full'))
-                ->addPermission('crm.user_leads.read', __('platform.actions.read'))
-                ->addPermission('crm.user_leads.create', __('platform.actions.create'))
-                ->addPermission('crm.user_leads.update', __('platform.actions.update'))
-                ->addPermission('crm.user_leads.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.branches.index'))
-                ->addPermission('branches.full', __('platform.actions.full'))
-                ->addPermission('branches.read', __('platform.actions.read'))
-                ->addPermission('branches.create', __('platform.actions.create'))
-                ->addPermission('branches.update', __('platform.actions.update'))
-                ->addPermission('branches.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.employees.index'))
-                ->addPermission('employees.full', __('platform.actions.full'))
-                ->addPermission('employees.read', __('platform.actions.read'))
-                ->addPermission('employees.create', __('platform.actions.create'))
-                ->addPermission('employees.update', __('platform.actions.update'))
-                ->addPermission('employees.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.publications.index'))
-                ->addPermission('publications.full', __('platform.actions.full'))
-                ->addPermission('publications.read', __('platform.actions.read'))
-                ->addPermission('publications.create', __('platform.actions.create'))
-                ->addPermission('publications.update', __('platform.actions.update'))
-                ->addPermission('publications.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.services.index'))
-                ->addPermission('services.full', __('platform.actions.full'))
-                ->addPermission('services.read', __('platform.actions.read'))
-                ->addPermission('services.create', __('platform.actions.create'))
-                ->addPermission('services.update', __('platform.actions.update'))
-                ->addPermission('services.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.vacansies.index'))
-                ->addPermission('vacansies.full', __('platform.actions.full'))
-                ->addPermission('vacansies.read', __('platform.actions.read'))
-                ->addPermission('vacansies.create', __('platform.actions.create'))
-                ->addPermission('vacansies.update', __('platform.actions.update'))
-                ->addPermission('vacansies.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.system.users.index'))
-                ->addPermission('system.users.full', __('platform.actions.full'))
-                ->addPermission('system.users.read', __('platform.actions.read'))
-                ->addPermission('system.users.create', __('platform.actions.create'))
-                ->addPermission('system.users.update', __('platform.actions.update'))
-                ->addPermission('system.users.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.system.roles.index'))
-                ->addPermission('system.roles.full', __('platform.actions.full'))
-                ->addPermission('system.roles.read', __('platform.actions.read'))
-                ->addPermission('system.roles.create', __('platform.actions.create'))
-                ->addPermission('system.roles.update', __('platform.actions.update'))
-                ->addPermission('system.roles.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.system.system_log.index'))
-                ->addPermission('system.system_log.full', __('platform.actions.full')),
-
-            ItemPermission::group(__('platform.pages.menu.system.directories.job_titles.index'))
-                ->addPermission('system.directories.job_titles.full', __('platform.actions.full'))
-                ->addPermission('system.directories.job_titles.read', __('platform.actions.read'))
-                ->addPermission('system.directories.job_titles.create', __('platform.actions.create'))
-                ->addPermission('system.directories.job_titles.update', __('platform.actions.update'))
-                ->addPermission('system.directories.job_titles.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.system.directories.directions.index'))
-                ->addPermission('system.directories.directions.full', __('platform.actions.full'))
-                ->addPermission('system.directories.directions.read', __('platform.actions.read'))
-                ->addPermission('system.directories.directions.create', __('platform.actions.create'))
-                ->addPermission('system.directories.directions.update', __('platform.actions.update'))
-                ->addPermission('system.directories.directions.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.system.directories.pub_sources.index'))
-                ->addPermission('system.directories.pub_sources.full', __('platform.actions.full'))
-                ->addPermission('system.directories.pub_sources.read', __('platform.actions.read'))
-                ->addPermission('system.directories.pub_sources.create', __('platform.actions.create'))
-                ->addPermission('system.directories.pub_sources.update', __('platform.actions.update'))
-                ->addPermission('system.directories.pub_sources.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.system.directories.pub_types.index'))
-                ->addPermission('system.directories.pub_types.full', __('platform.actions.full'))
-                ->addPermission('system.directories.pub_types.read', __('platform.actions.read'))
-                ->addPermission('system.directories.pub_types.create', __('platform.actions.create'))
-                ->addPermission('system.directories.pub_types.update', __('platform.actions.update'))
-                ->addPermission('system.directories.pub_types.delete', __('platform.actions.delete')),
-
-            ItemPermission::group(__('platform.pages.menu.examples.index'))
-                ->addPermission('examples.full', __('platform.actions.full')),
+            $this->permissionsGenerate('system.system_log', ['full']),
+            $this->permissionsGenerate('examples',['full']),
 
         ];
+    }
+
+    private function permissionsGenerate(string $page, array $permits = ['full', 'read', 'create', 'update', 'delete']): ItemPermission
+    {
+        $permission =  ItemPermission::group(__('platform.pages.menu.' . $page . '.index'));
+
+        foreach ($permits as $permit) {
+            $permission->addPermission(
+                $page . '.' . $permit,
+                __('platform.actions.' . $permit)
+            );
+        }
+
+        return $permission;
     }
 }
