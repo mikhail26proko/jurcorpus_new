@@ -11,6 +11,9 @@ class BranchService extends CommonService
 
     protected array $filters = [];
 
+    protected string $orderByFuild = 'id';
+    protected string $orderByVector = 'asc';
+
     protected array $relationship = [
         'employees',
     ];

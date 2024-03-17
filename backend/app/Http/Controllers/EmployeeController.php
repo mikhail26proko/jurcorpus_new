@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Employee\EmployeeResource;
 use App\Http\Resources\Employee\EmployeeCollection;
+use App\Http\Resources\Employee\EmployeeResource;
 use App\Services\Employee\EmployeeService;
 
 class EmployeeController extends Controller

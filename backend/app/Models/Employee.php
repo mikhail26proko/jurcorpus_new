@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Orchid\Presenters\EmployeePresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Orchid\Presenters\EmployeePresenter;
+use Illuminate\Database\Eloquent\Builder;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Types\Where;
 use Carbon\Carbon;
@@ -62,6 +63,11 @@ class Employee extends ExtendModel
         return $this->belongsToMany(Direction::class, 'employee_direction');
     }
 
+    public function publication()
+    {
+        return $this->HasMany(Publication::class,'employee_id');
+    }
+
     // Аксессоры
 
     public function getFullNameAttribute()
@@ -75,6 +81,15 @@ class Employee extends ExtendModel
     {
         $this->attributes['birthday'] = !empty($value) ? new Carbon($value): null;
     }
+
+    // Скоупы
+
+    public function scopePublisher(Builder $query): Builder
+    {
+        return $query->whereHas('publication');
+    }
+
+    // Презентер
 
     public function presenter(): EmployeePresenter
     {
