@@ -58,6 +58,8 @@ class CreateOrUpdateEmployee extends Rows
                     ->title(__('platform.fuilds.birthday'))
                     ->format(__('platform.masks.date'))
                     ->required(false)
+                    ->allowEmpty()
+                    ->allowInput()
                     ->enableTime(false)
                     ->placeholder(__('platform.fuilds.birthday')),
             ]),
