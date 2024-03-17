@@ -73,10 +73,7 @@ class Employee extends ExtendModel
 
     public function setBirthdayAttribute($value)
     {
-        if (!empty($value))
-        {
-            $this->attributes['birthday'] = new Carbon($value);
-        }
+        $this->attributes['birthday'] = !empty($value) ? new Carbon($value): null;
     }
 
     public function presenter(): EmployeePresenter
