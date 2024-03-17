@@ -76,6 +76,9 @@ class CreateOrUpdatePublication extends Rows
                     ->title(__('platform.fuilds.publicated_at'))
                     ->format(__('platform.masks.date'))
                     ->enableTime(false)
+                    ->allowEmpty()
+                    ->required()
+                    ->allowInput()
                     ->placeholder(__('platform.fuilds.publicated_at')),
             ]),
 

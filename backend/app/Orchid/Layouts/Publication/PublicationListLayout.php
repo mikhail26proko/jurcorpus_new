@@ -60,7 +60,7 @@ class PublicationListLayout extends Table
 
             TD::make('employee_id', __('platform.fuilds.employee'))
                 // TODO: Передать список сотрудников у которых есть публикации
-                ->filter(TD::FILTER_SELECT,array_column(Employee::all()->toArray(),'full_name','id'))
+                ->filter(TD::FILTER_SELECT,array_column(Employee::publisher()->get()->toArray(),'full_name','id'))
                 ->cantHide()
                 ->render(function (Publication $publication) {
                     return $publication->employee->full_name;
