@@ -41,10 +41,12 @@
 
             <footer class="position-sticky bottom-0">
                 <hr />
-                    <div class="w-100 m-auto align-items-center justify-content-center small">
+                    <div class="d-flex align-items-center justify-content-center small">
                         © ООО "ЮРКОРПУС", 2023
                     </div>
-                    <div class="small">current version: {{ __(config('app.version')) }}</div>
+                    <div class="d-flex align-items-center justify-content-center small">
+                        current version: {{ __(config('app.version')) }}
+                    </div>
             </footer>
         </nav>
     </div>
