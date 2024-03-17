@@ -62,7 +62,7 @@ class PublicationScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-    public function commandBar(): iterable
+    public function commandBar()
     {
         return [
             ModalToggle::make(__('Create'))

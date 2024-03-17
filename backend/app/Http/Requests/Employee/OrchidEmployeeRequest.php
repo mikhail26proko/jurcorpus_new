@@ -20,7 +20,7 @@ class OrchidEmployeeRequest extends FormRequest
             'last_name'     => 'sometimes|string|max:255',
             'first_name'    => 'sometimes|string|max:255',
             'sur_name'      => 'sometimes|string|max:255',
-            'birthday'      => 'sometimes|date',
+            'birthday'      => 'sometimes|date|nullable',
             'email'         => 'sometimes|string|max:255',
             'phone'         => 'sometimes|string|max:25',
             'description'   => 'sometimes|string',
@@ -38,30 +38,22 @@ class OrchidEmployeeRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-
-        if (!empty($job_titles = $this->get('job_titles'))) {
-            $this->merge([
-                'job_titles' => $this->prepare(JobTitle::class, $job_titles),
-            ]);
-        }
-
-        if (!empty($directions = $this->get('directions'))) {
-            $this->merge([
-                'directions' => $this->prepare(JobTitle::class, $directions),
-            ]);
-        }
+        $this->merge([
+            'job_titles' => ($this->prepareRelation(JobTitle::class, ($this->get('job_titles') ?? []))),
+            'directions' => ($this->prepareRelation(Direction::class, ($this->get('directions') ?? []))),
+        ]);
     }
 
-    private function prepare($type, array $items)
+    private function prepareRelation($type, array $items): array
     {
         $finished = [];
 
         foreach ($items as $item) {
-            if (is_numeric($item)){
-                $finished[] = $item;
+            if (preg_match('/^\+?\d+$/', $item)){
+                $finished[] = intval($item);
             } else {
                 $row = $type::create(['title'=>$item]);
-                $finished[] = $row->id;
+                $finished[] = intval($row->id);
             }
         }
 

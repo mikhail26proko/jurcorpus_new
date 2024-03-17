@@ -54,7 +54,7 @@ class UserProfileScreen extends Screen
      *
      * @return Action[]
      */
-    public function commandBar(): iterable
+    public function commandBar()
     {
         return [
             Button::make('Back to my account')

@@ -57,6 +57,7 @@ class CreateOrUpdateEmployee extends Rows
                 DateTimer::make('birthday')
                     ->title(__('platform.fuilds.birthday'))
                     ->format(__('platform.masks.date'))
+                    ->required(false)
                     ->enableTime(false)
                     ->placeholder(__('platform.fuilds.birthday')),
             ]),
@@ -67,7 +68,7 @@ class CreateOrUpdateEmployee extends Rows
                     ->multiple()
                     ->nullable(true)
                     ->allowAdd(true)
-                    ->fromModel(JobTitle::class,'title'),
+                    ->fromModel(JobTitle::class,'title','id'),
             ]),
 
             Group::make([
@@ -97,7 +98,7 @@ class CreateOrUpdateEmployee extends Rows
                     ->multiple()
                     ->nullable(true)
                     ->allowAdd(true)
-                    ->fromModel(Direction::class,'title'),
+                    ->fromModel(Direction::class,'title','id'),
             ]),
 
             Group::make([

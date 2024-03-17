@@ -14,7 +14,6 @@ use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use App\Models\Employee;
-use Carbon\Carbon;
 
 class EmployeeScreen extends Screen
 {
@@ -62,7 +61,7 @@ class EmployeeScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-    public function commandBar(): iterable
+    public function commandBar()
     {
         return [
             ModalToggle::make(__('Create'))
@@ -129,8 +128,8 @@ class EmployeeScreen extends Screen
             $message = 'WasUpdated';
         }
 
-        $employee->job_titles()->sync($validated['job_titles']??[]);
-        $employee->directions()->sync($validated['directions']??[]);
+        $employee->job_titles()->sync($validated['job_titles'] ?? []);
+        $employee->directions()->sync($validated['directions'] ?? []);
 
         Toast::success(__('platform.messages.'.$message));
     }
