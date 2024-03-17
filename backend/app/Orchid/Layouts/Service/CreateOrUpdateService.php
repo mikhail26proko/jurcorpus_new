@@ -35,7 +35,7 @@ class CreateOrUpdateService extends Rows
             Group::make([
                 TextArea::make('content')
                     ->type('text')
-                    ->row(5)
+                    ->rows(5)
                     ->required()
                     ->title(__('platform.fuilds.description'))
                     ->placeholder(__('platform.fuilds.description')),

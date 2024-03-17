@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Vacansy;
 
 use Orchid\Screen\Fields\Group;
-use Orchid\Screen\Fields\SimpleMDE;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
@@ -38,10 +37,6 @@ class CreateVacansy extends Rows
                     "text", "color", "header", "list", "format"
                 ]),
             ]),
-
-            // Group::make([
-            //     SimpleMDE::make('description')
-            // ])
         ];
     }
 }
