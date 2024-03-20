@@ -7,23 +7,28 @@ namespace App\Orchid\Screens\Lead;
 use App\Orchid\Layouts\UserLeads\CreateOrUpdateUserLead;
 use App\Orchid\Layouts\Lead\CreateOrUpdateLeadJournal;
 use App\Orchid\Layouts\UserLeads\UserLeadListLayout;
+use App\Http\Requests\Lead\OrchidLeadJournalRequest;
+use App\Http\Requests\Lead\OrchidLeadRequest;
 use Orchid\Screen\Actions\ModalToggle;
 use App\Services\Lead\JournalService;
 use App\Orchid\Components\DateTime;
 use App\Services\Lead\LeadService;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
+use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Screen\Sight;
+use App\Models\Lead;
 
-class UserLeadScreen extends Screen
+class UserLeadScreen extends LeadScreen
 {
     public function __construct(
         private LeadService $leadService,
         private JournalService $journalService,
     )
     {}
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -154,6 +159,41 @@ class UserLeadScreen extends Screen
                     ->title(__('platform.fuilds.journal'))
             ]),
         ];
+    }
+
+    public function asyncGetLead(Lead $lead): array
+    {
+        return $this->leadService->get($lead->id)->toArray();
+    }
+
+    public function createOrUpdateLead(OrchidLeadRequest $request): void
+    {
+        $validated = $request->validated();
+
+        if (empty($validated['id'])) {
+            $lead    = $this->leadService->create($validated);
+            $message = 'WasCreated';
+        } else {
+            $lead    = $this->leadService->update($validated['id'], $validated);
+            $message = 'WasUpdated';
+        }
+
+        Toast::success(__('platform.messages.' . $message));
+    }
+
+    public function CreateOrUpdateLeadJournal(OrchidLeadJournalRequest $request): void
+    {
+        $validated = $request->validated();
+
+        if (empty($validated['id'])) {
+            $journal = $this->journalService->create($validated);
+            $message = 'WasAdded';
+        } else {
+            $journal = $this->journalService->update($validated['id'], $validated);
+            $message = 'WasUpdated';
+        }
+
+        Toast::success(__('platform.messages.' . $message));
     }
 
 }
