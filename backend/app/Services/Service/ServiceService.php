@@ -38,7 +38,7 @@ class ServiceService extends CommonService
         if ($data['sort'] == $prewSort)
             return $data;
 
-        if ($data['sort'] = $count || $data['sort'] <= 0){
+        if ($data['sort'] == $count || $data['sort'] <= 0){
             $this->moveDown($prewSort);
             $data['sort'] = $count;
         } else {
