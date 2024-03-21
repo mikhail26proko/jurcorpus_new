@@ -53,12 +53,12 @@ class CreateOrUpdateBranch extends Rows
 
             Group::make([
                 Input::make('latitude')
-                    ->type('number')
+                    // ->type('number')
                     ->title(__('Latitude'))
                     ->placeholder(__('Latitude')),
 
                 Input::make('longitude')
-                    ->type('number')
+                    // ->type('number')
                     ->title(__('Longitude'))
                     ->placeholder(__('Longitude')),
             ]),
