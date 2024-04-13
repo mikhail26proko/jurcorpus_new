@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Employee;
 
-use App\Models\Direction;
+use Illuminate\Support\Facades\Blade;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Relation;
@@ -12,6 +12,7 @@ use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
+use App\Models\Direction;
 use Orchid\Screen\Field;
 use App\Models\JobTitle;
 use App\Models\Branch;
@@ -28,6 +29,15 @@ class CreateOrUpdateEmployee extends Rows
         return [
             Input::make('id')
                 ->type('hidden'),
+
+            Group::make([
+                Cropper::make('photo')
+                    ->title(__('platform.fuilds.photo'))
+                    ->acceptedFiles('.jpg,.jpeg,.png')
+                    ->targetId()
+                    ->width(300)
+                    ->height(400),
+            ]),
 
             Group::make([
                 Input::make('last_name')
@@ -50,7 +60,17 @@ class CreateOrUpdateEmployee extends Rows
                     ->required()
                     ->title(__('platform.fuilds.sur_name'))
                     ->placeholder(__('platform.fuilds.sur_name')),
+            ]),
 
+            Group::make([
+                DateTimer::make('practiceStartDate')
+                    ->title(__('platform.fuilds.practiceStartDate'))
+                    ->format(__('platform.masks.date'))
+                    ->required(false)
+                    ->allowEmpty()
+                    ->allowInput()
+                    ->enableTime(false)
+                    ->placeholder(__('platform.fuilds.practiceStartDate')),
             ]),
 
             Group::make([
@@ -108,15 +128,6 @@ class CreateOrUpdateEmployee extends Rows
                     ->title(__('platform.fuilds.description'))
                     ->rows(5),
 
-            ]),
-
-            Group::make([
-                Cropper::make('photo')
-                    ->title(__('platform.fuilds.photo'))
-                    ->acceptedFiles('.jpg,.jpeg,.png')
-                    ->targetId()
-                    ->width(300)
-                    ->height(400)
             ]),
         ];
     }

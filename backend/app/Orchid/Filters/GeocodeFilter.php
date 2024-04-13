@@ -30,7 +30,7 @@ class GeocodeFilter extends Filter
     {
         $filter = $this->request->get('filter');
 
-        if ($filter['geocode'])
+        if ((bool) $filter['geocode'])
         {
             return $builder->whereNotNull(['latitude','longitude']);
         }

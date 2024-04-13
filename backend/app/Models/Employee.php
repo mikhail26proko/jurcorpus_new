@@ -14,10 +14,11 @@ class Employee extends ExtendModel
     use Attachable, SoftDeletes;
 
     protected $fillable = [
-        'last_name',    // Фамилия
-        'first_name',   // Имя
-        'sur_name',     // Отчество
-        'birthday',
+        'last_name',        // Фамилия
+        'first_name',       // Имя
+        'sur_name',         // Отчество
+        'birthday',         // День рождения
+        'practiceStartDate',// Начало практики
         'email',
         'phone',
         'branch_id',
@@ -36,14 +37,16 @@ class Employee extends ExtendModel
 
     protected $allowedSorts = [
         'id',
-        'last_name',    // Фамилия
-        'first_name',   // Имя
-        'sur_name',     // Отчество
-        'birthday',
+        'last_name',        // Фамилия
+        'first_name',       // Имя
+        'sur_name',         // Отчество
+        'birthday',         // День рождения
+        'practiceStartDate',// Начало практики
     ];
 
     protected $casts = [
-        'birthday' => 'datetime:d.m.Y',
+        'birthday'          => 'datetime:d.m.Y',
+        'practiceStartDate' => 'datetime:d.m.Y',
     ];
 
     // Связи
@@ -80,6 +83,11 @@ class Employee extends ExtendModel
     public function setBirthdayAttribute($value)
     {
         $this->attributes['birthday'] = !empty($value) ? new Carbon($value): null;
+    }
+
+    public function setPracticeStartDateAttribute($value)
+    {
+        $this->attributes['practiceStartDate'] = !empty($value) ? new Carbon($value): null;
     }
 
     // Скоупы

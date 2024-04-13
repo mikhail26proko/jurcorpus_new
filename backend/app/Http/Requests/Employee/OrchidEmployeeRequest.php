@@ -16,18 +16,19 @@ class OrchidEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'            => 'sometimes|integer|exists:employees,id|nullable',
-            'last_name'     => 'sometimes|string|max:255',
-            'first_name'    => 'sometimes|string|max:255',
-            'sur_name'      => 'sometimes|string|max:255',
-            'birthday'      => 'sometimes|date|nullable',
-            'email'         => 'sometimes|string|max:255',
-            'phone'         => 'sometimes|string|max:25',
-            'description'   => 'sometimes|string',
-            'branch_id'     => 'sometimes|integer|exists:branches,id|nullable',
-            'job_titles.*'  => 'sometimes|integer|exists:job_titles,id|nullable',
-            'directions.*'  => 'sometimes|integer|exists:directions,id|nullable',
-            'photo'         => 'sometimes|integer|exists:attachments,id|nullable',
+            'id'                => 'sometimes|integer|exists:employees,id|nullable',
+            'last_name'         => 'sometimes|string|max:255',
+            'first_name'        => 'sometimes|string|max:255',
+            'sur_name'          => 'sometimes|string|max:255',
+            'practiceStartDate' => 'sometimes|date|nullable',
+            'birthday'          => 'sometimes|date|nullable',
+            'email'             => 'sometimes|string|max:255',
+            'phone'             => 'sometimes|string|max:25',
+            'description'       => 'sometimes|string',
+            'branch_id'         => 'sometimes|integer|exists:branches,id|nullable',
+            'job_titles.*'      => 'sometimes|integer|exists:job_titles,id|nullable',
+            'directions.*'      => 'sometimes|integer|exists:directions,id|nullable',
+            'photo'             => 'sometimes|integer|exists:attachments,id|nullable',
         ];
     }
 

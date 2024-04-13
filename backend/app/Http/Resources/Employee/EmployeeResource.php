@@ -5,6 +5,7 @@ namespace App\Http\Resources\Employee;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Branch\BranchResource;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EmployeeResource extends JsonResource
 {
@@ -20,6 +21,7 @@ class EmployeeResource extends JsonResource
         return [
             'id'            => $this->id,
             'full_name'     => $this->full_name,
+            'practice'      => $this->whenNotNull((new Carbon($this->practiceStartDate))->diffInYears()),
             'phone'         => $this->phone,
             'email'         => $this->email,
             'description'   => $this->description,
