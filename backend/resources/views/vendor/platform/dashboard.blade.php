@@ -41,8 +41,8 @@
 
             <footer class="position-sticky bottom-0">
                 <hr />
-                    <div class="d-flex align-items-center justify-content-center small">
-                        © ООО "ЮРКОРПУС", 2023
+                    <div class="d-flex align-items-center justify-content-center text-center small">
+                        © ООО "Юридическая Компания "ЮРКОРПУС", 2023
                     </div>
                     <div class="d-flex align-items-center justify-content-center small">
                         current version: {{ __(config('app.version')) }}

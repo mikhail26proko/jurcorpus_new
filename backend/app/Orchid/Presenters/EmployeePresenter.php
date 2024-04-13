@@ -12,6 +12,7 @@ use Laravel\Scout\Builder;
 
 class EmployeePresenter extends Presenter implements Personable, Searchable
 {
+    public bool $is_deleted;
 
     /**
      * Returns the label for this presenter, which is used in the UI to identify it.
@@ -57,10 +58,18 @@ class EmployeePresenter extends Presenter implements Personable, Searchable
     public function image(): ?string
     {
         if ($this->entity->attachment_count)
+        {
             return $this->entity->attachment()->first()?->url();
-        else return Attachment::find(1)->url();
+        } else return Attachment::find(1)->url();
     }
 
+    /**
+     * Returns the URL for the user's Gravatar image, or a default image if one is not found.
+     */
+    public function is_deleted(): ?bool
+    {
+        return !empty($this->entity->deleted_at);
+    }
     /**
      * Returns the number of models to return for a compact search result.
      * This method is used by the search functionality to display a list of matching results.

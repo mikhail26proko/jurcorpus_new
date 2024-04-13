@@ -14,6 +14,7 @@ trait OptionBuilderTrait {
         return (new $this->model)
             ->with($this->relationship)
             ->withCount($this->relationship)
+                ->orderBy('deleted_at', 'desc')
                 ->orderBy($this->orderByFuild, $this->orderByVector);
     }
 }

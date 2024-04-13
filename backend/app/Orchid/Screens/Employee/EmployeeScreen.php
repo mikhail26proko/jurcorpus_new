@@ -31,7 +31,7 @@ class EmployeeScreen extends Screen
     public function query(): iterable
     {
         return [
-            'employee' => $this->employeeService->index(),
+            'employee' => $this->employeeService->indexWithTrashed(),
         ];
     }
 
@@ -61,7 +61,7 @@ class EmployeeScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-    public function commandBar()
+    public function commandBar(): iterable
     {
         return [
             ModalToggle::make(__('Create'))
@@ -84,12 +84,12 @@ class EmployeeScreen extends Screen
             Layout::blank([
                 EmployeeListLayout::class,
 
-                Layout::modal('createEmployee', CreateOrUpdateEmployee::class)
+                Layout::modal('createEmployee',[CreateOrUpdateEmployee::class])
                     ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.create']))
                     ->title(__('Create'))
                     ->applyButton(__('Create')),
 
-                Layout::modal('editEmployee', CreateOrUpdateEmployee::class)
+                Layout::modal('editEmployee', [CreateOrUpdateEmployee::class])
                     ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.edit']))
                     ->title(__('Update'))
                     ->applyButton(__('Save'))
@@ -132,6 +132,13 @@ class EmployeeScreen extends Screen
         $employee->directions()->sync($validated['directions'] ?? []);
 
         Toast::success(__('platform.messages.'.$message));
+    }
+
+    public function restore(Employee $employee)
+    {
+        $employee->restore();
+
+        Toast::error($employee->title . ' ' . __('platform.messages.WasRestored'));
     }
 
     public function delete(Employee $employee)

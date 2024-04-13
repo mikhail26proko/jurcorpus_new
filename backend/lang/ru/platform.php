@@ -111,6 +111,7 @@ return [
         'read'      => 'Чтение',
         'update'    => 'Обновление',
         'delete'    => 'Удаление',
+        'restore'   => 'Восстановление',
         'download'  => 'Загрузка',
     ],
     'messages' => [
@@ -120,7 +121,9 @@ return [
         'WasCreated'        => 'Создано',
         'WasUpdated'        => 'Обновлено',
         'WasDeleted'        => 'Удалено',
+        'WasRestored'       => 'Восстановленно',
         'SureDelete'        => 'Подтвердите удаление',
+        'SureRestore'       => 'Подтвердите восстановление',
         'UnsetedValue'      => 'Отсутствует',
         'UnImplemented'     => 'Еще не реализованно'
     ],

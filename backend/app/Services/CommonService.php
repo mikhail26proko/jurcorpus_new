@@ -28,6 +28,18 @@ class CommonService
         return $entity;
     }
 
+    public function indexWithTrashed(): LengthAwarePaginator
+    {
+        $entity = ($this->builder())->withoutGlobalScopes()->filters($this->filters)
+            ->paginate(config('app.orchid_one_page'));
+
+        if (!$entity) {
+            throw new ModelNotFoundException("$this->model not found.", 404);
+        }
+
+        return $entity;
+    }
+
     public function get(int | string $id): Model
     {
         $entity = $this->builder()->where('id', $id)

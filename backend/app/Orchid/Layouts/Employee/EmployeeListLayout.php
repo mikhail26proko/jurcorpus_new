@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Employee;
 
-use App\Models\Branch;
+use App\Orchid\Extension\Fields\EmployeePresenterLayout;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Actions\DropDown;
-use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Layouts\Table;
 use App\Models\Employee;
+use App\Models\Branch;
 use Orchid\Screen\TD;
 
 class EmployeeListLayout extends Table
@@ -37,7 +37,7 @@ class EmployeeListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->sort()
                 ->cantHide()
-                ->render(fn (Employee $employee) => new Persona($employee->presenter())),
+                ->render(fn (Employee $employee) => new EmployeePresenterLayout($employee->presenter())),
 
             TD::make('birthday', __('platform.fuilds.birthday'))
                 ->sort()
@@ -71,6 +71,7 @@ class EmployeeListLayout extends Table
                 ->render(function (Employee $employee) {
                     return DropDown::make()
                         ->icon('bs.three-dots-vertical')
+                        ->class(empty($employee->deleted_at) ? 'btn btn-link' : 'btn btn-link link-danger')
                         ->list([
                             ModalToggle::make(__('Edit'))
                                 ->icon('bs.pencil')
@@ -79,12 +80,20 @@ class EmployeeListLayout extends Table
                                 ->method('createOrUpdateEmployee')
                                 ->asyncParameters(['employee' => $employee->id]),
 
-                            Button::make(__('Delete'))
-                                ->icon('bs.trash3')
-                                ->confirm(__('platform.messages.SureDelete'))
-                                ->method('delete', [
-                                    'employee' => $employee->id,
-                                ]),
+                            empty($employee->deleted_at) ?
+
+                                Button::make(__('Delete'))
+                                    ->icon('bs.trash3')
+                                    ->confirm(__('platform.messages.SureDelete'))
+                                    ->method('delete', [
+                                        'employee' => $employee->id,
+                                    ]) :
+                                Button::make(__('platform.actions.restore'))
+                                    ->icon('action-undo')
+                                    ->confirm(__('platform.messages.SureRestore'))
+                                    ->method('restore', [
+                                        'employee' => $employee->id,
+                                    ]),
                         ]);
                 }),
         ];
