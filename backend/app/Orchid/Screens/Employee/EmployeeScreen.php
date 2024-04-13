@@ -107,7 +107,7 @@ class EmployeeScreen extends Screen
 
     public function asyncGetEmployee(Employee $employee): array
     {
-        $photo    = $employee->attachment()->first()['id'] ?? 1;
+        $photo    = $employee->attachment()->first()['id'] ?? null;
         $employee = ($this->employeeService->get($employee->id))->toArray();
 
         $job_titles = array_column($employee['job_titles'],'id');

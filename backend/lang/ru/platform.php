@@ -135,9 +135,12 @@ return [
         'App\Models\Direction'  => 'Направления работы',
         'App\Models\Employee'   => 'Сотрудники',
         'App\Models\JobTitle'   => 'Должности',
+        'App\Models\Service'    => 'Услуги',
         'App\Models\PubSource'  => 'Источники публикаций',
+        'App\Models\PubType'    => 'Тема публикаций',
         'App\Models\Journal'    => 'Журнал заявки',
         'App\Models\User'       => 'Пользователи',
+        'App\Models\Vacansy'    => 'Вакансии',
         'App\Models\Role'       => 'Роли',
     ],
     'fuilds' => [

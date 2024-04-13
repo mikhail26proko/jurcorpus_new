@@ -18,11 +18,11 @@ class EmployeMainInfoLayout extends SimpleLayouts
             Layout::columns([
                 Layout::rows([
                     Cropper::make('photo')
-                    ->title(__('platform.fuilds.photo'))
-                    ->acceptedFiles('.jpg,.jpeg,.png')
-                    ->targetId()
-                    ->width(300)
-                    ->height(400)
+                        ->title(__('platform.fuilds.photo'))
+                        ->acceptedFiles('.jpg,.jpeg,.png')
+                        ->targetId()
+                        ->width(300)
+                        ->height(400)
                 ]),
                 Layout::rows([
                     Input::make('last_name')
