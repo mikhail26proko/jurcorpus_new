@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Employee;
 
-use Illuminate\Support\Facades\Blade;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Relation;
@@ -31,38 +30,6 @@ class CreateOrUpdateEmployee extends Rows
                 ->type('hidden'),
 
             Group::make([
-                Cropper::make('photo')
-                    ->title(__('platform.fuilds.photo'))
-                    ->acceptedFiles('.jpg,.jpeg,.png')
-                    ->targetId()
-                    ->width(300)
-                    ->height(400),
-            ]),
-
-            Group::make([
-                Input::make('last_name')
-                    ->type('text')
-                    ->max(255)
-                    ->required()
-                    ->title(__('platform.fuilds.last_name'))
-                    ->placeholder(__('platform.fuilds.last_name')),
-
-                Input::make('first_name')
-                    ->type('text')
-                    ->max(255)
-                    ->required()
-                    ->title(__('platform.fuilds.first_name'))
-                    ->placeholder(__('platform.fuilds.first_name')),
-
-                Input::make('sur_name')
-                    ->type('text')
-                    ->max(255)
-                    ->required()
-                    ->title(__('platform.fuilds.sur_name'))
-                    ->placeholder(__('platform.fuilds.sur_name')),
-            ]),
-
-            Group::make([
                 DateTimer::make('practiceStartDate')
                     ->title(__('platform.fuilds.practiceStartDate'))
                     ->format(__('platform.masks.date'))
@@ -71,17 +38,6 @@ class CreateOrUpdateEmployee extends Rows
                     ->allowInput()
                     ->enableTime(false)
                     ->placeholder(__('platform.fuilds.practiceStartDate')),
-            ]),
-
-            Group::make([
-                DateTimer::make('birthday')
-                    ->title(__('platform.fuilds.birthday'))
-                    ->format(__('platform.masks.date'))
-                    ->required(false)
-                    ->allowEmpty()
-                    ->allowInput()
-                    ->enableTime(false)
-                    ->placeholder(__('platform.fuilds.birthday')),
             ]),
 
             Group::make([

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\Employee;
 
+use App\Orchid\Components\Layouts\EmployeMainInfoLayout;
 use App\Orchid\Layouts\Employee\CreateOrUpdateEmployee;
 use App\Http\Requests\Employee\OrchidEmployeeRequest;
 use App\Orchid\Layouts\Employee\EmployeeListLayout;
@@ -84,12 +85,18 @@ class EmployeeScreen extends Screen
             Layout::blank([
                 EmployeeListLayout::class,
 
-                Layout::modal('createEmployee',[CreateOrUpdateEmployee::class])
+                Layout::modal('createEmployee',[
+                    EmployeMainInfoLayout::class
+                    , CreateOrUpdateEmployee::class
+                ])
                     ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.create']))
                     ->title(__('Create'))
                     ->applyButton(__('Create')),
 
-                Layout::modal('editEmployee', [CreateOrUpdateEmployee::class])
+                Layout::modal('editEmployee', [
+                    EmployeMainInfoLayout::class
+                    , CreateOrUpdateEmployee::class
+                ])
                     ->canSee(auth()->user()->hasAnyAccess(['employees.full', 'employees.edit']))
                     ->title(__('Update'))
                     ->applyButton(__('Save'))

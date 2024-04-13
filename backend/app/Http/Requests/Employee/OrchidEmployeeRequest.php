@@ -24,7 +24,7 @@ class OrchidEmployeeRequest extends FormRequest
             'birthday'          => 'sometimes|date|nullable',
             'email'             => 'sometimes|string|max:255',
             'phone'             => 'sometimes|string|max:25',
-            'description'       => 'sometimes|string',
+            'description'       => 'sometimes|string|nullable',
             'branch_id'         => 'sometimes|integer|exists:branches,id|nullable',
             'job_titles.*'      => 'sometimes|integer|exists:job_titles,id|nullable',
             'directions.*'      => 'sometimes|integer|exists:directions,id|nullable',

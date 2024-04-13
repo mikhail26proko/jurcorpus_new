@@ -1,6 +1,6 @@
 @component($typeForm, get_defined_vars())
     <div
-        class='d-block float-left'
+        class='d-flex justify-content-center'
         data-controller="cropper"
          data-cropper-value="{{ $attributes['value'] }}"
          data-cropper-storage="{{ $storage ?? config('platform.attachment.disk', 'public') }}"
@@ -16,8 +16,8 @@
          data-cropper-max-file-size="{{ $maxFileSize }}"
          data-cropper-groups="{{ $attributes['groups'] }}"
          data-cropper-path="{{ $attributes['path'] ?? '' }}"
-         data-cropper-keep-original-type-value="{{ $keepOriginalType }}"
-         data-cropper-max-size-message-value="{{ __($maxSizeValidateMessage) }}"
+         data-cropper-keep-original-type-value="{{ false }}"
+         data-cropper-max-size-message-value="{{ __('platform.messages.TooMuchMemory') }}"
     >
         <div class="border-dashed text-end cropper-actions" style="width:180px;height:240px;">
 
