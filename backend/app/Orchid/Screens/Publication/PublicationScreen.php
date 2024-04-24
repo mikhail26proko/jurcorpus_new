@@ -62,7 +62,7 @@ class PublicationScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-    public function commandBar()
+    public function commandBar(): iterable
     {
         return [
             ModalToggle::make(__('Create'))
@@ -141,7 +141,6 @@ class PublicationScreen extends Screen
     public function downloadPublication(): void
     {
         Toast::error(__('platform.messages.UnImplemented'));
-        // Toast::success(__('platform.messages.Success'));
     }
 
     public function delete(Publication $publication)

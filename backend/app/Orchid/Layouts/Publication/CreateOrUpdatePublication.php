@@ -6,14 +6,14 @@ namespace App\Orchid\Layouts\Publication;
 
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
 use App\Models\PubSource;
 use App\Models\Employee;
-use App\Models\PubType;
 use Orchid\Screen\Field;
+use App\Models\PubType;
 
 class CreateOrUpdatePublication extends Rows
 {
@@ -66,7 +66,6 @@ class CreateOrUpdatePublication extends Rows
                 Input::make('sub_title')
                     ->type('text')
                     ->max(255)
-                    ->required()
                     ->title(__('platform.fuilds.sub_title'))
                     ->placeholder(__('platform.fuilds.sub_title')),
             ]),
@@ -90,7 +89,7 @@ class CreateOrUpdatePublication extends Rows
             ]),
 
             Group::make([
-                Upload::make('photo')
+                Picture::make('photo')
                     ->title(__('platform.fuilds.photo'))
                     ->acceptedFiles('.jpg,.jpeg,.png')
                     ->targetId()
