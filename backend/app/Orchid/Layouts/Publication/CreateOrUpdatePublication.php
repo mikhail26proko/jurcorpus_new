@@ -6,7 +6,7 @@ namespace App\Orchid\Layouts\Publication;
 
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Fields\Cropper;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
@@ -90,12 +90,10 @@ class CreateOrUpdatePublication extends Rows
             ]),
 
             Group::make([
-                Cropper::make('photo')
+                Upload::make('photo')
                     ->title(__('platform.fuilds.photo'))
                     ->acceptedFiles('.jpg,.jpeg,.png')
                     ->targetId()
-                    ->width(300)
-                    ->height(400)
             ]),
         ];
     }
