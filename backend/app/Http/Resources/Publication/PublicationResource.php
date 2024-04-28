@@ -14,6 +14,8 @@ class PublicationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $photo = $this->attachment()->first();
+
         return [
             'id'            => $this->id,
             'pub_source'    => $this->pub_source->title,
@@ -21,6 +23,7 @@ class PublicationResource extends JsonResource
             'title'         => $this->title,
             'sub_title'     => $this->sub_title,
             'publicated_at' => $this->publicated_at,
+            'photo'         => $photo ? $photo->url() : null ,
             'link'          => $this->link,
         ];
     }

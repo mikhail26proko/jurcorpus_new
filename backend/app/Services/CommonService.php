@@ -66,6 +66,7 @@ class CommonService
 
         $entity = ($this->model)::create($data);
 
+        $data['id'] = $entity->id;
         $this->afterCreate($data);
 
         return $this->get($entity->id);

@@ -26,4 +26,16 @@ class EmployeeService extends CommonService
         'directions',
         'attachment',
     ];
+
+    public function afterCreate(array $data): void
+    {
+        $employee = $this->get($data['id']);
+        $employee->attachment()->sync($data['photo']);
+    }
+
+    public function afterUpdate(int|string $id, array $data): void
+    {
+        $employee = $this->get($id);
+        $employee->attachment()->sync($data['photo']);
+    }
 }

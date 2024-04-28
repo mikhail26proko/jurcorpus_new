@@ -115,7 +115,7 @@ class PublicationScreen extends Screen
 
         $publication['pub_source']  = $pub_source;
         $publication['pub_type']    = $pub_type;
-        $publication['photo']       = $photo;
+        $publication['photo']       = [$photo];
 
         return $publication;
     }

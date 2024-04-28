@@ -24,7 +24,7 @@ class OrchidPublicationRequest extends FormRequest
             'pub_source_id' => 'sometimes|integer|exists:pub_sources,id|nullable',
             'pub_type_id'   => 'sometimes|integer|exists:pub_types,id|nullable',
             'link'          => 'sometimes|string|max:500',
-            'photo'         => 'sometimes|integer|exists:attachments,id|nullable',
+            'photo.*'       => 'sometimes|integer|exists:attachments,id|nullable',
         ];
     }
 
