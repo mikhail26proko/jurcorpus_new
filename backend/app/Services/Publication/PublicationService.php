@@ -29,4 +29,16 @@ class PublicationService extends CommonService
         'employee',
         'attachment',
     ];
+
+    public function afterCreate(array $data): void
+    {
+        $publication = $this->get($data['id']);
+        $publication->attachment()->sync($data['photo']);
+    }
+
+    public function afterUpdate(int|string $id, array $data): void
+    {
+        $publication = $this->get($id);
+        $publication->attachment()->sync($data['photo']);
+    }
 }

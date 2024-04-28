@@ -23,7 +23,7 @@ class PublicationResource extends JsonResource
             'title'         => $this->title,
             'sub_title'     => $this->sub_title,
             'publicated_at' => $this->publicated_at,
-            'photo'         => $photo ? $photo->url() : null,
+            'photo'         => $photo ? $photo->url() : null ,
             'link'          => $this->link,
         ];
     }
