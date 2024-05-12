@@ -18,12 +18,12 @@ class OrchidPublicationRequest extends FormRequest
         return [
             'id'            => 'sometimes|integer|exists:publications,id|nullable',
             'title'         => 'sometimes|string|max:255',
-            'sub_title'     => 'sometimes|string|max:255',
+            'sub_title'     => 'sometimes|string|max:255|nullable',
             'publicated_at' => 'sometimes|date',
             'employee_id'   => 'sometimes|integer|exists:employees,id|nullable',
             'pub_source_id' => 'sometimes|integer|exists:pub_sources,id|nullable',
             'pub_type_id'   => 'sometimes|integer|exists:pub_types,id|nullable',
-            'link'          => 'sometimes|string|max:500',
+            'link'          => 'sometimes|string|max:500|nullable',
             'photo.*'       => 'sometimes|integer|exists:attachments,id|nullable',
         ];
     }
