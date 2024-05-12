@@ -18,8 +18,10 @@ class CommonService
 
     public function index(): LengthAwarePaginator
     {
+        $per_page = request()->get('per_page') ?? config('app.orchid_one_page');
+
         $entity = $this->builder()->filters($this->filters)
-            ->paginate(config('app.orchid_one_page'));
+            ->paginate($per_page);
 
         if (!$entity) {
             throw new ModelNotFoundException("$this->model not found.", 404);
@@ -30,8 +32,10 @@ class CommonService
 
     public function indexWithTrashed(): LengthAwarePaginator
     {
+        $per_page = request()->get('per_page') ?? config('app.orchid_one_page');
+
         $entity = ($this->builder())->withoutGlobalScopes()->filters($this->filters)
-            ->paginate(config('app.orchid_one_page'));
+            ->paginate($per_page);
 
         if (!$entity) {
             throw new ModelNotFoundException("$this->model not found.", 404);
