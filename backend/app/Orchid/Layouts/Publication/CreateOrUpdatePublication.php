@@ -29,6 +29,17 @@ class CreateOrUpdatePublication extends Rows
                 ->type('hidden'),
 
             Group::make([
+                DateTimer::make('publicated_at')
+                    ->title(__('platform.fuilds.publicated_at'))
+                    ->format(__('platform.masks.date'))
+                    ->enableTime(false)
+                    ->allowEmpty()
+                    ->required()
+                    ->allowInput()
+                    ->placeholder(__('platform.fuilds.publicated_at')),
+            ]),
+
+            Group::make([
                 Relation::make('pub_source')
                     ->required()
                     ->title('platform.fuilds.pub_source')
@@ -68,17 +79,6 @@ class CreateOrUpdatePublication extends Rows
                     ->max(255)
                     ->title(__('platform.fuilds.sub_title'))
                     ->placeholder(__('platform.fuilds.sub_title')),
-            ]),
-
-            Group::make([
-                DateTimer::make('publicated_at')
-                    ->title(__('platform.fuilds.publicated_at'))
-                    ->format(__('platform.masks.date'))
-                    ->enableTime(false)
-                    ->allowEmpty()
-                    ->required()
-                    ->allowInput()
-                    ->placeholder(__('platform.fuilds.publicated_at')),
             ]),
 
             Group::make([
