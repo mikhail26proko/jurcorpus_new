@@ -56,15 +56,6 @@ class CreateOrUpdatePublication extends Rows
             ]),
 
             Group::make([
-                Relation::make('employee_id')
-                    ->title('platform.fuilds.employee')
-                    ->clear()
-                    ->fromModel(Employee::class, 'last_name')
-                    ->searchColumns('first_name','sur_name')
-                    ->displayAppend('full_name'),
-                ]),
-
-            Group::make([
                 Input::make('title')
                     ->type('text')
                     ->max(255)
@@ -80,6 +71,16 @@ class CreateOrUpdatePublication extends Rows
                     ->title(__('platform.fuilds.sub_title'))
                     ->placeholder(__('platform.fuilds.sub_title')),
             ]),
+
+            Group::make([
+                Relation::make('employee_id')
+                    ->title('platform.fuilds.employee')
+                    ->clear()
+                    //TODO: Сортировка по алфавиту или по кол-ву статей;
+                    ->fromModel(Employee::class, 'last_name')
+                    ->searchColumns('first_name','sur_name')
+                    ->displayAppend('full_name'),
+                ]),
 
             Group::make([
                 Input::make('link')
