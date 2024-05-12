@@ -63,7 +63,7 @@ class PublicationListLayout extends Table
                 ->filter(TD::FILTER_SELECT,array_column(Employee::publisher()->get()->toArray(),'full_name','id'))
                 ->cantHide()
                 ->render(function (Publication $publication) {
-                    return $publication->employee->full_name;
+                    return $publication->employee->full_name ?? '';
                 }),
 
             TD::make(__('Actions'))->alignRight()

@@ -19,7 +19,7 @@ class PublicationResource extends JsonResource
         return [
             'id'            => $this->id,
             'pub_source'    => $this->pub_source->title,
-            'employee_id'   => $this->employee->full_name,
+            'employee_id'   => $this->employee->full_name ?? '',
             'title'         => $this->title,
             'sub_title'     => $this->sub_title,
             'publicated_at' => $this->publicated_at,
