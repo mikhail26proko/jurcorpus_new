@@ -29,10 +29,7 @@ class PublicationListLayout extends Table
         return [
 
             TD::make('id', '#')->width(70)
-                ->sort()
-                ->render(function (Publication $publication, object $loop) {
-                    return $loop->index + 1 + (((\request()->get('page')?? 1) - 1) * config('app.orchid_one_page'));
-                }),
+                ->sort(),
 
             TD::make('publicated_at', __('platform.fuilds.publicated_at'))
                 ->sort()
