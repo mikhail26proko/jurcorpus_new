@@ -32,7 +32,7 @@ class ServiceScreen extends Screen
     public function query(): iterable
     {
         return [
-            'service' => $this->serviceService->index(),
+            'service'   => Service::sorted()->get(),
         ];
     }
 
@@ -88,8 +88,9 @@ class ServiceScreen extends Screen
     {
         return [
             Layout::blank([
-
                 ServiceListLayout::class,
+
+                // Layout::sortable('service', ServiceListSight::columns()),
 
                 Layout::modal('createService', CreateOrUpdateService::class)
                     ->canSee(auth()->user()->hasAnyAccess(['services.full', 'services.create']))
