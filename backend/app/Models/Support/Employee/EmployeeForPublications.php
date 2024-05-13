@@ -21,4 +21,10 @@ class EmployeeForPublications extends Employee
                 ->orderBy('publication_count', 'desc');
         });
     }
+
+    public function getFullNameAttribute()
+    {
+        $pub_count = $this->publication_count ? "($this->publication_count)" : "";
+        return implode(' ',[$this->last_name, $this->first_name, $this->sur_name, $pub_count]);
+    }
 }
