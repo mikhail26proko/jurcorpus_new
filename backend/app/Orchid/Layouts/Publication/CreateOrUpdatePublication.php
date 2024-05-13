@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Publication;
 
+use App\Models\Support\Employee\EmployeeForPublications;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Picture;
@@ -11,7 +12,6 @@ use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
 use App\Models\PubSource;
-use App\Models\Employee;
 use Orchid\Screen\Field;
 use App\Models\PubType;
 
@@ -75,11 +75,10 @@ class CreateOrUpdatePublication extends Rows
             Group::make([
                 Relation::make('employee_id')
                     ->title('platform.fuilds.employee')
-                    ->clear()
-                    //TODO: Сортировка по алфавиту или по кол-ву статей;
-                    ->fromModel(Employee::class, 'last_name')
+                    ->fromModel(EmployeeForPublications::class, 'last_name')
                     ->searchColumns('first_name','sur_name')
-                    ->displayAppend('full_name'),
+                    ->displayAppend('full_name')
+                    ->clear(),
                 ]),
 
             Group::make([
