@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Branch;
 
 use App\Orchid\Layouts\Branch\CreateOrUpdateBranch;
+use App\Orchid\Layouts\Listeners\AddressListener;
 use App\Http\Requests\Branch\OrchidBranchRequest;
 use App\Orchid\Layouts\Branch\BranchListLayout;
 use Orchid\Screen\Actions\ModalToggle;
@@ -91,19 +92,34 @@ class BranchScreen extends Screen
 
                 BranchListLayout::class,
 
-                Layout::modal('createBranch', CreateOrUpdateBranch::class)
+                Layout::modal('createBranch', [
+                    CreateOrUpdateBranch::class,
+                    AddressListener::class,
+                ])
                     ->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.create']))
                     ->title(__('Create'))
                     ->applyButton(__('Create')),
 
-                Layout::modal('editBranch', CreateOrUpdateBranch::class)
-                    ->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.edit']))
-                    ->title(__('Update'))
-                    ->applyButton(__('Save'))
-                    ->async('asyncGetBranch'),
+                Layout::blank([
+                    Layout::modal('editBranch',[
+                        CreateOrUpdateBranch::class,
+                        AddressListener::class,
+                    ])
+                        ->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.edit']))
+                        ->title(__('Update'))
+                        ->applyButton(__('Save'))
+                        ->async('asyncGetBranch'),
+
+                ]),
 
             ])->canSee(auth()->user()->hasAnyAccess(['branches.full', 'branches.read'])),
+
         ];
+    }
+
+    public function asyncAddress(array $address): array
+    {
+        return $address;
     }
 
     /**
